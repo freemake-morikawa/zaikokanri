@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         plusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 count++;
+                if(count > 9999) {
+                    count = 9999;
+                }
                 textView.setText(String.valueOf(count));
             }
         });
@@ -47,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         minusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 count--;
+                if(count < 0){
+                    count = 0;
+                }
                 textView.setText(String.valueOf(count));
             }
         });
