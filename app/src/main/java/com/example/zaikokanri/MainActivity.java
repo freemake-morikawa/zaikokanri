@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -34,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         plusButton = findViewById(R.id.plusButton);
         minusButton = findViewById(R.id.minusButton);
 
-
         // 加算
         plusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -42,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 if(count > 9999) {
                     count = 9999;
                 }
-                textView.setText(String.valueOf(count));
+                String number;
+                number = formatThousand(count);
+                textView.setText(number);
             }
         });
 
@@ -53,9 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 if(count < 0){
                     count = 0;
                 }
-                textView.setText(String.valueOf(count));
+                String number;
+                number = formatThousand(count);
+                textView.setText(number);
             }
         });
 
     }
+
+    private String formatThousand(int num) {
+        DecimalFormat decFormat = new DecimalFormat("#,###");
+        return decFormat.format(num);
+    }
+
 }
