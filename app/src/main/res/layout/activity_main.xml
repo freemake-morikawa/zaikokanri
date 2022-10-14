@@ -19,7 +19,7 @@
         android:id="@+id/number"
         android:layout_width="130dp"
         android:layout_height="45dp"
-        android:text="9999"
+        android:text="@string/zero"
         android:textSize="35sp"
         app:layout_constraintStart_toEndOf="@+id/textView1"
         app:layout_constraintTop_toTopOf="parent" />

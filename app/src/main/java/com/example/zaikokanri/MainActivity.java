@@ -5,7 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Button;
+
 public class MainActivity extends AppCompatActivity {
+
+
+    int count = 0;
+    TextView textView;
+    Button plusButton;
+    Button minusButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +28,28 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setTitle("Freemake");
         }
 
-        // TextViewの文字内容を変更
+        // TextViewの数値部分を取得！！
+        textView = findViewById(R.id.number);
+        // Buttonの取得！
+        plusButton = findViewById(R.id.plusButton);
+        minusButton = findViewById(R.id.minusButton);
 
+
+        // 加算
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                count++;
+                textView.setText(String.valueOf(count));
+            }
+        });
+
+        // 減算
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                count--;
+                textView.setText(String.valueOf(count));
+            }
+        });
 
     }
 }
