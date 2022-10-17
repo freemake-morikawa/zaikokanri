@@ -60,11 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // DecimalFormatクラスのインスタンスを生成
-    DecimalFormat decFormat = new DecimalFormat("#,###");
-
     // 3桁ごとにカンマを入れて返します
     private String formatThousand(int num) {
+        DecimalFormat decFormat = new DecimalFormat("#,###");
         return decFormat.format(num);
     }
 
