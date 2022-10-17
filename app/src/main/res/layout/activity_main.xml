@@ -68,6 +68,7 @@
         android:layout_height="45dp"
         android:textSize="35sp"
         android:format24Hour="HH:mm:ss"
+        android:textColor="#808080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
