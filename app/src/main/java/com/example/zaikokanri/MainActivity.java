@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 if(count > 9999) {
                     count = 9999;
                 }
-                String number;
-                number = formatThousand(count);
-                textView.setText(number);
+                textView.setText(formatThousand(count));
             }
         });
 
@@ -56,16 +54,17 @@ public class MainActivity extends AppCompatActivity {
                 if(count < 0){
                     count = 0;
                 }
-                String number;
-                number = formatThousand(count);
-                textView.setText(number);
+                textView.setText(formatThousand(count));
             }
         });
 
     }
 
+    // DecimalFormatクラスのインスタンスを生成
+    DecimalFormat decFormat = new DecimalFormat("#,###");
+
+    // 3桁ごとにカンマを入れて返します
     private String formatThousand(int num) {
-        DecimalFormat decFormat = new DecimalFormat("#,###");
         return decFormat.format(num);
     }
 
