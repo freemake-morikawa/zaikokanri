@@ -10,6 +10,16 @@ import android.widget.TextView;
 import android.widget.Button;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.os.Handler;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     Button plusButton;
     Button minusButton;
+    TextView clock;
+    Handler myHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +70,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // ここから下は時計機能
+        Timer myTimer = new Timer();
+        clock = findViewById(R.id.clock);
+
+        // タスクを作成
+        MainTimerTask myTimerTask = new MainTimerTask();
+
+        // 100ミリ秒に１回タスクを実行する
+        myTimer.schedule(myTimerTask, 0, 100);
     }
 
     // 3桁ごとにカンマを入れて返します
     private String formatThousand(int num) {
         DecimalFormat decFormat = new DecimalFormat("#,###");
         return decFormat.format(num);
+    }
+
+
+    // Timerで呼び出すタスクを作成
+    public class MainTimerTask extends TimerTask {
+        @Override
+        public void run(){
+            clock.setText((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
+        }
     }
 
 }
