@@ -16,8 +16,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.os.Handler;
-
 public class MainActivity extends AppCompatActivity {
     int count = 0;
     TextView textView;
