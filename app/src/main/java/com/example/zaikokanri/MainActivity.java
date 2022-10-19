@@ -17,19 +17,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Handler;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 public class MainActivity extends AppCompatActivity {
-
-
     int count = 0;
     TextView textView;
     Button plusButton;
     Button minusButton;
     TextView clock;
-    Handler myHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         DecimalFormat decFormat = new DecimalFormat("#,###");
         return decFormat.format(num);
     }
-
 
     // Timerで呼び出すタスクを作成
     public class MainTimerTask extends TimerTask {
