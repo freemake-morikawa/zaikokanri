@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run(){
             clock.setText((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
-            //Log.v("Test",(new SimpleDateFormat("HH:mm:ss")).format(new Date()));
         }
     }
 
