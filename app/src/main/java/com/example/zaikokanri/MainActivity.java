@@ -82,10 +82,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run(){
             clock.setText((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
-
-            // /* Debug
-            Log.v("Test",(new SimpleDateFormat("HH:mm:ss")).format(new Date()));
-            // */
+            //Log.v("Test",(new SimpleDateFormat("HH:mm:ss")).format(new Date()));
         }
     }
 
@@ -93,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         myTimer.cancel();
-        Log.v("Test", "アプリがバックグラウンドに移行しました");
     }
     @Override
     protected void onStart() {
@@ -103,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         // タスクを作成
         myTimerTask = new MainTimerTask();
         myTimer.schedule(myTimerTask, 0, 100);
-        Log.v("Test", "アプリがフォアグラウンドに移行しました");
     }
 
 }
