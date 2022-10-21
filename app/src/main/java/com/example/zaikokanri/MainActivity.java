@@ -4,32 +4,27 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.os.Handler;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
+// Debug
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-
-
     int count = 0;
     TextView textView;
     Button plusButton;
     Button minusButton;
     TextView clock;
-    Handler myHandler = new Handler();
+    Timer myTimer;
+    MainTimerTask myTimerTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +66,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // ここから下は時計機能
-        Timer myTimer = new Timer();
         clock = findViewById(R.id.clock);
 
-        // タスクを作成
-        MainTimerTask myTimerTask = new MainTimerTask();
 
-        // 100ミリ秒に１回タスクを実行する
-        myTimer.schedule(myTimerTask, 0, 100);
     }
 
     // 3桁ごとにカンマを入れて返します
@@ -87,13 +77,33 @@ public class MainActivity extends AppCompatActivity {
         return decFormat.format(num);
     }
 
-
     // Timerで呼び出すタスクを作成
     public class MainTimerTask extends TimerTask {
         @Override
         public void run(){
             clock.setText((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
+
+            // /* Debug
+            Log.v("Test",(new SimpleDateFormat("HH:mm:ss")).format(new Date()));
+            // */
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        myTimer.cancel();
+        Log.v("Test", "アプリがバックグラウンドに移行しました");
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 100ミリ秒に１回タスクを実行する
+        myTimer = new Timer();
+        // タスクを作成
+        myTimerTask = new MainTimerTask();
+        myTimer.schedule(myTimerTask, 0, 100);
+        Log.v("Test", "アプリがフォアグラウンドに移行しました");
     }
 
 }
