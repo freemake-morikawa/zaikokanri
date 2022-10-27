@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     Timer myTimer;
     MainTimerTask myTimerTask;
     List<CellData> list = new ArrayList<>();
-    ListViewAdapter adapter;
 
     // itemのデータを保持するクラス
     class CellData {
@@ -91,12 +90,13 @@ public class MainActivity extends AppCompatActivity {
         // リスト
         addButton.setOnClickListener(new View.OnClickListener() {
           public void onClick(View v) {
-              addStringData(list, adapter);
+              addStringData(list);
           }
         });
     }
 
-    private void addStringData(List<CellData> list, ListViewAdapter adapter) {
+    // 
+    private void addStringData(List<CellData> list) {
         TextView time = findViewById(R.id.clock);
         TextView number = findViewById(R.id.number);
         EditText comment = findViewById(R.id.comment);
@@ -105,8 +105,7 @@ public class MainActivity extends AppCompatActivity {
         CellData data = new CellData(time.getText().toString(), number.getText().toString(), comment.getText().toString());
         list.add(data);
 
-        adapter = new ListViewAdapter(this, R.layout.list, list);
-        listView.setAdapter(adapter);
+        listView.setAdapter(new ListViewAdapter(this, R.layout.list, list));
     }
 
     class ViewHolder {
