@@ -1,6 +1,7 @@
 package com.example.zaikokanri;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //
     private void addStringData(List<CellData> list) {
         TextView time = findViewById(R.id.clock);
         TextView number = findViewById(R.id.number);
@@ -159,6 +159,11 @@ public class MainActivity extends AppCompatActivity {
                 holder.viewNumber = convertView.findViewById(R.id.listNumber);
                 holder.viewComment = convertView.findViewById(R.id.listComment);
                 convertView.setTag(holder);
+
+                // 偶数行の色を変更
+                if (position % 2 == 0) {
+                    convertView.setBackgroundColor(Color.rgb(100, 149, 237));
+                }
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
