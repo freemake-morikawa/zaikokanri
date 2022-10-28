@@ -1,6 +1,7 @@
 package com.example.zaikokanri;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,12 +28,14 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<CellData> list;
+    List<CellData> cellDataList;
     private int count;
     private TextView clockText;
     private ListView listView;
 
     private Timer timer;
+
+    private ArrayAdapter<CellData> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +44,20 @@ public class MainActivity extends AppCompatActivity {
 
         // 初期化
         count = 0;
-        list = new ArrayList<>();
+        cellDataList = new ArrayList<>();
+        adapter = new ListViewAdapter(this, R.layout.list);
 
         // アクションバーの変更
-        getSupportActionBar().setTitle("Freemake");
+        getSupportActionBar().setTitle(R.string.action_bar);
 
         // Viewの取得
-        final TextView countText = findViewById(R.id.count);
-        final Button plusButton = findViewById(R.id.plusButton);
-        final Button minusButton = findViewById(R.id.minusButton);
-        final Button addButton = findViewById(R.id.addButton);
+        final TextView countText = findViewById(R.id.count_text);
+        final Button plusButton = findViewById(R.id.plus_button);
+        final Button minusButton = findViewById(R.id.minus_button);
+        final Button addButton = findViewById(R.id.add_button);
 
-        clockText = findViewById(R.id.clock);
-        listView = findViewById(R.id.list);
+        clockText = findViewById(R.id.clock_text);
+        listView = findViewById(R.id.list_view);
 
         // 加算・減算
         plusButton.setOnClickListener(new View.OnClickListener() {
@@ -80,22 +85,16 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addStringData(list);
+                TextView time = findViewById(R.id.clock_text);
+                TextView count = findViewById(R.id.count_text);
+                EditText comment = findViewById(R.id.comment_text);
+
+                CellData cellData = new CellData(time.getText().toString(), count.getText().toString(), comment.getText().toString());
+                cellDataList.add(cellData);
+                adapter.add(cellData);
+                listView.setAdapter(adapter);
             }
         });
-    }
-
-    // リスト追加処理
-    private void addStringData(List<CellData> list) {
-        TextView time = findViewById(R.id.clock);
-        TextView count = findViewById(R.id.count);
-        EditText comment = findViewById(R.id.comment);
-        ListView listView = findViewById(R.id.list);
-
-        CellData data = new CellData(time.getText().toString(), count.getText().toString(), comment.getText().toString());
-        list.add(data);
-
-        listView.setAdapter(new ListViewAdapter(this, R.layout.list, list));
     }
 
     @Override
@@ -134,12 +133,12 @@ public class MainActivity extends AppCompatActivity {
 
     // カスタムアダプタークラス
     private class ListViewAdapter extends ArrayAdapter<CellData> {
-        private CellData data;
+        private CellData cellDataItem;
         private LayoutInflater inflater;
         private int itemLayout;
 
-        ListViewAdapter(Context context, int itemLayout, List<CellData> list) {
-            super(context, 0, list);
+        ListViewAdapter(Context context, int itemLayout) {
+            super(context, itemLayout);
             this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.itemLayout = itemLayout;
         }
@@ -147,27 +146,61 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public @NonNull
         View getView(final int position, View convertView, @NonNull ViewGroup parent) {
-            ViewHolder holder;
-            Log.i("Test", "positionは" + position + "です");
+            ViewHolder viewHolder;
+
             if (convertView == null) {
                 convertView = inflater.inflate(itemLayout, parent, false);
-                holder = new ViewHolder();
-                holder.viewCheck = convertView.findViewById(R.id.listCheckBox);
-                holder.viewTime = convertView.findViewById(R.id.listTime);
-                holder.viewCount = convertView.findViewById(R.id.listCount);
-                holder.viewComment = convertView.findViewById(R.id.listComment);
-                convertView.setTag(holder);
+                viewHolder = new ViewHolder();
+                viewHolder.viewCheck = convertView.findViewById(R.id.listCheckBox);
+                viewHolder.viewTime = convertView.findViewById(R.id.listTime);
+                viewHolder.viewCount = convertView.findViewById(R.id.listCount);
+                viewHolder.viewComment = convertView.findViewById(R.id.listComment);
+                convertView.setTag(viewHolder);
 
+                viewHolder.viewCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(buttonView.isPressed()) {
+                            // リストデータを変更
+                            final CellData buf = cellDataList.get(position);
+                            buf.check = isChecked;
+                            cellDataList.set(position, buf);
+                            Log.i("Test", "cellDataList[" + position + "]のcheckに[" + isChecked + "]を入れました");
+
+                            // 背景色を変更
+                            final View parentView = (View) buttonView.getParent();
+                            changeBackgroundColor(parentView, position, isChecked);
+                        }
+                    }
+                });
             } else {
-                holder = (ViewHolder) convertView.getTag();
+                viewHolder = (ViewHolder) convertView.getTag();
             }
-            data = getItem(position);
-            if (data != null) {
-                holder.viewTime.setText(data.time);
-                holder.viewCount.setText(data.count);
-                holder.viewComment.setText(data.comment);
+            cellDataItem = getItem(position);
+            if (cellDataItem != null) {
+                viewHolder.viewCheck.setChecked(cellDataList.get(position).check);
+                viewHolder.viewTime.setText(cellDataList.get(position).time);
+                viewHolder.viewCount.setText(cellDataList.get(position).count);
+                viewHolder.viewComment.setText(cellDataList.get(position).comment);
             }
+
+            // 背景色の変更
+            changeBackgroundColor(convertView, position, viewHolder.viewCheck.isChecked());
+
             return convertView;
+        }
+
+        // 色変え処理
+        private void changeBackgroundColor(View view, int position, boolean isChecked) {
+            if (position % 2 == 0) {
+                view.setBackgroundColor(Color.rgb(100, 149, 237));
+            } else {
+                view.setBackgroundColor(Color.WHITE);
+            }
+
+            if (isChecked) {
+                view.setBackgroundColor(Color.GREEN);
+            }
         }
 
         // Viewを保持するクラス
