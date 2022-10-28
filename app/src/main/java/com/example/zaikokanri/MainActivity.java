@@ -178,10 +178,10 @@ public class MainActivity extends AppCompatActivity {
             }
             cellDataItem = getItem(position);
             if (cellDataItem != null) {
-                viewHolder.viewCheck.setChecked(cellDataList.get(position).check);
-                viewHolder.viewTime.setText(cellDataList.get(position).time);
-                viewHolder.viewCount.setText(cellDataList.get(position).count);
-                viewHolder.viewComment.setText(cellDataList.get(position).comment);
+                viewHolder.viewCheck.setChecked(cellDataItem.check);
+                viewHolder.viewTime.setText(cellDataItem.time);
+                viewHolder.viewCount.setText(cellDataItem.count);
+                viewHolder.viewComment.setText(cellDataItem.comment);
             }
 
             // 背景色の変更
