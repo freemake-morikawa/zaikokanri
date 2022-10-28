@@ -15,7 +15,7 @@
         android:text="@string/clock" />
 
     <TextView
-        android:id="@+id/listNumber"
+        android:id="@+id/listCount"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
