@@ -177,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (buttonView.isPressed()) {
                             // リストデータを変更
-                            final CellData buf = cellDataList.get(position);
-                            buf.check = isChecked;
-                            cellDataList.set(position, buf);
+                            final CellData cellData = cellDataList.get(position);
+                            cellData.check = isChecked;
+                            cellDataList.set(position, cellData);
 
                             // 背景色を変更
                             final View parentView = (View) buttonView.getParent();
