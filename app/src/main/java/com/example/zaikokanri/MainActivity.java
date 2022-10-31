@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.viewCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(buttonView.isPressed()) {
+                        if (buttonView.isPressed()) {
                             // リストデータを変更
                             final CellData buf = cellDataList.get(position);
                             buf.check = isChecked;
