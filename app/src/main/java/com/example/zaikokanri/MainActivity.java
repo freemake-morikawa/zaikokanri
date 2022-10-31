@@ -31,10 +31,7 @@ public class MainActivity extends AppCompatActivity {
     List<CellData> cellDataList;
     private int count;
     private TextView clockText;
-    private ListView listView;
-
     private Timer timer;
-
     private ArrayAdapter<CellData> adapter;
 
     @Override
@@ -50,16 +47,13 @@ public class MainActivity extends AppCompatActivity {
         // アクションバーの変更
         getSupportActionBar().setTitle(R.string.action_bar);
 
-        // Viewの取得
-        final TextView countText = findViewById(R.id.count_text);
-        final Button plusButton = findViewById(R.id.plus_button);
-        final Button minusButton = findViewById(R.id.minus_button);
-        final Button addButton = findViewById(R.id.add_button);
-
+        // 時計のViewを取得
         clockText = findViewById(R.id.clock_text);
-        listView = findViewById(R.id.list_view);
 
         // 加算・減算
+        final TextView countText = findViewById(R.id.count_text);
+        final Button plusButton = findViewById(R.id.plus_button);
+
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 countText.setText(formatThousand(count));
             }
         });
+
+        final Button minusButton = findViewById(R.id.minus_button);
+
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // リスト追加
+        final Button addButton = findViewById(R.id.add_button);
+        final ListView listView = findViewById(R.id.list_view);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +114,12 @@ public class MainActivity extends AppCompatActivity {
     private String formatThousand(int num) {
         DecimalFormat df = new DecimalFormat("#,###");
         return df.format(num);
+    }
+
+    // リストアイテムの削除
+    private void deleteListItem(int position) {
+        adapter.remove(cellDataList.remove(position));
+        adapter.notifyDataSetChanged();
     }
 
     // データを保持するクラス
@@ -179,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 convertView.findViewById(R.id.listButton).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                              deleteListItem(position);
+                        deleteListItem(position);
                     }
                 });
             } else {
@@ -227,11 +233,5 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             clockText.setText((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
         }
-    }
-
-    // リストアイテムの削除
-    private void deleteListItem(int position) {
-        adapter.remove(cellDataList.remove(position));
-        adapter.notifyDataSetChanged();
     }
 }
