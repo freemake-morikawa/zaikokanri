@@ -9,4 +9,6 @@
     <string name="comment">コメント</string>
     <string name="add">追加</string>
     <string name="delete">削除</string>
+    <string name="clear">クリア</string>
+    <string name="sum">選択された合計数量</string>
 </resources>
