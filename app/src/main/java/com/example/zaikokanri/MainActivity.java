@@ -3,7 +3,6 @@ package com.example.zaikokanri;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -166,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                             final CellData buf = cellDataList.get(position);
                             buf.check = isChecked;
                             cellDataList.set(position, buf);
-                            Log.i("Test", "cellDataList[" + position + "]のcheckに[" + isChecked + "]を入れました");
 
                             // 背景色を変更
                             final View parentView = (View) buttonView.getParent();
