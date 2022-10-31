@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
     // 3桁ごとにカンマ挿入
     private String formatThousand(int num) {
-        DecimalFormat df = new DecimalFormat("#,###");
-        return df.format(num);
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(num);
     }
 
     // リストアイテムの削除
