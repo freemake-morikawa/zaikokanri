@@ -217,15 +217,15 @@ public class MainActivity extends AppCompatActivity {
         private final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
 
         private void changeBackgroundColor(View view, int position, boolean isChecked) {
-            if (position % 2 == 0) {
-                view.setBackgroundColor(EVEN_ITEM_BACKGROUND_COLOR);
-            } else {
-                view.setBackgroundColor(ODD_ITEM_BACKGROUND_COLOR);
-            }
-
+            // 選択済の場合
             if (isChecked) {
                 view.setBackgroundColor(CHECKED_ITEM_BACKGROUND_COLOR);
+                return;
             }
+
+            // 奇数、偶数の判定
+            int color = (position % 2 == 0) ? EVEN_ITEM_BACKGROUND_COLOR : ODD_ITEM_BACKGROUND_COLOR;
+            view.setBackgroundColor(color);
         }
 
         // Viewを保持するクラス
