@@ -3,6 +3,7 @@ package com.example.zaikokanri;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         final Button plusButton = findViewById(R.id.plus_button);
         final Button minusButton = findViewById(R.id.minus_button);
         final Button addButton = findViewById(R.id.add_button);
+        final Button clearButton = findViewById(R.id.clear_button);
 
         clockText = findViewById(R.id.clock_text);
         listView = findViewById(R.id.list_view);
@@ -92,6 +94,16 @@ public class MainActivity extends AppCompatActivity {
                 cellDataList.add(cellData);
                 adapter.add(cellData);
                 listView.setAdapter(adapter);
+            }
+        });
+
+        // リスト全件削除
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cellDataList.clear();
+                adapter.clear();
+                adapter.notifyDataSetChanged();
             }
         });
     }
