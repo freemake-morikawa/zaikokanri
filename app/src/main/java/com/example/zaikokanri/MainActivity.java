@@ -3,7 +3,6 @@ package com.example.zaikokanri;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 初期化
-        count = 0;
         cellDataList = new ArrayList<>();
         adapter = new ListViewAdapter(this, R.layout.list);
 
@@ -54,12 +52,17 @@ public class MainActivity extends AppCompatActivity {
         final TextView countText = findViewById(R.id.count_text);
         final Button plusButton = findViewById(R.id.plus_button);
 
+        final int COUNT_MAX = 9999;
+        final int COUNT_MIN = 0;
+
+        count = COUNT_MIN;
+
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count++;
-                if (count > 9999) {
-                    count = 9999;
+                if (count > COUNT_MAX) {
+                    count = COUNT_MAX;
                 }
                 countText.setText(formatThousand(count));
             }
@@ -71,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 count--;
-                if (count < 0) {
-                    count = 0;
+                if (count < COUNT_MIN) {
+                    count = COUNT_MIN;
                 }
                 countText.setText(formatThousand(count));
             }
@@ -97,11 +100,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // 時計を動かす
+    private final int TIMER_DELAY = 0;
+    private final int TIMER_PERIOD = 100;
+
     @Override
     protected void onStart() {
         super.onStart();
         timer = new Timer();
-        timer.schedule(new MainTimerTask(), 0, 100);
+        timer.schedule(new MainTimerTask(), TIMER_DELAY, TIMER_PERIOD);
     }
 
     @Override
@@ -139,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     // カスタムアダプタークラス
     private class ListViewAdapter extends ArrayAdapter<CellData> {
+
         private CellData cellDataItem;
         private LayoutInflater inflater;
         private int itemLayout;
@@ -172,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
                             final CellData buf = cellDataList.get(position);
                             buf.check = isChecked;
                             cellDataList.set(position, buf);
-                            Log.i("Test", "cellDataList[" + position + "]のcheckに[" + isChecked + "]を入れました");
 
                             // 背景色を変更
                             final View parentView = (View) buttonView.getParent();
@@ -206,15 +213,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 色変え処理
+        private final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
+        private final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
+        private final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
+
         private void changeBackgroundColor(View view, int position, boolean isChecked) {
             if (position % 2 == 0) {
-                view.setBackgroundColor(Color.rgb(100, 149, 237));
+                view.setBackgroundColor(EVEN_ITEM_BACKGROUND_COLOR);
             } else {
-                view.setBackgroundColor(Color.WHITE);
+                view.setBackgroundColor(ODD_ITEM_BACKGROUND_COLOR);
             }
 
             if (isChecked) {
-                view.setBackgroundColor(Color.GREEN);
+                view.setBackgroundColor(CHECKED_ITEM_BACKGROUND_COLOR);
             }
         }
 
