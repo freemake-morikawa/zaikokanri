@@ -28,11 +28,11 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<CellData> cellDataList;
     private int count;
+    private List<CellData> cellDataList;
+    private ArrayAdapter<CellData> adapter;
     private TextView clockText;
     private Timer timer;
-    private ArrayAdapter<CellData> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
