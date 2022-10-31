@@ -3,6 +3,7 @@ package com.example.zaikokanri;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -198,13 +199,12 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
+
             cellDataItem = getItem(position);
-            if (cellDataItem != null) {
-                viewHolder.viewCheck.setChecked(cellDataItem.check);
-                viewHolder.viewTime.setText(cellDataItem.time);
-                viewHolder.viewCount.setText(cellDataItem.count);
-                viewHolder.viewComment.setText(cellDataItem.comment);
-            }
+            viewHolder.viewCheck.setChecked(cellDataItem.check);
+            viewHolder.viewTime.setText(cellDataItem.time);
+            viewHolder.viewCount.setText(cellDataItem.count);
+            viewHolder.viewComment.setText(cellDataItem.comment);
 
             // 背景色の変更
             changeBackgroundColor(convertView, position, viewHolder.viewCheck.isChecked());
