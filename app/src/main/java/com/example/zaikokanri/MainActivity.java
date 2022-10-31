@@ -148,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
     // カスタムアダプタークラス
     private class ListViewAdapter extends ArrayAdapter<CellData> {
 
-        private CellData cellDataItem;
         private LayoutInflater inflater;
         private int itemLayout;
 
@@ -200,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-            cellDataItem = getItem(position);
+            CellData cellDataItem = getItem(position);
             viewHolder.viewCheck.setChecked(cellDataItem.check);
             viewHolder.viewTime.setText(cellDataItem.time);
             viewHolder.viewCount.setText(cellDataItem.count);
