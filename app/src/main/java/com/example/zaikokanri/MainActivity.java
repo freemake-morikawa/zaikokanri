@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.viewComment = convertView.findViewById(R.id.listComment);
                 convertView.setTag(viewHolder);
 
+                // チェックボックスのリスナー
                 viewHolder.viewCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -171,6 +172,14 @@ public class MainActivity extends AppCompatActivity {
                             final View parentView = (View) buttonView.getParent();
                             changeBackgroundColor(parentView, position, isChecked);
                         }
+                    }
+                });
+
+                // 削除ボタンのリスナー
+                convertView.findViewById(R.id.listButton).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                              deleteListItem(position);
                     }
                 });
             } else {
@@ -218,5 +227,11 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             clockText.setText((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
         }
+    }
+
+    // リストアイテムの削除
+    private void deleteListItem(int position) {
+        adapter.remove(cellDataList.remove(position));
+        adapter.notifyDataSetChanged();
     }
 }
