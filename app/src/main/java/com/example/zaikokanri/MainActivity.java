@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<InventoryData> adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 stockCount++;
                 if (stockCount > STOCK_COUNT_MAX) {
                     stockCount = STOCK_COUNT_MAX;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 stockCount--;
                 if (stockCount < STOCK_COUNT_MIN) {
                     stockCount = STOCK_COUNT_MIN;
@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 final TextView clockTextView = findViewById(R.id.clock_textview);
                 final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
                 final EditText commentEditText = findViewById(R.id.comment_edittext);
 
-                InventoryData inventoryData = new InventoryData(
+                final InventoryData inventoryData = new InventoryData(
                         clockTextView.getText().toString(),
                         stockCountTextView.getText().toString(),
                         commentEditText.getText().toString());
@@ -86,14 +86,14 @@ public class MainActivity extends AppCompatActivity {
 
     // 3桁を超える場合、カンマを入れる
     private String formatCommaThreeDigit(final int number) {
-        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        final DecimalFormat decimalFormat = new DecimalFormat("#,###");
         return decimalFormat.format(number);
     }
 
     // 時計処理
+    private static final int TIMER_DELAY = 0;
+    private static final int TIMER_PERIOD = 100;
     private TextView clockTextView;
-    static final private int TIMER_DELAY = 0;
-    static final private int TIMER_PERIOD = 100;
     private Timer timer;
 
     @Override

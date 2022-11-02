@@ -16,7 +16,7 @@ public class ListViewAdapter extends ArrayAdapter {
     private LayoutInflater inflater;
     private int itemLayout;
 
-    ListViewAdapter(Context context, int itemLayout) {
+    ListViewAdapter(final Context context, final int itemLayout) {
 
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -25,7 +25,7 @@ public class ListViewAdapter extends ArrayAdapter {
 
     @Override
     public @NonNull
-    View getView(final int position, View convertView, @NonNull ViewGroup parent) {
+    View getView(final int position, View convertView, @NonNull final ViewGroup parent) {
         ViewHolder viewHolder;
 
         if (convertView == null) {
@@ -41,7 +41,7 @@ public class ListViewAdapter extends ArrayAdapter {
             viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
 
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
                     if (buttonView.isPressed()) {
                         final InventoryData inventoryData = (InventoryData) getItem(position);
                         inventoryData.check = isChecked;
@@ -55,7 +55,7 @@ public class ListViewAdapter extends ArrayAdapter {
             // 削除ボタンのリスナー
             convertView.findViewById(R.id.item_delete_button).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     remove(getItem(position));
                     notifyDataSetChanged();
                 }
@@ -63,7 +63,7 @@ public class ListViewAdapter extends ArrayAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        InventoryData inventoryData = (InventoryData) getItem(position);
+        final InventoryData inventoryData = (InventoryData) getItem(position);
         viewHolder.checkBox.setChecked(inventoryData.check);
         viewHolder.timeTextView.setText(inventoryData.time);
         viewHolder.stockCountTextView.setText(inventoryData.count);
@@ -83,9 +83,9 @@ public class ListViewAdapter extends ArrayAdapter {
     }
 
     // 背景色の変更
-    private final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
-    private final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
-    private final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
+    private static final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
+    private static final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
+    private static final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
 
     private void changeBackgroundColor(final View view, final int position, final boolean isChecked) {
         if (isChecked) {
