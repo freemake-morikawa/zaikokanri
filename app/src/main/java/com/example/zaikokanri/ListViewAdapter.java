@@ -24,8 +24,8 @@ public class ListViewAdapter extends ArrayAdapter {
     }
 
     @Override
-    public @NonNull
-    View getView(final int position, View convertView, @NonNull final ViewGroup parent) {
+    @NonNull
+    public View getView(final int position, View convertView, @NonNull final ViewGroup parent) {
         ViewHolder viewHolder;
 
         if (convertView == null) {
