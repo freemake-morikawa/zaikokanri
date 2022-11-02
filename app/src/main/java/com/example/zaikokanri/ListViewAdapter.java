@@ -44,7 +44,7 @@ public class ListViewAdapter extends ArrayAdapter {
                 public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
                     if (buttonView.isPressed()) {
                         final InventoryData inventoryData = (InventoryData) getItem(position);
-                        inventoryData.check = isChecked;
+                        inventoryData.setCheck(isChecked);
 
                         final View parentView = (View) buttonView.getParent();
                         changeBackgroundColor(parentView, position, isChecked);
@@ -64,10 +64,10 @@ public class ListViewAdapter extends ArrayAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         final InventoryData inventoryData = (InventoryData) getItem(position);
-        viewHolder.checkBox.setChecked(inventoryData.check);
-        viewHolder.timeTextView.setText(inventoryData.time);
-        viewHolder.stockCountTextView.setText(inventoryData.count);
-        viewHolder.commentTextView.setText(inventoryData.comment);
+        viewHolder.checkBox.setChecked(inventoryData.getCheck());
+        viewHolder.timeTextView.setText(inventoryData.getTime());
+        viewHolder.stockCountTextView.setText(inventoryData.getStockCount());
+        viewHolder.commentTextView.setText(inventoryData.getComment());
 
         changeBackgroundColor(convertView, position, viewHolder.checkBox.isChecked());
 
