@@ -29,15 +29,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.action_bar_text);
 
         // 加算・減算
-        final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
-        final Button plusButton = findViewById(R.id.plus_button);
-        final Button minusButton = findViewById(R.id.minus_button);
-
         final int STOCK_COUNT_MIN = 0;
         final int STOCK_COUNT_MAX = 9999;
-
         stockCount = STOCK_COUNT_MIN;
 
+        final Button plusButton = findViewById(R.id.plus_button);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -45,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
                 if (stockCount > STOCK_COUNT_MAX) {
                     stockCount = STOCK_COUNT_MAX;
                 }
+                final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
                 stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
+        final Button minusButton = findViewById(R.id.minus_button);
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -55,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 if (stockCount < STOCK_COUNT_MIN) {
                     stockCount = STOCK_COUNT_MIN;
                 }
+                final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
                 stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
@@ -63,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
         clockTextView = findViewById(R.id.clock_textview);
 
         // リスト追加
-        final Button addButton = findViewById(R.id.add_button);
         final ListView listView = findViewById(R.id.inventory_data_list_listview);
         adapter = new ListViewAdapter(this, R.layout.list_item);
 
+        final Button addButton = findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

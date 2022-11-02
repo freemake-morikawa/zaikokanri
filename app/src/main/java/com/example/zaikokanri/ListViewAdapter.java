@@ -30,15 +30,16 @@ public class ListViewAdapter extends ArrayAdapter {
 
         if (convertView == null) {
             convertView = inflater.inflate(itemLayout, parent, false);
-            viewHolder = new ViewHolder();
-            viewHolder.checkBox = convertView.findViewById(R.id.item_checkbox);
-            viewHolder.timeTextView = convertView.findViewById(R.id.item_time_textview);
-            viewHolder.stockCountTextView = convertView.findViewById(R.id.item_stock_count_textview);
-            viewHolder.commentTextView = convertView.findViewById(R.id.item_comment_textview);
+            viewHolder = new ViewHolder(
+                    (CheckBox) convertView.findViewById(R.id.item_checkbox),
+                    (TextView) convertView.findViewById(R.id.item_time_textview),
+                    (TextView) convertView.findViewById(R.id.item_stock_count_textview),
+                    (TextView) convertView.findViewById(R.id.item_comment_textview)
+            );
             convertView.setTag(viewHolder);
 
             // チェックボックスのリスナー
-            viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            viewHolder.getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
 
                 public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
@@ -64,22 +65,14 @@ public class ListViewAdapter extends ArrayAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         final InventoryData inventoryData = (InventoryData) getItem(position);
-        viewHolder.checkBox.setChecked(inventoryData.getCheck());
-        viewHolder.timeTextView.setText(inventoryData.getTime());
-        viewHolder.stockCountTextView.setText(inventoryData.getStockCount());
-        viewHolder.commentTextView.setText(inventoryData.getComment());
+        viewHolder.getCheckBox().setChecked(inventoryData.getCheck());
+        viewHolder.getTimeTextView().setText(inventoryData.getTime());
+        viewHolder.getStockCountTextView().setText(inventoryData.getStockCount());
+        viewHolder.getCommentTextView().setText(inventoryData.getComment());
 
-        changeBackgroundColor(convertView, position, viewHolder.checkBox.isChecked());
+        changeBackgroundColor(convertView, position, viewHolder.getCheckBox().isChecked());
 
         return convertView;
-    }
-
-    // Viewを保持するクラス
-    private class ViewHolder {
-        public CheckBox checkBox;
-        public TextView timeTextView;
-        public TextView stockCountTextView;
-        public TextView commentTextView;
     }
 
     // 背景色の変更
