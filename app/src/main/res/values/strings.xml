@@ -9,4 +9,5 @@
     <string name="comment_edittext_hint">コメント</string>
     <string name="add_button_text">追加</string>
     <string name="delete_button_text">削除</string>
-</resources>
+    <string name="format_24_hour">HH:mm:ss</string>
+ </resources>

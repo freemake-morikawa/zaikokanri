@@ -1,115 +1,106 @@
 package com.example.zaikokanri;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int count;
-    private List<CellData> cellDataList;
-    private ArrayAdapter<CellData> adapter;
-    private TextView clockText;
-    private Timer timer;
+    private int stockCount;
+    private ArrayAdapter<InventoryData> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 初期化
-        cellDataList = new ArrayList<>();
-        adapter = new ListViewAdapter(this, R.layout.list);
-
-        // アクションバーの変更
-        getSupportActionBar().setTitle(R.string.action_bar);
-
-        // 時計のViewを取得
-        clockText = findViewById(R.id.clock_text);
+        getSupportActionBar().setTitle(R.string.action_bar_text);
 
         // 加算・減算
-        final TextView countText = findViewById(R.id.count_text);
+        final TextView countTextView = findViewById(R.id.count_textview);
         final Button plusButton = findViewById(R.id.plus_button);
+        final Button minusButton = findViewById(R.id.minus_button);
 
-        final int COUNT_MAX = 9999;
         final int COUNT_MIN = 0;
+        final int COUNT_MAX = 9999;
 
-        count = COUNT_MIN;
+        stockCount = COUNT_MIN;
 
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                count++;
-                if (count > COUNT_MAX) {
-                    count = COUNT_MAX;
+                stockCount++;
+                if (stockCount > COUNT_MAX) {
+                    stockCount = COUNT_MAX;
                 }
-                countText.setText(formatThousand(count));
+                countTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
-
-        final Button minusButton = findViewById(R.id.minus_button);
-
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                count--;
-                if (count < COUNT_MIN) {
-                    count = COUNT_MIN;
+                stockCount--;
+                if (stockCount < COUNT_MIN) {
+                    stockCount = COUNT_MIN;
                 }
-                countText.setText(formatThousand(count));
+                countTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
+        // 時計の処理のためViewを取得
+        clockTextView = findViewById(R.id.clock_textview);
+
         // リスト追加
         final Button addButton = findViewById(R.id.add_button);
-        final ListView listView = findViewById(R.id.list_view);
+        final ListView listView = findViewById(R.id.inventory_data_list_listview);
+        adapter = new ListViewAdapter(this, R.layout.list_item);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView time = findViewById(R.id.clock_text);
-                TextView count = findViewById(R.id.count_text);
-                EditText comment = findViewById(R.id.comment_text);
+                final TextView time = findViewById(R.id.clock_textview);
+                final TextView count = findViewById(R.id.count_textview);
+                final EditText comment = findViewById(R.id.comment_edittext);
 
-                CellData cellData = new CellData(time.getText().toString(), count.getText().toString(), comment.getText().toString());
-                cellDataList.add(cellData);
-                adapter.add(cellData);
+                InventoryData inventoryData = new InventoryData(
+                        time.getText().toString(),
+                        count.getText().toString(),
+                        comment.getText().toString());
+                adapter.add(inventoryData);
                 listView.setAdapter(adapter);
             }
         });
     }
 
-    // 時計を動かす
-    private final int TIMER_DELAY = 0;
-    private final int TIMER_PERIOD = 100;
+    // 3桁を超える場合、カンマを入れる
+    private String formatCommaThreeDigit(final int number) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(number);
+    }
+
+    // 時計処理
+    private TextView clockTextView;
+    final private int TIMER_DELAY = 0;
+    final private int TIMER_PERIOD = 100;
+    private Timer timer;
 
     @Override
     protected void onStart() {
         super.onStart();
         timer = new Timer();
-        timer.schedule(new MainTimerTask(), TIMER_DELAY, TIMER_PERIOD);
+        timer.schedule(new MyTimerTask(), TIMER_DELAY, TIMER_PERIOD);
     }
 
     @Override
@@ -118,130 +109,11 @@ public class MainActivity extends AppCompatActivity {
         timer.cancel();
     }
 
-    // 3桁ごとにカンマ挿入
-    private String formatThousand(int num) {
-        DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        return decimalFormat.format(num);
-    }
-
-    // リストアイテムの削除
-    private void deleteListItem(int position) {
-        adapter.remove(cellDataList.remove(position));
-        adapter.notifyDataSetChanged();
-    }
-
-    // データを保持するクラス
-    private class CellData {
-        boolean check;
-        String time;
-        String count;
-        String comment;
-
-        CellData(String time, String count, String comment) {
-            this.check = false;
-            this.time = time;
-            this.count = count;
-            this.comment = comment;
-        }
-    }
-
-    // カスタムアダプタークラス
-    private class ListViewAdapter extends ArrayAdapter<CellData> {
-
-        private LayoutInflater inflater;
-        private int itemLayout;
-
-        ListViewAdapter(Context context, int itemLayout) {
-            super(context, itemLayout);
-            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            this.itemLayout = itemLayout;
-        }
-
-        @Override
-        public @NonNull
-        View getView(final int position, View convertView, @NonNull ViewGroup parent) {
-            ViewHolder viewHolder;
-
-            if (convertView == null) {
-                convertView = inflater.inflate(itemLayout, parent, false);
-                viewHolder = new ViewHolder();
-                viewHolder.viewCheck = convertView.findViewById(R.id.listCheckBox);
-                viewHolder.viewTime = convertView.findViewById(R.id.listTime);
-                viewHolder.viewCount = convertView.findViewById(R.id.listCount);
-                viewHolder.viewComment = convertView.findViewById(R.id.listComment);
-                convertView.setTag(viewHolder);
-
-                // チェックボックスのリスナー
-                viewHolder.viewCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (buttonView.isPressed()) {
-                            // リストデータを変更
-                            final CellData cellData = cellDataList.get(position);
-                            cellData.check = isChecked;
-                            cellDataList.set(position, cellData);
-
-                            // 背景色を変更
-                            final View parentView = (View) buttonView.getParent();
-                            changeBackgroundColor(parentView, position, isChecked);
-                        }
-                    }
-                });
-
-                // 削除ボタンのリスナー
-                convertView.findViewById(R.id.listButton).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        deleteListItem(position);
-                    }
-                });
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-
-            CellData cellDataItem = getItem(position);
-            viewHolder.viewCheck.setChecked(cellDataItem.check);
-            viewHolder.viewTime.setText(cellDataItem.time);
-            viewHolder.viewCount.setText(cellDataItem.count);
-            viewHolder.viewComment.setText(cellDataItem.comment);
-
-            // 背景色の変更
-            changeBackgroundColor(convertView, position, viewHolder.viewCheck.isChecked());
-
-            return convertView;
-        }
-
-        // 色変え処理
-        private final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
-        private final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
-        private final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
-
-        private void changeBackgroundColor(View view, int position, boolean isChecked) {
-            // 選択済の場合
-            if (isChecked) {
-                view.setBackgroundColor(CHECKED_ITEM_BACKGROUND_COLOR);
-                return;
-            }
-
-            // 奇数、偶数の判定
-            int color = (position % 2 == 0) ? EVEN_ITEM_BACKGROUND_COLOR : ODD_ITEM_BACKGROUND_COLOR;
-            view.setBackgroundColor(color);
-        }
-
-        // Viewを保持するクラス
-        private class ViewHolder {
-            CheckBox viewCheck;
-            TextView viewTime;
-            TextView viewCount;
-            TextView viewComment;
-        }
-    }
-
-    // Timerで呼び出すタスクのクラス
-    public class MainTimerTask extends TimerTask {
+    private class MyTimerTask extends TimerTask {
         @Override
         public void run() {
-            clockText.setText((new SimpleDateFormat("HH:mm:ss")).format(new Date()));
+            final String clockText = new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
+            clockTextView.setText(clockText);
         }
     }
 }

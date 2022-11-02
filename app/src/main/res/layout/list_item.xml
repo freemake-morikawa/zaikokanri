@@ -5,36 +5,34 @@
     android:orientation="horizontal">
 
     <CheckBox
-        android:id="@+id/listCheckBox"
+        android:id="@+id/item_checkbox"
         android:layout_width="30dp"
         android:layout_height="fill_parent" />
 
     <TextView
-        android:id="@+id/listTime"
+        android:id="@+id/item_time_textview"
         android:layout_width="55dp"
         android:layout_height="fill_parent"
         android:gravity="center_vertical"
-        android:text="@string/clock" />
+        android:text="test" />
 
     <TextView
-        android:id="@+id/listCount"
+        android:id="@+id/item_count_textview"
         android:layout_width="35dp"
         android:layout_height="fill_parent"
         android:layout_marginStart="10dp"
-        android:gravity="center_vertical"
-        android:text="@string/zero" />
+        android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/listComment"
+        android:id="@+id/item_comment_textview"
         android:layout_width="150dp"
         android:layout_height="fill_parent"
         android:layout_marginStart="20dp"
-        android:gravity="center_vertical"
-        android:text="@string/comment" />
+        android:gravity="center_vertical" />
 
     <Button
-        android:id="@+id/listButton"
+        android:id="@+id/item_delete_button"
         android:layout_width="60dp"
         android:layout_height="fill_parent"
-        android:text="@string/delete" />
+        android:text="@string/delete_button_text" />
 </LinearLayout>
