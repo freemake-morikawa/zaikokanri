@@ -7,21 +7,21 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/volume_textview"
+        android:id="@+id/stock_textview"
         android:layout_width="@dimen/volume_textview_width"
         android:layout_height="@dimen/textview_height"
-        android:text="@string/volume_textview_text"
+        android:text="@string/stock_textview_text"
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/count_textview"
+        android:id="@+id/stock_count_textview"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/textview_height"
         android:text="@string/count_textview_initial_text"
         android:textSize="@dimen/text_size"
-        app:layout_constraintStart_toEndOf="@+id/volume_textview"
+        app:layout_constraintStart_toEndOf="@+id/stock_textview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -47,7 +47,7 @@
         android:textColor="#808080"
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/volume_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/stock_textview" />
 
     <EditText
         android:id="@+id/comment_edittext"

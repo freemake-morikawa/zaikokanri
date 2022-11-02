@@ -33,7 +33,7 @@ public class ListViewAdapter extends ArrayAdapter {
             viewHolder = new ViewHolder();
             viewHolder.checkBox = convertView.findViewById(R.id.item_checkbox);
             viewHolder.timeTextView = convertView.findViewById(R.id.item_time_textview);
-            viewHolder.countTextView = convertView.findViewById(R.id.item_count_textview);
+            viewHolder.stockCountTextView = convertView.findViewById(R.id.item_stock_count_textview);
             viewHolder.commentTextView = convertView.findViewById(R.id.item_comment_textview);
             convertView.setTag(viewHolder);
 
@@ -66,7 +66,7 @@ public class ListViewAdapter extends ArrayAdapter {
         InventoryData inventoryData = (InventoryData) getItem(position);
         viewHolder.checkBox.setChecked(inventoryData.check);
         viewHolder.timeTextView.setText(inventoryData.time);
-        viewHolder.countTextView.setText(inventoryData.count);
+        viewHolder.stockCountTextView.setText(inventoryData.count);
         viewHolder.commentTextView.setText(inventoryData.comment);
 
         changeBackgroundColor(convertView, position, viewHolder.checkBox.isChecked());
@@ -78,7 +78,7 @@ public class ListViewAdapter extends ArrayAdapter {
     private class ViewHolder {
         public CheckBox checkBox;
         public TextView timeTextView;
-        public TextView countTextView;
+        public TextView stockCountTextView;
         public TextView commentTextView;
     }
 
@@ -92,7 +92,7 @@ public class ListViewAdapter extends ArrayAdapter {
             view.setBackgroundColor(CHECKED_ITEM_BACKGROUND_COLOR);
             return;
         }
-        final int color = (position % 2 == 0) ? EVEN_ITEM_BACKGROUND_COLOR : ODD_ITEM_BACKGROUND_COLOR;
+        final int color = position % 2 == 0 ? EVEN_ITEM_BACKGROUND_COLOR : ODD_ITEM_BACKGROUND_COLOR;
         view.setBackgroundColor(color);
     }
 }

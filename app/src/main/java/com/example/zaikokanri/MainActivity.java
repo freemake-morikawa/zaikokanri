@@ -29,33 +29,33 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.action_bar_text);
 
         // 加算・減算
-        final TextView countTextView = findViewById(R.id.count_textview);
+        final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
         final Button plusButton = findViewById(R.id.plus_button);
         final Button minusButton = findViewById(R.id.minus_button);
 
-        final int COUNT_MIN = 0;
-        final int COUNT_MAX = 9999;
+        final int STOCK_COUNT_MIN = 0;
+        final int STOCK_COUNT_MAX = 9999;
 
-        stockCount = COUNT_MIN;
+        stockCount = STOCK_COUNT_MIN;
 
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stockCount++;
-                if (stockCount > COUNT_MAX) {
-                    stockCount = COUNT_MAX;
+                if (stockCount > STOCK_COUNT_MAX) {
+                    stockCount = STOCK_COUNT_MAX;
                 }
-                countTextView.setText(formatCommaThreeDigit(stockCount));
+                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stockCount--;
-                if (stockCount < COUNT_MIN) {
-                    stockCount = COUNT_MIN;
+                if (stockCount < STOCK_COUNT_MIN) {
+                    stockCount = STOCK_COUNT_MIN;
                 }
-                countTextView.setText(formatCommaThreeDigit(stockCount));
+                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
@@ -70,14 +70,14 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final TextView time = findViewById(R.id.clock_textview);
-                final TextView count = findViewById(R.id.count_textview);
-                final EditText comment = findViewById(R.id.comment_edittext);
+                final TextView clockTextView = findViewById(R.id.clock_textview);
+                final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
+                final EditText commentEditText = findViewById(R.id.comment_edittext);
 
                 InventoryData inventoryData = new InventoryData(
-                        time.getText().toString(),
-                        count.getText().toString(),
-                        comment.getText().toString());
+                        clockTextView.getText().toString(),
+                        stockCountTextView.getText().toString(),
+                        commentEditText.getText().toString());
                 adapter.add(inventoryData);
                 listView.setAdapter(adapter);
             }
@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
     // 時計処理
     private TextView clockTextView;
-    final private int TIMER_DELAY = 0;
-    final private int TIMER_PERIOD = 100;
+    static final private int TIMER_DELAY = 0;
+    static final private int TIMER_PERIOD = 100;
     private Timer timer;
 
     @Override
