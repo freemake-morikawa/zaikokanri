@@ -2,7 +2,6 @@ package com.example.zaikokanri;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,7 @@ public class ListViewAdapter extends ArrayAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        InventoryData inventoryData = (InventoryData) this.getItem(position);
+        InventoryData inventoryData = (InventoryData) getItem(position);
         viewHolder.checkBox.setChecked(inventoryData.check);
         viewHolder.timeTextView.setText(inventoryData.time);
         viewHolder.countTextView.setText(inventoryData.count);
