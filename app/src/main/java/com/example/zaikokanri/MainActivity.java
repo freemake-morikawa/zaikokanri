@@ -35,6 +35,39 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(R.string.action_bar_text);
 
+        initView();
+    }
+
+    // 3桁を超える場合、カンマを入れる
+    private String formatCommaThreeDigit(final int number) {
+        final DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(number);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        timer = new Timer();
+        timer.schedule(new MyTimerTask(), TIMER_DELAY, TIMER_PERIOD);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        timer.cancel();
+    }
+
+    // 時計のタスククラス
+    private class MyTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            final String clockText = new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
+            clockTextView.setText(clockText);
+        }
+    }
+
+    // アプリ起動時のView操作
+    private void initView (){
         // 加算・減算
         stockCount = STOCK_COUNT_MIN;
 
@@ -89,32 +122,5 @@ public class MainActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         });
-    }
-
-    // 3桁を超える場合、カンマを入れる
-    private String formatCommaThreeDigit(final int number) {
-        final DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        return decimalFormat.format(number);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        timer = new Timer();
-        timer.schedule(new MyTimerTask(), TIMER_DELAY, TIMER_PERIOD);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        timer.cancel();
-    }
-
-    private class MyTimerTask extends TimerTask {
-        @Override
-        public void run() {
-            final String clockText = new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
-            clockTextView.setText(clockText);
-        }
     }
 }
