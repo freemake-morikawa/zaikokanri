@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private static final int STOCK_COUNT_MIN = 0;
-    private static final int STOCK_COUNT_MAX = 9999;
+    private static final int STOCK_COUNT_MAX = 9_999;
     private static final int TIMER_DELAY = 0;
     private static final int TIMER_PERIOD = 100;
     private static final String DEFAULT_NUMBER_FORMAT = "#,###";
