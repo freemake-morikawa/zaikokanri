@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.inventory_data_list_listview);
         adapter = new ListViewAdapter(this, R.layout.list_item);
 
-        final Button addButton = findViewById(R.id.add_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        final Button inventoryDataAddButton = findViewById(R.id.inventory_data_add_button);
+        inventoryDataAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final TextView clockTextView = findViewById(R.id.clock_textview);
