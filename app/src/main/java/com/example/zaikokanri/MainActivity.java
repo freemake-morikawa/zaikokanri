@@ -38,12 +38,6 @@ public class MainActivity extends AppCompatActivity {
         initView();
     }
 
-    // 3桁を超える場合、カンマを入れる
-    private String formatCommaThreeDigit(final int number) {
-        final DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        return decimalFormat.format(number);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -122,5 +116,11 @@ public class MainActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         });
+    }
+
+    // 3桁を超える場合、カンマを入れる
+    private String formatCommaThreeDigit(final int number) {
+        final DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(number);
     }
 }
