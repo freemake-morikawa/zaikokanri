@@ -13,6 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 public class ListViewAdapter extends ArrayAdapter {
+
+    private static final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
+    private static final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
+    private static final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
+
     private LayoutInflater inflater;
     private int itemLayout;
 
@@ -76,10 +81,6 @@ public class ListViewAdapter extends ArrayAdapter {
     }
 
     // 背景色の変更
-    private static final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
-    private static final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
-    private static final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
-
     private void changeBackgroundColor(final View view, final int position, final boolean isChecked) {
         if (isChecked) {
             view.setBackgroundColor(CHECKED_ITEM_BACKGROUND_COLOR);

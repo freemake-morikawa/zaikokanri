@@ -18,8 +18,15 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int STOCK_COUNT_MIN = 0;
+    private static final int STOCK_COUNT_MAX = 9999;
+    private static final int TIMER_DELAY = 0;
+    private static final int TIMER_PERIOD = 100;
+
     private int stockCount;
     private ArrayAdapter<InventoryData> adapter;
+    private TextView clockTextView;
+    private Timer timer;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -29,10 +36,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.action_bar_text);
 
         // 加算・減算
-        final int STOCK_COUNT_MIN = 0;
-        final int STOCK_COUNT_MAX = 9999;
         stockCount = STOCK_COUNT_MIN;
-
         final Button plusButton = findViewById(R.id.plus_button);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,12 +92,6 @@ public class MainActivity extends AppCompatActivity {
         final DecimalFormat decimalFormat = new DecimalFormat("#,###");
         return decimalFormat.format(number);
     }
-
-    // 時計処理
-    private static final int TIMER_DELAY = 0;
-    private static final int TIMER_PERIOD = 100;
-    private TextView clockTextView;
-    private Timer timer;
 
     @Override
     protected void onStart() {
