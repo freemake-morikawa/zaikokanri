@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 stockCount++;
-                if (stockCount > STOCK_COUNT_MAX) {
+                if (STOCK_COUNT_MAX < stockCount) {
                     stockCount = STOCK_COUNT_MAX;
                 }
 
