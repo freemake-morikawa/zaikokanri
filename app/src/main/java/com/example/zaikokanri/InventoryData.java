@@ -1,24 +1,24 @@
 package com.example.zaikokanri;
 
 public class InventoryData {
-    private boolean check;
+    private boolean isCheck;
     private String time;
     private String stockCount;
     private String comment;
 
     public InventoryData(final String time, final String stockCount, final String comment) {
-        this.check = false;
+        this.isCheck = false;
         this.time = time;
         this.stockCount = stockCount;
         this.comment = comment;
     }
 
     public void setCheck(final boolean check) {
-        this.check = check;
+        this.isCheck = check;
     }
 
     public boolean isChecked() {
-        return check;
+        return isCheck;
     }
 
     public void setTime(final String time) {
