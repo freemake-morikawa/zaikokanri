@@ -16,32 +16,16 @@ public class ViewHolder {
         this.commentTextView = commentTextView;
     }
 
-    public void setCheckBox(final CheckBox checkBox) {
-        this.checkBox = checkBox;
-    }
-
     public CheckBox getCheckBox() {
         return checkBox;
-    }
-
-    public void setTimeTextView(final TextView timeTextView) {
-        this.timeTextView = timeTextView;
     }
 
     public TextView getTimeTextView() {
         return timeTextView;
     }
 
-    public void setStockCountTextView(final TextView stockCountTextView) {
-        this.stockCountTextView = stockCountTextView;
-    }
-
     public TextView getStockCountTextView() {
         return stockCountTextView;
-    }
-
-    public void setCommentTextView(final TextView commentTextView) {
-        this.commentTextView = commentTextView;
     }
 
     public TextView getCommentTextView() {

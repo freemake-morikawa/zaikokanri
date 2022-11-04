@@ -21,24 +21,12 @@ public class InventoryData {
         return isCheck;
     }
 
-    public void setTime(final String time) {
-        this.time = time;
-    }
-
     public String getTime() {
         return time;
     }
 
-    public void setStockCount(final String stockCount) {
-        this.stockCount = stockCount;
-    }
-
     public String getStockCount() {
         return stockCount;
-    }
-
-    public void setComment(final String comment) {
-        this.comment = comment;
     }
 
     public String getComment() {
