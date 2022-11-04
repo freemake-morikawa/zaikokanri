@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 加算・減算
         stockCount = STOCK_COUNT_MIN;
+
         final Button plusButton = findViewById(R.id.plus_button);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 if (stockCount > STOCK_COUNT_MAX) {
                     stockCount = STOCK_COUNT_MAX;
                 }
+
                 final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
                 stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
+
         final Button minusButton = findViewById(R.id.minus_button);
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 if (stockCount < STOCK_COUNT_MIN) {
                     stockCount = STOCK_COUNT_MIN;
                 }
+
                 final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
                 stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }

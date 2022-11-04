@@ -22,7 +22,6 @@ public class ListViewAdapter extends ArrayAdapter {
     private int itemLayout;
 
     ListViewAdapter(final Context context, final int itemLayout) {
-
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayout = itemLayout;
@@ -69,6 +68,7 @@ public class ListViewAdapter extends ArrayAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         final InventoryData inventoryData = (InventoryData) getItem(position);
         viewHolder.getCheckBox().setChecked(inventoryData.getCheck());
         viewHolder.getTimeTextView().setText(inventoryData.getTime());
