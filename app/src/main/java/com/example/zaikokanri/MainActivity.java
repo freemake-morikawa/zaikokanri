@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int STOCK_COUNT_MAX = 9999;
     private static final int TIMER_DELAY = 0;
     private static final int TIMER_PERIOD = 100;
+    private static final String DEFAULT_NUMBER_FORMAT = "#,###";
 
     private int stockCount;
     private ArrayAdapter<InventoryData> adapter;
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 3桁を超える場合、カンマを入れる
     private String formatCommaThreeDigit(final int number) {
-        final DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        final DecimalFormat decimalFormat = new DecimalFormat(DEFAULT_NUMBER_FORMAT);
         return decimalFormat.format(number);
     }
 }
