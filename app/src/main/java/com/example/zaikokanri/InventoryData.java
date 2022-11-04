@@ -17,7 +17,7 @@ public class InventoryData {
         this.check = check;
     }
 
-    public boolean getCheck() {
+    public boolean isChecked() {
         return check;
     }
 

@@ -70,7 +70,7 @@ public class ListViewAdapter extends ArrayAdapter {
         }
 
         final InventoryData inventoryData = (InventoryData) getItem(position);
-        viewHolder.getCheckBox().setChecked(inventoryData.getCheck());
+        viewHolder.getCheckBox().setChecked(inventoryData.isChecked());
         viewHolder.getTimeTextView().setText(inventoryData.getTime());
         viewHolder.getStockCountTextView().setText(inventoryData.getStockCount());
         viewHolder.getCommentTextView().setText(inventoryData.getComment());
