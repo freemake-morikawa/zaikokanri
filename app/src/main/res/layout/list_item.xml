@@ -6,33 +6,33 @@
 
     <CheckBox
         android:id="@+id/item_checkbox"
-        android:layout_width="30dp"
+        android:layout_width="@dimen/item_checkbox_width"
         android:layout_height="fill_parent" />
 
     <TextView
         android:id="@+id/item_time_textview"
-        android:layout_width="55dp"
+        android:layout_width="@dimen/item_time_textview_width"
         android:layout_height="fill_parent"
         android:gravity="center_vertical"
-        android:text="test" />
+        />
 
     <TextView
         android:id="@+id/item_stock_count_textview"
-        android:layout_width="35dp"
+        android:layout_width="@dimen/item_stock_count_textview_width"
         android:layout_height="fill_parent"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/item_stock_count_textview_margin_start"
         android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/item_comment_textview"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/item_comment_textview_width"
         android:layout_height="fill_parent"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="@dimen/item_comment_textview_margin_start"
         android:gravity="center_vertical" />
 
     <Button
         android:id="@+id/item_delete_button"
-        android:layout_width="60dp"
+        android:layout_width="@dimen/item_delete_button_width"
         android:layout_height="fill_parent"
         android:text="@string/delete_button_text" />
 </LinearLayout>

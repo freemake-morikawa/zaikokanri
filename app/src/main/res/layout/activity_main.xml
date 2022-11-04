@@ -44,7 +44,7 @@
         android:id="@+id/clock_textview"
         android:layout_width="@dimen/clock_textview_width"
         android:layout_height="@dimen/textview_height"
-        android:textColor="#808080"
+        android:textColor="@color/clock_textview_text_color"
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stock_textview" />
