@@ -29,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView clockTextView;
     private Timer timer;
 
+    public MainActivity() {
+        stockCount = 0;
+        adapter = null;
+        clockTextView = null;
+        timer = null;
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
