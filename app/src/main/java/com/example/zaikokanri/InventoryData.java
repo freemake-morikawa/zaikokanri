@@ -1,6 +1,6 @@
 package com.example.zaikokanri;
 
-public class InventoryData {
+public final class InventoryData {
     private boolean isCheck;
     private String time;
     private String stockCount;

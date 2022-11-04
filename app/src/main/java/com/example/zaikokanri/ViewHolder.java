@@ -3,7 +3,7 @@ package com.example.zaikokanri;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class ViewHolder {
+public final class ViewHolder {
     private CheckBox checkBox;
     private TextView timeTextView;
     private TextView stockCountTextView;

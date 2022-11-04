@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public class ListViewAdapter extends ArrayAdapter {
+public final class ListViewAdapter extends ArrayAdapter {
 
     private static final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
     private static final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
