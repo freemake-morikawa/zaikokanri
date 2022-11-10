@@ -124,6 +124,15 @@ public class MainActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         });
+
+        // クリア
+        final Button buttonClear = findViewById(R.id.button_clear);
+        buttonClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.clear();
+            }
+        });
     }
 
     // 3桁を超える場合、カンマを入れる
