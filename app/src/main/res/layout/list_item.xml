@@ -10,29 +10,29 @@
         android:layout_height="fill_parent" />
 
     <TextView
-        android:id="@+id/item_text_view_time"
-        android:layout_width="@dimen/item_text_view_time_width"
+        android:id="@+id/item_time_text_view"
+        android:layout_width="@dimen/item_time_text_view_width"
         android:layout_height="fill_parent"
         android:gravity="center_vertical"
         />
 
     <TextView
-        android:id="@+id/item_text_view_stock_count"
-        android:layout_width="@dimen/item_text_view_stock_count_width"
+        android:id="@+id/item_stock_count_text_view"
+        android:layout_width="@dimen/item_comment_text_view_width"
         android:layout_height="fill_parent"
-        android:layout_marginStart="@dimen/item_text_view_stock_count_margin_start"
+        android:layout_marginStart="@dimen/item_stock_count_text_view_margin_start"
         android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/item_text_view_comment"
-        android:layout_width="@dimen/item_text_view_comment_width"
+        android:id="@+id/item_comment_text_view"
+        android:layout_width="@dimen/item_comment_text_view"
         android:layout_height="fill_parent"
-        android:layout_marginStart="@dimen/item_text_view_comment_margin_start"
+        android:layout_marginStart="@dimen/item_comment_text_view_margin_start"
         android:gravity="center_vertical" />
 
     <Button
-        android:id="@+id/item_button_delete"
-        android:layout_width="@dimen/item_button_delete_width"
+        android:id="@+id/item_delete_button"
+        android:layout_width="@dimen/item_delete_button_width"
         android:layout_height="fill_parent"
-        android:text="@string/button_delete_text" />
+        android:text="@string/item_delete_button_text" />
 </LinearLayout>
