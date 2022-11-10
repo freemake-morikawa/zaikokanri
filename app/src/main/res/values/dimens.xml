@@ -2,15 +2,16 @@
     <dimen name="text_view_height">45dp</dimen>
     <dimen name="button_height">45dp</dimen>
     <dimen name="edit_view_height">45dp</dimen>
-    <dimen name="text_view_volume_width">75dp</dimen>
+    <dimen name="stock_text_view_width">75dp</dimen>
     <dimen name="text_size">35sp</dimen>
-    <dimen name="text_view_clock_width">140dp</dimen>
-    <dimen name="edit_view_comment_width">130dp</dimen>
+    <dimen name="clock_text_view_width">140dp</dimen>
+    <dimen name="comment_edit_text_width">130dp</dimen>
     <dimen name="item_checkbox_width">30dp</dimen>
-    <dimen name="item_text_view_time_width">55dp</dimen>
-    <dimen name="item_text_view_stock_count_width">35dp</dimen>
-    <dimen name="item_text_view_stock_count_margin_start">10dp</dimen>
-    <dimen name="item_text_view_comment_width">150dp</dimen>
-    <dimen name="item_text_view_comment_margin_start">20dp</dimen>
-    <dimen name="item_button_delete_width">60dp</dimen>
+    <dimen name="item_time_text_view_width">55dp</dimen>
+    <dimen name="item_stock_count_text_view_width">35dp</dimen>
+    <dimen name="item_stock_count_text_view_margin_start">10dp</dimen>
+    <dimen name="item_comment_text_view_width">150dp</dimen>
+    <dimen name="item_comment_text_view_margin_start">20dp</dimen>
+    <dimen name="item_delete_button_width">60dp</dimen>
+    <dimen name="show_checked_total_count_button_width">300dp</dimen>
 </resources>
