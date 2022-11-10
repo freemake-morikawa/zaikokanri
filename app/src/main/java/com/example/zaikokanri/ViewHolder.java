@@ -9,7 +9,10 @@ public final class ViewHolder {
     private TextView stockCountTextView;
     private TextView commentTextView;
 
-    public ViewHolder(CheckBox checkBox, TextView timeTextView, TextView stockCountTextView, TextView commentTextView) {
+    public ViewHolder(CheckBox checkBox,
+                      TextView timeTextView,
+                      TextView stockCountTextView,
+                      TextView commentTextView) {
         this.checkBox = checkBox;
         this.timeTextView = timeTextView;
         this.stockCountTextView = stockCountTextView;
