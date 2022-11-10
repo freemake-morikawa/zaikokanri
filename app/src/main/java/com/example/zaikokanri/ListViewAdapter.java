@@ -82,11 +82,10 @@ public final class ListViewAdapter extends ArrayAdapter {
 
     // 背景色の変更
     private void changeBackgroundColor(final View view, final int position, final boolean isChecked) {
+        int color = position % 2 == 0 ? ITEM_BACKGROUND_COLOR_EVEN : ITEM_BACKGROUND_COLOR_ODD;
         if (isChecked) {
-            view.setBackgroundColor(ITEM_BACKGROUND_COLOR_CHECKED);
-            return;
+            color = ITEM_BACKGROUND_COLOR_CHECKED;
         }
-        final int color = position % 2 == 0 ? ITEM_BACKGROUND_COLOR_EVEN : ITEM_BACKGROUND_COLOR_ODD;
         view.setBackgroundColor(color);
     }
 }
