@@ -7,73 +7,73 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/stock_textview"
-        android:layout_width="@dimen/volume_textview_width"
-        android:layout_height="@dimen/textview_height"
-        android:text="@string/stock_textview_text"
+        android:id="@+id/text_view_stock"
+        android:layout_width="@dimen/text_view_volume_width"
+        android:layout_height="@dimen/text_view_height"
+        android:text="@string/text_view_stock_text"
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/stock_count_textview"
+        android:id="@+id/text_view_stock_count"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/textview_height"
-        android:text="@string/count_textview_initial_text"
+        android:layout_height="@dimen/text_view_height"
+        android:text="@string/text_view_count_initial_text"
         android:textSize="@dimen/text_size"
-        app:layout_constraintStart_toEndOf="@+id/stock_textview"
+        app:layout_constraintStart_toEndOf="@+id/text_view_stock"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/plus_button"
+        android:id="@+id/button_plus"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height"
-        android:text="@string/plus_button_text"
-        app:layout_constraintEnd_toStartOf="@+id/minus_button"
+        android:text="@string/button_plus_text"
+        app:layout_constraintEnd_toStartOf="@+id/button_minus"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/minus_button"
+        android:id="@+id/button_minus"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height"
-        android:text="@string/minus_button_text"
+        android:text="@string/button_minus_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/clock_textview"
-        android:layout_width="@dimen/clock_textview_width"
-        android:layout_height="@dimen/textview_height"
-        android:textColor="@color/clock_textview_text_color"
+        android:id="@+id/text_view_clock"
+        android:layout_width="@dimen/text_view_clock_width"
+        android:layout_height="@dimen/text_view_height"
+        android:textColor="@color/text_view_clock_text_color"
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stock_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_stock" />
 
     <EditText
-        android:id="@+id/comment_edittext"
-        android:layout_width="@dimen/comment_editview_width"
-        android:layout_height="@dimen/editview_height"
-        android:hint="@string/comment_edittext_hint"
+        android:id="@+id/edit_text_comment"
+        android:layout_width="@dimen/edit_view_comment_width"
+        android:layout_height="@dimen/edit_view_height"
+        android:hint="@string/edit_text_comment_hint"
         android:inputType="text"
         android:autofillHints=""
-        app:layout_constraintStart_toEndOf="@+id/clock_textview"
-        app:layout_constraintTop_toBottomOf="@+id/plus_button"
+        app:layout_constraintStart_toEndOf="@+id/text_view_clock"
+        app:layout_constraintTop_toBottomOf="@+id/button_plus"
         tools:targetApi="26" />
 
     <Button
-        android:id="@+id/inventory_data_add_button"
+        android:id="@+id/button_inventory_data_add"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height"
-        android:text="@string/add_button_text"
-        app:layout_constraintStart_toEndOf="@+id/comment_edittext"
-        app:layout_constraintTop_toBottomOf="@+id/plus_button" />
+        android:text="@string/button_add_text"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_comment"
+        app:layout_constraintTop_toBottomOf="@+id/button_plus" />
 
     <ListView
-        android:id="@+id/inventory_data_list_listview"
+        android:id="@+id/list_view_inventory_data_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comment_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_comment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

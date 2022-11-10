@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         // 加算・減算
         stockCount = STOCK_COUNT_MIN;
 
-        final Button plusButton = findViewById(R.id.plus_button);
+        final Button plusButton = findViewById(R.id.button_plus);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
                     stockCount = STOCK_COUNT_MAX;
                 }
 
-                final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
+                final TextView stockCountTextView = findViewById(R.id.text_view_stock_count);
                 stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
-        final Button minusButton = findViewById(R.id.minus_button);
+        final Button minusButton = findViewById(R.id.button_minus);
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -96,25 +96,25 @@ public class MainActivity extends AppCompatActivity {
                     stockCount = STOCK_COUNT_MIN;
                 }
 
-                final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
+                final TextView stockCountTextView = findViewById(R.id.text_view_stock_count);
                 stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
         // 時計の処理のためViewを取得
-        clockTextView = findViewById(R.id.clock_textview);
+        clockTextView = findViewById(R.id.text_view_clock);
 
         // リスト追加
-        final ListView listView = findViewById(R.id.inventory_data_list_listview);
+        final ListView listView = findViewById(R.id.list_view_inventory_data_list);
         adapter = new ListViewAdapter(this, R.layout.list_item);
 
-        final Button inventoryDataAddButton = findViewById(R.id.inventory_data_add_button);
+        final Button inventoryDataAddButton = findViewById(R.id.button_inventory_data_add);
         inventoryDataAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                final TextView clockTextView = findViewById(R.id.clock_textview);
-                final TextView stockCountTextView = findViewById(R.id.stock_count_textview);
-                final EditText commentEditText = findViewById(R.id.comment_edittext);
+                final TextView clockTextView = findViewById(R.id.text_view_clock);
+                final TextView stockCountTextView = findViewById(R.id.text_view_stock_count);
+                final EditText commentEditText = findViewById(R.id.edit_text_comment);
 
                 final InventoryData inventoryData = new InventoryData(
                         clockTextView.getText().toString(),

@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">在庫管理</string>
     <string name="action_bar_text">Freemake</string>
-    <string name="stock_textview_text">数量</string>
-    <string name="plus_button_text">+</string>
-    <string name="minus_button_text">-</string>
-    <string name="count_textview_initial_text">0</string>
-    <string name="clock_textview_initial_text">00:00:00</string>
-    <string name="comment_edittext_hint">コメント</string>
-    <string name="add_button_text">追加</string>
-    <string name="delete_button_text">削除</string>
+    <string name="text_view_stock_text">数量</string>
+    <string name="button_plus_text">+</string>
+    <string name="button_minus_text">-</string>
+    <string name="text_view_count_initial_text">0</string>
+    <string name="text_view_clock_initial_text">00:00:00</string>
+    <string name="edit_text_comment_hint">コメント</string>
+    <string name="button_add_text">追加</string>
+    <string name="button_delete_text">削除</string>
     <string name="format_24_hour">HH:mm:ss</string>
  </resources>

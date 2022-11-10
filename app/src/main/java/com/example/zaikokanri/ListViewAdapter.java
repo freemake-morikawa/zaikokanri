@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 
 public final class ListViewAdapter extends ArrayAdapter {
 
-    private static final int EVEN_ITEM_BACKGROUND_COLOR = Color.rgb(100, 149, 237);
-    private static final int ODD_ITEM_BACKGROUND_COLOR = Color.WHITE;
-    private static final int CHECKED_ITEM_BACKGROUND_COLOR = Color.GREEN;
+    private static final int ITEM_BACKGROUND_COLOR_EVEN = Color.rgb(100, 149, 237);
+    private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
+    private static final int ITEM_BACKGROUND_COLOR_CHECKED = Color.GREEN;
 
     private LayoutInflater inflater;
     private int itemLayout;
@@ -36,9 +36,9 @@ public final class ListViewAdapter extends ArrayAdapter {
             convertView = inflater.inflate(itemLayout, parent, false);
             viewHolder = new ViewHolder(
                     (CheckBox) convertView.findViewById(R.id.item_checkbox),
-                    (TextView) convertView.findViewById(R.id.item_time_textview),
-                    (TextView) convertView.findViewById(R.id.item_stock_count_textview),
-                    (TextView) convertView.findViewById(R.id.item_comment_textview)
+                    (TextView) convertView.findViewById(R.id.item_text_view_time),
+                    (TextView) convertView.findViewById(R.id.item_text_view_stock_count),
+                    (TextView) convertView.findViewById(R.id.item_text_view_comment)
             );
             convertView.setTag(viewHolder);
 
@@ -58,7 +58,7 @@ public final class ListViewAdapter extends ArrayAdapter {
             });
 
             // 削除ボタンのリスナー
-            convertView.findViewById(R.id.item_delete_button).setOnClickListener(new View.OnClickListener() {
+            convertView.findViewById(R.id.item_button_delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     remove(getItem(position));
@@ -83,10 +83,10 @@ public final class ListViewAdapter extends ArrayAdapter {
     // 背景色の変更
     private void changeBackgroundColor(final View view, final int position, final boolean isChecked) {
         if (isChecked) {
-            view.setBackgroundColor(CHECKED_ITEM_BACKGROUND_COLOR);
+            view.setBackgroundColor(ITEM_BACKGROUND_COLOR_CHECKED);
             return;
         }
-        final int color = position % 2 == 0 ? EVEN_ITEM_BACKGROUND_COLOR : ODD_ITEM_BACKGROUND_COLOR;
+        final int color = position % 2 == 0 ? ITEM_BACKGROUND_COLOR_EVEN : ITEM_BACKGROUND_COLOR_ODD;
         view.setBackgroundColor(color);
     }
 }
