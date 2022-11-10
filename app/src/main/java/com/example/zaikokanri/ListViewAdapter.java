@@ -36,9 +36,9 @@ public final class ListViewAdapter extends ArrayAdapter {
             convertView = inflater.inflate(itemLayout, parent, false);
             viewHolder = new ViewHolder(
                     (CheckBox) convertView.findViewById(R.id.item_checkbox),
-                    (TextView) convertView.findViewById(R.id.item_text_view_time),
-                    (TextView) convertView.findViewById(R.id.item_text_view_stock_count),
-                    (TextView) convertView.findViewById(R.id.item_text_view_comment)
+                    (TextView) convertView.findViewById(R.id.item_time_text_view),
+                    (TextView) convertView.findViewById(R.id.item_stock_count_text_view),
+                    (TextView) convertView.findViewById(R.id.item_comment_text_viw)
             );
             convertView.setTag(viewHolder);
 
@@ -58,7 +58,7 @@ public final class ListViewAdapter extends ArrayAdapter {
             });
 
             // 削除ボタンのリスナー
-            convertView.findViewById(R.id.item_button_delete).setOnClickListener(new View.OnClickListener() {
+            convertView.findViewById(R.id.item_delete_button).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     remove(getItem(position));

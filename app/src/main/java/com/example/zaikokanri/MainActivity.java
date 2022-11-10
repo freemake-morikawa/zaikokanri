@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
     private int stockCount;
     private ArrayAdapter<InventoryData> adapter;
-    private TextView textViewClock;
+    private TextView clockTextView;
     private Timer timer;
 
     public MainActivity() {
         stockCount = 0;
         adapter = null;
-        textViewClock = null;
+        clockTextView = null;
         timer = null;
     }
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             final String clockText = new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
-            textViewClock.setText(clockText);
+            clockTextView.setText(clockText);
         }
     }
 
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         // 加算・減算
         stockCount = STOCK_COUNT_MIN;
 
-        final Button buttonPlus = findViewById(R.id.button_plus);
-        buttonPlus.setOnClickListener(new View.OnClickListener() {
+        final Button plusButton = findViewById(R.id.plus_button);
+        plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 stockCount++;
@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
                     stockCount = STOCK_COUNT_MAX;
                 }
 
-                final TextView textViewStockCount = findViewById(R.id.text_view_stock_count);
-                textViewStockCount.setText(formatCommaThreeDigit(stockCount));
+                final TextView stockCountTextView = findViewById(R.id.stock_count_text_view);
+                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
-        final Button minusButton = findViewById(R.id.button_minus);
+        final Button minusButton = findViewById(R.id.minus_button);
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -96,38 +96,38 @@ public class MainActivity extends AppCompatActivity {
                     stockCount = STOCK_COUNT_MIN;
                 }
 
-                final TextView textViewStockCount = findViewById(R.id.text_view_stock_count);
-                textViewStockCount.setText(formatCommaThreeDigit(stockCount));
+                final TextView stockCountTextView = findViewById(R.id.stock_count_text_view);
+                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
         // 時計の処理のためViewを取得
-        textViewClock = findViewById(R.id.text_view_clock);
+        clockTextView = findViewById(R.id.clock_text_view);
 
         // リスト追加
-        final ListView listView = findViewById(R.id.list_view_inventory_data_list);
+        final ListView listView = findViewById(R.id.inventory_data_list_view);
         adapter = new ListViewAdapter(this, R.layout.list_item);
 
-        final Button buttonAddInventoryData = findViewById(R.id.button_add_inventory_data);
-        buttonAddInventoryData.setOnClickListener(new View.OnClickListener() {
+        final Button addInventoryDataButton = findViewById(R.id.add_inventory_data_button);
+        addInventoryDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                final TextView textViewClock= findViewById(R.id.text_view_clock);
-                final TextView textViewStockCount = findViewById(R.id.text_view_stock_count);
-                final EditText editTextComment = findViewById(R.id.edit_text_comment);
+                final TextView clockTextView= findViewById(R.id.clock_text_view);
+                final TextView stockCountTextView = findViewById(R.id.stock_count_text_view);
+                final EditText commentEditText = findViewById(R.id.comment_edit_text);
 
                 final InventoryData inventoryData = new InventoryData(
-                        textViewClock.getText().toString(),
-                        textViewStockCount.getText().toString(),
-                        editTextComment.getText().toString());
+                        clockTextView.getText().toString(),
+                        stockCountTextView.getText().toString(),
+                        commentEditText.getText().toString());
                 adapter.add(inventoryData);
                 listView.setAdapter(adapter);
             }
         });
 
         // クリア
-        final Button buttonClear = findViewById(R.id.button_clear);
-        buttonClear.setOnClickListener(new View.OnClickListener() {
+        final Button clearButton = findViewById(R.id.clear_button);
+        clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 adapter.clear();
