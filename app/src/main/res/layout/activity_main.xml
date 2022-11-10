@@ -1,82 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <TextView
-    android:id="@+id/textView1"
-    android:layout_width="75dp"
-    android:layout_height="45dp"
-    android:text="@string/suuryo"
-    android:textSize="35sp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/text_view_stock"
+        android:layout_width="@dimen/text_view_volume_width"
+        android:layout_height="@dimen/text_view_height"
+        android:text="@string/text_view_stock_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/number"
-        android:layout_width="130dp"
-        android:layout_height="45dp"
-        android:text="@string/zero"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toTopOf="@id/clock"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
+        android:id="@+id/text_view_stock_count"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/text_view_height"
+        android:text="@string/text_view_count_initial_text"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toEndOf="@+id/text_view_stock"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/plusButton"
+        android:id="@+id/button_plus"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="@string/plus"
-        app:layout_constraintEnd_toStartOf="@+id/minusButton"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/button_plus_text"
+        app:layout_constraintEnd_toStartOf="@+id/button_minus"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/minusButton"
+        android:id="@+id/button_minus"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="@string/minus"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/button_minus_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/text_view_clock"
+        android:layout_width="@dimen/text_view_clock_width"
+        android:layout_height="@dimen/text_view_height"
+        android:textColor="@color/text_view_clock_text_color"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_stock" />
+
     <EditText
-        android:id="@+id/comment"
-        android:layout_width="130dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/comment"
+        android:id="@+id/edit_text_comment"
+        android:layout_width="@dimen/edit_view_comment_width"
+        android:layout_height="@dimen/edit_view_height"
+        android:hint="@string/edit_text_comment_hint"
+        android:inputType="text"
         android:autofillHints=""
-        tools:targetApi="26"
-        android:hint="@string/comment"
-        app:layout_constraintStart_toEndOf="@+id/clock"
-        app:layout_constraintTop_toBottomOf="@+id/plusButton" />
+        app:layout_constraintStart_toEndOf="@+id/text_view_clock"
+        app:layout_constraintTop_toBottomOf="@+id/button_plus"
+        tools:targetApi="26" />
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/button_add_inventory_data"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="@string/add"
-        app:layout_constraintStart_toEndOf="@+id/comment"
-        app:layout_constraintTop_toBottomOf="@+id/plusButton" />
-
-    <TextView
-        android:id="@+id/clock"
-        android:layout_width="140dp"
-        android:layout_height="45dp"
-        android:textSize="35sp"
-        android:format24Hour="HH:mm:ss"
-        android:textColor="#808080"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        android:layout_height="@dimen/button_height"
+        android:text="@string/button_add_inventory_data_text"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_comment"
+        app:layout_constraintTop_toBottomOf="@+id/button_plus" />
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/list_view_inventory_data_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/comment"
-        tools:layout_editor_absoluteX="131dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_comment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

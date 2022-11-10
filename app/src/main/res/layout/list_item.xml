@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/item_checkbox"
+        android:layout_width="@dimen/item_checkbox_width"
+        android:layout_height="fill_parent" />
+
+    <TextView
+        android:id="@+id/item_text_view_time"
+        android:layout_width="@dimen/item_text_view_time_width"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/item_text_view_stock_count"
+        android:layout_width="@dimen/item_text_view_stock_count_width"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="@dimen/item_text_view_stock_count_margin_start"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/item_text_view_comment"
+        android:layout_width="@dimen/item_text_view_comment_width"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="@dimen/item_text_view_comment_margin_start"
+        android:gravity="center_vertical" />
+
+    <Button
+        android:id="@+id/item_button_delete"
+        android:layout_width="@dimen/item_button_delete_width"
+        android:layout_height="fill_parent"
+        android:text="@string/button_delete_text" />
+</LinearLayout>
