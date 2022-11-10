@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
     private int stockCount;
     private ArrayAdapter<InventoryData> adapter;
-    private TextView clockTextView;
+    private TextView textViewClock;
     private Timer timer;
 
     public MainActivity() {
         stockCount = 0;
         adapter = null;
-        clockTextView = null;
+        textViewClock = null;
         timer = null;
     }
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             final String clockText = new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
-            clockTextView.setText(clockText);
+            textViewClock.setText(clockText);
         }
     }
 
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         // 加算・減算
         stockCount = STOCK_COUNT_MIN;
 
-        final Button plusButton = findViewById(R.id.button_plus);
-        plusButton.setOnClickListener(new View.OnClickListener() {
+        final Button buttonPlus = findViewById(R.id.button_plus);
+        buttonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 stockCount++;
@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     stockCount = STOCK_COUNT_MAX;
                 }
 
-                final TextView stockCountTextView = findViewById(R.id.text_view_stock_count);
-                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
+                final TextView textViewStockCount = findViewById(R.id.text_view_stock_count);
+                textViewStockCount.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
@@ -96,30 +96,30 @@ public class MainActivity extends AppCompatActivity {
                     stockCount = STOCK_COUNT_MIN;
                 }
 
-                final TextView stockCountTextView = findViewById(R.id.text_view_stock_count);
-                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
+                final TextView textViewStockCount = findViewById(R.id.text_view_stock_count);
+                textViewStockCount.setText(formatCommaThreeDigit(stockCount));
             }
         });
 
         // 時計の処理のためViewを取得
-        clockTextView = findViewById(R.id.text_view_clock);
+        textViewClock = findViewById(R.id.text_view_clock);
 
         // リスト追加
         final ListView listView = findViewById(R.id.list_view_inventory_data_list);
         adapter = new ListViewAdapter(this, R.layout.list_item);
 
-        final Button inventoryDataAddButton = findViewById(R.id.button_inventory_data_add);
-        inventoryDataAddButton.setOnClickListener(new View.OnClickListener() {
+        final Button buttonAddInventoryData = findViewById(R.id.button_add_inventory_data);
+        buttonAddInventoryData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                final TextView clockTextView = findViewById(R.id.text_view_clock);
-                final TextView stockCountTextView = findViewById(R.id.text_view_stock_count);
-                final EditText commentEditText = findViewById(R.id.edit_text_comment);
+                final TextView textViewClock= findViewById(R.id.text_view_clock);
+                final TextView textViewStockCount = findViewById(R.id.text_view_stock_count);
+                final EditText editTextComment = findViewById(R.id.edit_text_comment);
 
                 final InventoryData inventoryData = new InventoryData(
-                        clockTextView.getText().toString(),
-                        stockCountTextView.getText().toString(),
-                        commentEditText.getText().toString());
+                        textViewClock.getText().toString(),
+                        textViewStockCount.getText().toString(),
+                        editTextComment.getText().toString());
                 adapter.add(inventoryData);
                 listView.setAdapter(adapter);
             }

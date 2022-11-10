@@ -7,7 +7,7 @@
     <string name="text_view_count_initial_text">0</string>
     <string name="text_view_clock_initial_text">00:00:00</string>
     <string name="edit_text_comment_hint">コメント</string>
-    <string name="button_add_text">追加</string>
+    <string name="button_add_inventory_data_text">追加</string>
     <string name="button_delete_text">削除</string>
     <string name="format_24_hour">HH:mm:ss</string>
  </resources>
