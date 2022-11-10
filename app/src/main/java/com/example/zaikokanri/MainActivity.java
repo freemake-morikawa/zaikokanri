@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         timer = new Timer();
-        timer.schedule(new MyTimerTask(), TIMER_DELAY, TIMER_PERIOD);
+        timer.schedule(new TextViewClockTimerTask(), TIMER_DELAY, TIMER_PERIOD);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 時計のタスククラス
-    private class MyTimerTask extends TimerTask {
+    private class TextViewClockTimerTask extends TimerTask {
         @Override
         public void run() {
             final String clockText = new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
