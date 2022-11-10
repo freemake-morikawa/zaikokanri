@@ -13,4 +13,5 @@
     <dimen name="item_text_view_comment_width">150dp</dimen>
     <dimen name="item_text_view_comment_margin_start">20dp</dimen>
     <dimen name="item_button_delete_width">60dp</dimen>
+    <dimen name="button_show_checked_total_stock_width">300dp</dimen>
 </resources>
