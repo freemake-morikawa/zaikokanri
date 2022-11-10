@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button minusButton = findViewById(R.id.plus_button);
+        final Button minusButton = findViewById(R.id.minus_button);
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -122,6 +122,15 @@ public class MainActivity extends AppCompatActivity {
                         commentEditText.getText().toString());
                 adapter.add(inventoryData);
                 listView.setAdapter(adapter);
+            }
+        });
+
+        // クリア
+        final Button clearButton = findViewById(R.id.clear_button);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.clear();
             }
         });
     }

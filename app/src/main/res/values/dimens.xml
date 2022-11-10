@@ -2,7 +2,7 @@
     <dimen name="text_view_height">45dp</dimen>
     <dimen name="button_height">45dp</dimen>
     <dimen name="edit_view_height">45dp</dimen>
-    <dimen name="stock_text_view_text">75dp</dimen>
+    <dimen name="stock_text_view_width">75dp</dimen>
     <dimen name="text_size">35sp</dimen>
     <dimen name="clock_text_view_width">140dp</dimen>
     <dimen name="comment_edit_text_width">130dp</dimen>
@@ -13,4 +13,5 @@
     <dimen name="item_comment_text_view_width">150dp</dimen>
     <dimen name="item_comment_text_view_margin_start">20dp</dimen>
     <dimen name="item_delete_button_width">60dp</dimen>
+    <dimen name="show_checked_total_count_button_width">300dp</dimen>
 </resources>

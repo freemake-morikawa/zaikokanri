@@ -18,14 +18,14 @@
 
     <TextView
         android:id="@+id/item_stock_count_text_view"
-        android:layout_width="@dimen/item_comment_text_view_width"
+        android:layout_width="@dimen/item_stock_count_text_view_width"
         android:layout_height="fill_parent"
         android:layout_marginStart="@dimen/item_stock_count_text_view_margin_start"
         android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/item_comment_text_view"
-        android:layout_width="@dimen/item_comment_text_view"
+        android:layout_width="@dimen/item_comment_text_view_width"
         android:layout_height="fill_parent"
         android:layout_marginStart="@dimen/item_comment_text_view_margin_start"
         android:gravity="center_vertical" />
