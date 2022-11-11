@@ -10,6 +10,6 @@
     <string name="add_inventory_data_button_text">追加</string>
     <string name="item_delete_button_text">削除</string>
     <string name="clear_button_text">クリア</string>
-    <string name="total_stock_count_show_button_text">選択された合計数量</string>
+    <string name="checked_total_stock_count_show_button_text">選択された合計数量</string>
     <string name="format_24_hour">HH:mm:ss</string>
  </resources>
