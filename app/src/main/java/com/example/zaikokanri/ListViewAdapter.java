@@ -72,8 +72,8 @@ public final class ListViewAdapter extends ArrayAdapter {
 
         final InventoryData inventoryData = (InventoryData) getItem(position);
         viewHolder.getCheckBox().setChecked(inventoryData.isChecked());
-        viewHolder.getTimeTextView().setText(inventoryData.getTime());
-        viewHolder.getStockCountTextView().setText(inventoryData.getStockCount());
+        viewHolder.getTimeTextView().setText(inventoryData.getTimeString());
+        viewHolder.getStockCountTextView().setText(inventoryData.getStockCountString());
         viewHolder.getCommentTextView().setText(inventoryData.getComment());
 
         changeBackgroundColor(convertView, position, viewHolder.getCheckBox().isChecked());

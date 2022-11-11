@@ -1,16 +1,12 @@
 package com.example.zaikokanri;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -166,13 +162,9 @@ public class MainActivity extends AppCompatActivity {
     private int sumCheckedStockCount() {
         int totalStockCount = 0;
         for (int i = 0; i < adapter.getCount(); i++) {
-            try {
-                InventoryData inventoryData = adapter.getItem(i);
-                if (inventoryData.isChecked()) {
-                    totalStockCount += NumberFormat.getInstance().parse(inventoryData.getStockCount()).intValue();
-                }
-            } catch (ParseException e) {
-                Log.e("Exception", e.toString());
+            InventoryData inventoryData = adapter.getItem(i);
+            if (inventoryData.isChecked()) {
+                totalStockCount += inventoryData.getStockCount();
             }
         }
         return totalStockCount;

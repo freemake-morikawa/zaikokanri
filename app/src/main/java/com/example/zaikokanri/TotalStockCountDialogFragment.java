@@ -13,6 +13,7 @@ public class TotalStockCountDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         final int totalStockCount = getArguments().getInt(DialogConstants.KEY_COUNT, DialogConstants.ARG_COUNT_DEFAULT_VALUE);
         final String dialogFirstMessage = getResources().getString(R.string.dialog_first_message);
         final String dialogEndMessage = getResources().getString(R.string.dialog_end_message);
