@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -147,10 +148,10 @@ public class MainActivity extends AppCompatActivity {
                 final DialogFragment dialog = new ShowTotalStockCountDialog();
                 final Bundle args = new Bundle();
 
-                args.putInt("count", totalStockCount);
+                args.putInt(DialogConstants.KEY_COUNT, totalStockCount);
                 dialog.setArguments(args);
 
-                dialog.show(getSupportFragmentManager(), "dialog");
+                dialog.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
             }
         });
     }
