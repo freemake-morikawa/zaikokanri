@@ -27,3 +27,5 @@ public class ShowTotalStockCountDialog extends DialogFragment {
     }
 
 }
+
+public class TotalStockOfItemsDialogFrangment
