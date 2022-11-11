@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         checkedTotalStockCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int totalStockCount = calculateCheckedTotalStockCount();
+                final int totalStockCount = sumCheckedStockCount();
                 final DialogFragment dialog = new ShowTotalStockCountDialog();
                 final Bundle args = new Bundle();
 
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 合計数量を求める
-    private int calculateCheckedTotalStockCount() {
+    private int sumCheckedStockCount() {
         int totalStockCount = 0;
         for (int i = 0; i < adapter.getCount(); i++) {
             try {
