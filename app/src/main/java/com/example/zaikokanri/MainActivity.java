@@ -139,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // 選択された合計数量
-        final Button showCheckedTotalStockCountButton = findViewById(R.id.show_checked_total_stock_count_button);
-        showCheckedTotalStockCountButton.setOnClickListener(new View.OnClickListener() {
+        final Button totalStockCountShowButton = findViewById(R.id.total_stock_count_show_button);
+        totalStockCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final int totalStockCount = calculateCheckedTotalStockCount();

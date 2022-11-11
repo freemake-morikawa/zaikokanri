@@ -25,7 +25,4 @@ public class ShowTotalStockCountDialog extends DialogFragment {
 
         return builder.create();
     }
-
 }
-
-public class TotalStockOfItemsDialogFrangment
