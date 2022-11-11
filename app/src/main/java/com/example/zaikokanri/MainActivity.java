@@ -1,12 +1,15 @@
 package com.example.zaikokanri;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // アプリ起動時のView操作
-    private void initView (){
+    private void initView() {
         // 加算・減算
         stockCount = STOCK_COUNT_MIN;
 
@@ -133,11 +137,44 @@ public class MainActivity extends AppCompatActivity {
                 adapter.clear();
             }
         });
+
+        // 選択された合計数量
+        final Button showCheckedTotalStockCountButton = findViewById(R.id.show_checked_total_stock_count_button);
+        showCheckedTotalStockCountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int totalStockCount = calculateCheckedTotalStockCount();
+                Log.d("test", "合計数量は" + totalStockCount);
+
+                DialogFragment dialog = new ShowTotalStockCountDialog();
+                Bundle args = new Bundle();
+                args.putInt("count", totalStockCount);
+                dialog.setArguments(args);
+
+                dialog.show(getSupportFragmentManager(), "dialog");
+            }
+        });
     }
 
     // 3桁を超える場合、カンマを入れる
     private String formatCommaThreeDigit(final int number) {
         final DecimalFormat decimalFormat = new DecimalFormat(DEFAULT_NUMBER_FORMAT);
         return decimalFormat.format(number);
+    }
+
+    // 合計数量を求める
+    private int calculateCheckedTotalStockCount() {
+        int totalStockCount = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            try {
+                InventoryData inventoryData = adapter.getItem(i);
+                if (inventoryData.isChecked()) {
+                    totalStockCount += NumberFormat.getInstance().parse(inventoryData.getStockCount()).intValue();
+                }
+            } catch (ParseException e) {
+                Log.e("Exception", e.toString());
+            }
+        }
+        return totalStockCount;
     }
 }
