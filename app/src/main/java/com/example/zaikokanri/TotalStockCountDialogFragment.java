@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class ShowTotalStockCountDialog extends DialogFragment {
+public class TotalStockCountDialogFragment extends DialogFragment {
 
     @NonNull
     @Override

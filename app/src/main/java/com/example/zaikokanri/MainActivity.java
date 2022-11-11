@@ -145,13 +145,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final int totalStockCount = sumCheckedStockCount();
-                final DialogFragment dialog = new ShowTotalStockCountDialog();
+                final DialogFragment dialogFragment = new TotalStockCountDialogFragment();
                 final Bundle args = new Bundle();
 
                 args.putInt(DialogConstants.KEY_COUNT, totalStockCount);
-                dialog.setArguments(args);
+                dialogFragment.setArguments(args);
 
-                dialog.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
+                dialogFragment.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
             }
         });
     }
