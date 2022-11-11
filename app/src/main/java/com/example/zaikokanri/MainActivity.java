@@ -1,11 +1,5 @@
 package com.example.zaikokanri;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +11,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int STOCK_COUNT_MIN = 0;
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int TIMER_DELAY = 0;
     private static final int TIMER_PERIOD = 100;
     private static final String DEFAULT_NUMBER_FORMAT = "#,###";
+    private static final int NOT_CHECKED_FLAG = -1;
 
     private int stockCount;
     private ArrayAdapter<InventoryData> adapter;
@@ -141,13 +142,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final int totalStockCount = sumCheckedStockCount();
-                final DialogFragment dialogFragment = new TotalStockCountDialogFragment();
-                final Bundle args = new Bundle();
+                if (totalStockCount != NOT_CHECKED_FLAG) {
+                    final DialogFragment dialogFragment = new TotalStockCountDialogFragment();
+                    final Bundle args = new Bundle();
 
-                args.putInt(DialogConstants.KEY_COUNT, totalStockCount);
-                dialogFragment.setArguments(args);
+                    args.putInt(DialogConstants.KEY_COUNT, totalStockCount);
+                    dialogFragment.setArguments(args);
 
-                dialogFragment.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
+                    dialogFragment.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
+                }
             }
         });
     }
@@ -161,12 +164,24 @@ public class MainActivity extends AppCompatActivity {
     // 合計数量を求める
     private int sumCheckedStockCount() {
         int totalStockCount = 0;
+        boolean isCheckedFlag = false;
+
         for (int i = 0; i < adapter.getCount(); i++) {
             InventoryData inventoryData = adapter.getItem(i);
+
             if (inventoryData.isChecked()) {
                 totalStockCount += inventoryData.getStockCount();
+
+                if (isCheckedFlag == false) {
+                    isCheckedFlag = true;
+                }
             }
         }
-        return totalStockCount;
+
+        if (isCheckedFlag) {
+            return totalStockCount;
+        } else {
+            return NOT_CHECKED_FLAG;
+        }
     }
 }
