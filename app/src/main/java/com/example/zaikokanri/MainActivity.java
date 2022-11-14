@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
     private class TextViewClockTimerTask extends TimerTask {
         @Override
         public void run() {
-            final String clockText = new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
+            final String clockText =
+                    new SimpleDateFormat(getString(R.string.format_24_hour)).format(new Date());
             clockTextView.setText(clockText);
         }
     }
@@ -137,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // 選択された合計数量
-        final Button checkedTotalInventoryCountShowButton = findViewById(R.id.checked_total_inventory_count_show_button);
+        final Button checkedTotalInventoryCountShowButton =
+                findViewById(R.id.checked_total_inventory_count_show_button);
         checkedTotalInventoryCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
