@@ -37,7 +37,7 @@ public final class ListViewAdapter extends ArrayAdapter {
             viewHolder = new ViewHolder(
                     (CheckBox) convertView.findViewById(R.id.item_checkbox),
                     (TextView) convertView.findViewById(R.id.item_time_text_view),
-                    (TextView) convertView.findViewById(R.id.item_stock_count_text_view),
+                    (TextView) convertView.findViewById(R.id.item_inventory_count_text_view),
                     (TextView) convertView.findViewById(R.id.item_comment_text_view)
             );
             convertView.setTag(viewHolder);
@@ -48,8 +48,8 @@ public final class ListViewAdapter extends ArrayAdapter {
 
                 public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
                     if (buttonView.isPressed()) {
-                        final InventoryData inventoryData = (InventoryData) getItem(position);
-                        inventoryData.setCheck(isChecked);
+                        final InventoryInfo inventoryInfo = (InventoryInfo) getItem(position);
+                        inventoryInfo.setCheck(isChecked);
 
                         final View parentView = (View) buttonView.getParent();
                         changeBackgroundColor(parentView, position, isChecked);
@@ -69,11 +69,11 @@ public final class ListViewAdapter extends ArrayAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        final InventoryData inventoryData = (InventoryData) getItem(position);
-        viewHolder.getCheckBox().setChecked(inventoryData.isChecked());
-        viewHolder.getTimeTextView().setText(inventoryData.getTime());
-        viewHolder.getStockCountTextView().setText(inventoryData.getStockCount());
-        viewHolder.getCommentTextView().setText(inventoryData.getComment());
+        final InventoryInfo inventoryInfo = (InventoryInfo) getItem(position);
+        viewHolder.getCheckBox().setChecked(inventoryInfo.isChecked());
+        viewHolder.getTimeTextView().setText(inventoryInfo.getTimeString());
+        viewHolder.getStockCountTextView().setText(inventoryInfo.getInventoryCountString());
+        viewHolder.getCommentTextView().setText(inventoryInfo.getComment());
 
         changeBackgroundColor(convertView, position, viewHolder.getCheckBox().isChecked());
 

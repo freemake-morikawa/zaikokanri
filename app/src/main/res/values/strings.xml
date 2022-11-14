@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">在庫管理</string>
     <string name="action_bar_text">Freemake</string>
-    <string name="stock_text_view_text">数量</string>
+    <string name="quantity_text_view_text">数量</string>
     <string name="plus_button_text">+</string>
     <string name="minus_button_text">-</string>
-    <string name="stock_count_text_view_initial_text">0</string>
+    <string name="inventory_count_text_view_initial_text">0</string>
     <string name="clock_text_view_initial_text">00:00:00</string>
     <string name="comment_edit_text_hint">コメント</string>
-    <string name="add_inventory_data_button_text">追加</string>
+    <string name="add_inventory_info_button_text">追加</string>
     <string name="item_delete_button_text">削除</string>
     <string name="clear_button_text">クリア</string>
-    <string name="show_checked_total_count_button_text">選択された合計数量</string>
+    <string name="checked_total_inventory_count_show_button_text">選択された合計数量</string>
+    <string name="dialog_first_message">合計</string>
+    <string name="dialog_end_message">です。 </string>
     <string name="format_24_hour">HH:mm:ss</string>
+    <string name="dialog_ok_button_text">OK</string>
 </resources>
