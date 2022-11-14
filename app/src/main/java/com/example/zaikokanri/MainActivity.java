@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int TIMER_DELAY = 0;
     private static final int TIMER_PERIOD = 100;
     private static final String DEFAULT_NUMBER_FORMAT = "#,###";
+    private static final String TAG_DIALOG = "dialog";
 
     private int inventoryCount;
     private ArrayAdapter<InventoryInfo> adapter;
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 args.putInt(DialogConstants.KEY_COUNT, totalInventoryCount);
                 dialogFragment.setArguments(args);
 
-                dialogFragment.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
+                dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);
             }
         });
     }

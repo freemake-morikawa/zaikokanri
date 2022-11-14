@@ -3,8 +3,6 @@ package com.example.zaikokanri;
 public class DialogConstants {
 
     public static final String KEY_COUNT = "count";
-    public static final String TAG_DIALOG = "dialog";
-    public static final int ARG_COUNT_DEFAULT_VALUE = 0;
 
     private DialogConstants() {
     }
