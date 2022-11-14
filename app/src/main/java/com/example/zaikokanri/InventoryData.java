@@ -11,12 +11,12 @@ public final class InventoryData {
 
     private boolean isCheck;
     private Date time;
-    private int stockCount;
+    private int inventoryCount;
     private String comment;
 
-    public InventoryData(final String time, final String stockCount, final String comment) {
+    public InventoryData(final String time, final String inventoryCount, final String comment) {
         this.time = parseDate(time);
-        this.stockCount = parseInt(stockCount);
+        this.inventoryCount = parseInt(inventoryCount);
         this.comment = comment;
     }
 
@@ -33,12 +33,12 @@ public final class InventoryData {
         return simpleDateFormat.format(time);
     }
 
-    public int getStockCount() {
-        return stockCount;
+    public int getInventoryCount() {
+        return inventoryCount;
     }
 
-    public String getStockCountString() {
-        return Integer.valueOf(stockCount).toString();
+    public String getInventoryCountString() {
+        return Integer.valueOf(inventoryCount).toString();
     }
 
     public String getComment() {
@@ -57,15 +57,15 @@ public final class InventoryData {
         return time;
     }
 
-    private int parseInt(final String stockCountString) {
+    private int parseInt(final String inventoryCountString) {
 
-        int stockCount = 0;
+        int inventoryCount = 0;
         try {
-            stockCount = NumberFormat.getInstance().parse(stockCountString).intValue();
+            inventoryCount = NumberFormat.getInstance().parse(inventoryCountString).intValue();
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return stockCount;
+        return inventoryCount;
     }
 }

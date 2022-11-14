@@ -19,20 +19,20 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int STOCK_COUNT_MIN = 0;
-    private static final int STOCK_COUNT_MAX = 9_999;
+    private static final int INVENTORY_COUNT_MIN = 0;
+    private static final int INVENTORY_COUNT_MAX = 9_999;
     private static final int TIMER_DELAY = 0;
     private static final int TIMER_PERIOD = 100;
     private static final String DEFAULT_NUMBER_FORMAT = "#,###";
     private static final int NOT_CHECKED_FLAG = -1;
 
-    private int stockCount;
+    private int inventoryCount;
     private ArrayAdapter<InventoryData> adapter;
     private TextView clockTextView;
     private Timer timer;
 
     public MainActivity() {
-        stockCount = 0;
+        inventoryCount = 0;
         adapter = null;
         clockTextView = null;
         timer = null;
@@ -73,19 +73,19 @@ public class MainActivity extends AppCompatActivity {
     // アプリ起動時のView操作
     private void initView() {
         // 加算・減算
-        stockCount = STOCK_COUNT_MIN;
+        inventoryCount = INVENTORY_COUNT_MIN;
 
         final Button plusButton = findViewById(R.id.plus_button);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                stockCount++;
-                if (STOCK_COUNT_MAX < stockCount) {
-                    stockCount = STOCK_COUNT_MAX;
+                inventoryCount++;
+                if (INVENTORY_COUNT_MAX < inventoryCount) {
+                    inventoryCount = INVENTORY_COUNT_MAX;
                 }
 
-                final TextView stockCountTextView = findViewById(R.id.stock_count_text_view);
-                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
+                final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
+                inventoryCountTextView.setText(formatCommaThreeDigit(inventoryCount));
             }
         });
 
@@ -93,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                stockCount--;
-                if (stockCount < STOCK_COUNT_MIN) {
-                    stockCount = STOCK_COUNT_MIN;
+                inventoryCount--;
+                if (inventoryCount < INVENTORY_COUNT_MIN) {
+                    inventoryCount = INVENTORY_COUNT_MIN;
                 }
 
-                final TextView stockCountTextView = findViewById(R.id.stock_count_text_view);
-                stockCountTextView.setText(formatCommaThreeDigit(stockCount));
+                final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
+                inventoryCountTextView.setText(formatCommaThreeDigit(inventoryCount));
             }
         });
 
@@ -115,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 final TextView clockTextView = findViewById(R.id.clock_text_view);
-                final TextView stockCountTextView = findViewById(R.id.stock_count_text_view);
+                final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
                 final EditText commentEditText = findViewById(R.id.comment_edit_text);
 
                 final InventoryData inventoryData = new InventoryData(
                         clockTextView.getText().toString(),
-                        stockCountTextView.getText().toString(),
+                        inventoryCountTextView.getText().toString(),
                         commentEditText.getText().toString());
                 adapter.add(inventoryData);
                 listView.setAdapter(adapter);
@@ -137,16 +137,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // 選択された合計数量
-        final Button checkedTotalStockCountShowButton = findViewById(R.id.checked_total_stock_count_show_button);
-        checkedTotalStockCountShowButton.setOnClickListener(new View.OnClickListener() {
+        final Button checkedTotalInventoryCountShowButton = findViewById(R.id.checked_total_inventory_count_show_button);
+        checkedTotalInventoryCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int totalStockCount = sumCheckedStockCount();
-                if (totalStockCount != NOT_CHECKED_FLAG) {
-                    final DialogFragment dialogFragment = new TotalStockCountDialogFragment();
+                final int totalInventoryCount = sumCheckedInventoryCount();
+                if (totalInventoryCount != NOT_CHECKED_FLAG) {
+                    final DialogFragment dialogFragment = new TotalInventoryCountDialogFragment();
                     final Bundle args = new Bundle();
 
-                    args.putInt(DialogConstants.KEY_COUNT, totalStockCount);
+                    args.putInt(DialogConstants.KEY_COUNT, totalInventoryCount);
                     dialogFragment.setArguments(args);
 
                     dialogFragment.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
@@ -162,15 +162,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 合計数量を求める
-    private int sumCheckedStockCount() {
-        int totalStockCount = 0;
+    private int sumCheckedInventoryCount() {
+        int totalInventoryCount = 0;
         boolean isCheckedFlag = false;
 
         for (int i = 0; i < adapter.getCount(); i++) {
             InventoryData inventoryData = adapter.getItem(i);
 
             if (inventoryData.isChecked()) {
-                totalStockCount += inventoryData.getStockCount();
+                totalInventoryCount += inventoryData.getInventoryCount();
 
                 if (isCheckedFlag == false) {
                     isCheckedFlag = true;
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (isCheckedFlag) {
-            return totalStockCount;
+            return totalInventoryCount;
         } else {
             return NOT_CHECKED_FLAG;
         }

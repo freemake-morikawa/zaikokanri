@@ -2,7 +2,6 @@ package com.example.zaikokanri;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ public final class ListViewAdapter extends ArrayAdapter {
             viewHolder = new ViewHolder(
                     (CheckBox) convertView.findViewById(R.id.item_checkbox),
                     (TextView) convertView.findViewById(R.id.item_time_text_view),
-                    (TextView) convertView.findViewById(R.id.item_stock_count_text_view),
+                    (TextView) convertView.findViewById(R.id.item_inventory_count_text_view),
                     (TextView) convertView.findViewById(R.id.item_comment_text_view)
             );
             convertView.setTag(viewHolder);
@@ -73,7 +72,7 @@ public final class ListViewAdapter extends ArrayAdapter {
         final InventoryData inventoryData = (InventoryData) getItem(position);
         viewHolder.getCheckBox().setChecked(inventoryData.isChecked());
         viewHolder.getTimeTextView().setText(inventoryData.getTimeString());
-        viewHolder.getStockCountTextView().setText(inventoryData.getStockCountString());
+        viewHolder.getStockCountTextView().setText(inventoryData.getInventoryCountString());
         viewHolder.getCommentTextView().setText(inventoryData.getComment());
 
         changeBackgroundColor(convertView, position, viewHolder.getCheckBox().isChecked());

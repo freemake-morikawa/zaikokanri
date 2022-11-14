@@ -7,21 +7,21 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/stock_text_view"
-        android:layout_width="@dimen/stock_text_view_width"
+        android:id="@+id/quantity_text_view"
+        android:layout_width="@dimen/quantity_text_view_width"
         android:layout_height="@dimen/text_view_height"
-        android:text="@string/stock_text_view_text"
+        android:text="@string/quantity_text_view_text"
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/stock_count_text_view"
+        android:id="@+id/inventory_count_text_view"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/text_view_height"
-        android:text="@string/stock_count_text_view_initial_text"
+        android:text="@string/inventory_count_text_view_initial_text"
         android:textSize="@dimen/text_size"
-        app:layout_constraintStart_toEndOf="@+id/stock_text_view"
+        app:layout_constraintStart_toEndOf="@+id/quantity_text_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -48,7 +48,7 @@
         android:textSize="@dimen/text_size"
         android:text="@string/clock_text_view_initial_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stock_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/quantity_text_view" />
 
     <EditText
         android:id="@+id/comment_edit_text"
@@ -86,10 +86,10 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
-        android:id="@+id/checked_total_stock_count_show_button"
-        android:layout_width="@dimen/checked_total_stock_count_show_button_width"
+        android:id="@+id/checked_total_inventory_count_show_button"
+        android:layout_width="@dimen/checked_total_inventory_count_show_button_width"
         android:layout_height="@dimen/button_height"
-        android:text="@string/checked_total_stock_count_show_button_text"
+        android:text="@string/checked_total_inventory_count_show_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
