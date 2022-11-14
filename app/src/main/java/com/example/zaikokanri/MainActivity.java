@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int TIMER_DELAY = 0;
     private static final int TIMER_PERIOD = 100;
     private static final String DEFAULT_NUMBER_FORMAT = "#,###";
-    private static final int NOT_CHECKED_FLAG = -1;
 
     private int inventoryCount;
     private ArrayAdapter<InventoryInfo> adapter;
@@ -143,16 +142,17 @@ public class MainActivity extends AppCompatActivity {
         checkedTotalInventoryCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int totalInventoryCount = sumCheckedInventoryCount();
-                if (totalInventoryCount != NOT_CHECKED_FLAG) {
-                    final DialogFragment dialogFragment = new TotalInventoryCountDialogFragment();
-                    final Bundle args = new Bundle();
-
-                    args.putInt(DialogConstants.KEY_COUNT, totalInventoryCount);
-                    dialogFragment.setArguments(args);
-
-                    dialogFragment.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
+                if (!isListItemChecked()) {
+                    return;
                 }
+                final int totalInventoryCount = sumCheckedInventoryCount();
+                final DialogFragment dialogFragment = new TotalInventoryCountDialogFragment();
+                final Bundle args = new Bundle();
+
+                args.putInt(DialogConstants.KEY_COUNT, totalInventoryCount);
+                dialogFragment.setArguments(args);
+
+                dialogFragment.show(getSupportFragmentManager(), DialogConstants.TAG_DIALOG);
             }
         });
     }
@@ -166,20 +166,23 @@ public class MainActivity extends AppCompatActivity {
     // 合計数量を求める
     private int sumCheckedInventoryCount() {
         int totalInventoryCount = 0;
-        boolean isCheckedFlag = false;
 
         for (int i = 0; i < adapter.getCount(); i++) {
             InventoryInfo inventoryInfo = adapter.getItem(i);
-            if (!inventoryInfo.isChecked()) {
-                continue;
-            }
-            isCheckedFlag = true;
             totalInventoryCount += inventoryInfo.getInventoryCount();
         }
 
-        if (isCheckedFlag) {
-            return totalInventoryCount;
+        return totalInventoryCount;
+    }
+
+    // 選択されている項目があるかの確認
+    private boolean isListItemChecked() {
+        for (int i = 0; i < adapter.getCount(); i++) {
+            InventoryInfo inventoryInfo = adapter.getItem(i);
+            if(inventoryInfo.isChecked()) {
+                return true;
+            }
         }
-        return NOT_CHECKED_FLAG;
+        return false;
     }
 }
