@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 final DialogFragment dialogFragment = new TotalInventoryCountDialogFragment();
                 final Bundle args = new Bundle();
 
-                args.putInt(DialogConstants.KEY_COUNT, totalInventoryCount);
+                args.putInt(Constants.KEY_COUNT, totalInventoryCount);
                 dialogFragment.setArguments(args);
 
                 dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);

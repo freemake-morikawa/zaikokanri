@@ -18,7 +18,7 @@ public class TotalInventoryCountDialogFragment extends DialogFragment {
 
 
         final int totalInventoryCount = getArguments().getInt(
-                DialogConstants.KEY_COUNT,
+                Constants.KEY_COUNT,
                 ARG_COUNT_DEFAULT_VALUE
         );
         final String dialogFirstMessage = getResources().getString(R.string.dialog_first_message);
