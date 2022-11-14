@@ -62,15 +62,15 @@
         tools:targetApi="26" />
 
     <Button
-        android:id="@+id/add_inventory_data_button"
+        android:id="@+id/add_inventory_info_button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height"
-        android:text="@string/add_inventory_data_button_text"
+        android:text="@string/add_inventory_info_button_text"
         app:layout_constraintStart_toEndOf="@+id/comment_edit_text"
         app:layout_constraintTop_toBottomOf="@+id/plus_button" />
 
     <ListView
-        android:id="@+id/inventory_data_list_view"
+        android:id="@+id/inventory_info_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

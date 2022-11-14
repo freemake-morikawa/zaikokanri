@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public final class InventoryData {
+public final class InventoryInfo {
 
     private static final String SIMPLE_DATE_FORMAT_PATTERN = "HH:mm:ss";
 
@@ -14,7 +14,7 @@ public final class InventoryData {
     private int inventoryCount;
     private String comment;
 
-    public InventoryData(final String time, final String inventoryCount, final String comment) {
+    public InventoryInfo(final String time, final String inventoryCount, final String comment) {
         this.time = parseDate(time);
         this.inventoryCount = parseInt(inventoryCount);
         this.comment = comment;

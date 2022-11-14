@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int NOT_CHECKED_FLAG = -1;
 
     private int inventoryCount;
-    private ArrayAdapter<InventoryData> adapter;
+    private ArrayAdapter<InventoryInfo> adapter;
     private TextView clockTextView;
     private Timer timer;
 
@@ -110,19 +110,19 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.inventory_data_list_view);
         adapter = new ListViewAdapter(this, R.layout.list_item);
 
-        final Button addInventoryDataButton = findViewById(R.id.add_inventory_data_button);
-        addInventoryDataButton.setOnClickListener(new View.OnClickListener() {
+        final Button addInventoryInfoButton = findViewById(R.id.add_inventory_data_button);
+        addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final TextView clockTextView = findViewById(R.id.clock_text_view);
                 final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
                 final EditText commentEditText = findViewById(R.id.comment_edit_text);
 
-                final InventoryData inventoryData = new InventoryData(
+                final InventoryInfo inventoryInfo = new InventoryInfo(
                         clockTextView.getText().toString(),
                         inventoryCountTextView.getText().toString(),
                         commentEditText.getText().toString());
-                adapter.add(inventoryData);
+                adapter.add(inventoryInfo);
                 listView.setAdapter(adapter);
             }
         });
@@ -167,10 +167,10 @@ public class MainActivity extends AppCompatActivity {
         boolean isCheckedFlag = false;
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            InventoryData inventoryData = adapter.getItem(i);
+            InventoryInfo inventoryInfo = adapter.getItem(i);
 
-            if (inventoryData.isChecked()) {
-                totalInventoryCount += inventoryData.getInventoryCount();
+            if (inventoryInfo.isChecked()) {
+                totalInventoryCount += inventoryInfo.getInventoryCount();
 
                 if (isCheckedFlag == false) {
                     isCheckedFlag = true;
