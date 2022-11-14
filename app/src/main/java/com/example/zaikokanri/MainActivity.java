@@ -180,8 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (isCheckedFlag) {
             return totalInventoryCount;
-        } else {
-            return NOT_CHECKED_FLAG;
         }
+        return NOT_CHECKED_FLAG;
     }
 }
