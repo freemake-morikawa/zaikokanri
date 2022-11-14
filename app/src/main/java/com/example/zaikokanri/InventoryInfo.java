@@ -38,7 +38,7 @@ public final class InventoryInfo {
     }
 
     public String getInventoryCountString() {
-        return Integer.valueOf(inventoryCount).toString();
+        return String.valueOf(inventoryCount);
     }
 
     public String getComment() {
