@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!isListItemChecked()) {
                     return;
                 }
+
                 final int totalInventoryCount = sumCheckedInventoryCount();
                 final DialogFragment dialogFragment = new TotalInventoryCountDialogFragment();
                 final Bundle args = new Bundle();
