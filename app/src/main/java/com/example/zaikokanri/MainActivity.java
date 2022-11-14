@@ -107,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
         clockTextView = findViewById(R.id.clock_text_view);
 
         // リスト追加
-        final ListView listView = findViewById(R.id.inventory_data_list_view);
+        final ListView listView = findViewById(R.id.inventory_info_list_view);
         adapter = new ListViewAdapter(this, R.layout.list_item);
 
-        final Button addInventoryInfoButton = findViewById(R.id.add_inventory_data_button);
+        final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
