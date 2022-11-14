@@ -168,14 +168,11 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < adapter.getCount(); i++) {
             InventoryInfo inventoryInfo = adapter.getItem(i);
-
-            if (inventoryInfo.isChecked()) {
-                totalInventoryCount += inventoryInfo.getInventoryCount();
-
-                if (isCheckedFlag == false) {
-                    isCheckedFlag = true;
-                }
+            if (!inventoryInfo.isChecked()) {
+                continue;
             }
+            isCheckedFlag = true;
+            totalInventoryCount += inventoryInfo.getInventoryCount();
         }
 
         if (isCheckedFlag) {
