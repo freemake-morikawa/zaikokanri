@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InventoryItemDetailsDisplayActivity">
+
+    <ImageView
+        android:id="@+id/details_display_activity_photo_library_image_view"
+        android:layout_width="@dimen/details_display_activity_image_view_size"
+        android:layout_height="@dimen/details_display_activity_image_view_size"
+        android:contentDescription="@string/details_display_activity_photo_library_image_view_description"
+        android:src="@drawable/photo_library"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/details_display_activity_save_image_view"
+        android:layout_width="@dimen/details_display_activity_image_view_size"
+        android:layout_height="@dimen/details_display_activity_image_view_size"
+        android:src="@drawable/save"
+        android:contentDescription="@string/details_display_activity_save_image_view_description"
+        app:layout_constraintEnd_toStartOf="@id/details_display_activity_delete_image_view"
+        app:layout_constraintStart_toEndOf="@+id/details_display_activity_photo_library_image_view"
+        app:layout_constraintStart_toEnfOf="@id/details_display_activity_photo_library_image_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/details_display_activity_delete_image_view"
+        android:layout_width="@dimen/details_display_activity_image_view_size"
+        android:layout_height="@dimen/details_display_activity_image_view_size"
+        android:src="@drawable/delete"
+        android:contentDescription="@string/details_display_activity_delete_image_view_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
