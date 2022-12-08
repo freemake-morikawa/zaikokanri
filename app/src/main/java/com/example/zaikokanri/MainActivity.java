@@ -15,7 +15,6 @@ import androidx.fragment.app.DialogFragment;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         // リスト追加
         final ListView listView = findViewById(R.id.inventory_info_list_view);
-        adapter = new ListViewAdapter(this, R.layout.list_item, this);
+        adapter = new ListViewAdapter(this, R.layout.list_item);
 
         final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isListItemChecked() {
         for (int i = 0; i < adapter.getCount(); i++) {
             InventoryInfo inventoryInfo = adapter.getItem(i);
-            if(inventoryInfo.isChecked()) {
+            if (inventoryInfo.isChecked()) {
                 return true;
             }
         }
