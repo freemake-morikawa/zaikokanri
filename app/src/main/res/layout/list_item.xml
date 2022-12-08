@@ -31,8 +31,15 @@
         android:gravity="center_vertical" />
 
     <Button
+        android:id="@+id/item_detail_button"
+        android:layout_width="@dimen/item_button_width"
+        android:layout_height="fill_parent"
+        android:text="@string/item_detail_button_text" />
+
+    <Button
         android:id="@+id/item_delete_button"
-        android:layout_width="@dimen/item_delete_button_width"
+        android:layout_width="@dimen/item_button_width"
         android:layout_height="fill_parent"
         android:text="@string/item_delete_button_text" />
+
 </LinearLayout>

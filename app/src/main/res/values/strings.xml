@@ -9,6 +9,7 @@
     <string name="comment_edit_text_hint">コメント</string>
     <string name="add_inventory_info_button_text">追加</string>
     <string name="item_delete_button_text">削除</string>
+    <string name="item_detail_button_text">詳細</string>
     <string name="clear_button_text">クリア</string>
     <string name="checked_total_inventory_count_show_button_text">選択された合計数量</string>
     <string name="dialog_first_message">合計</string>

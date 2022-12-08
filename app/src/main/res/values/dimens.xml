@@ -10,8 +10,8 @@
     <dimen name="item_time_text_view_width">55dp</dimen>
     <dimen name="item_inventory_count_text_view_width">35dp</dimen>
     <dimen name="item_inventory_count_text_view_margin_start">10dp</dimen>
-    <dimen name="item_comment_text_view_width">150dp</dimen>
+    <dimen name="item_comment_text_view_width">120dp</dimen>
     <dimen name="item_comment_text_view_margin_start">20dp</dimen>
-    <dimen name="item_delete_button_width">60dp</dimen>
+    <dimen name="item_button_width">60dp</dimen>
     <dimen name="checked_total_inventory_count_show_button_width">300dp</dimen>
 </resources>
