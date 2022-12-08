@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -190,8 +191,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 画面遷移
-    public void changeActivity() {
+    public void changeActivity(int position) {
         Intent intent = new Intent(this, InventoryItemDetailsDisplayActivity.class);
+        InventoryInfo inventoryInfo = adapter.getItem(position);
+
+        intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
+        intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
+        intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
+
         startActivity(intent);
     }
 }

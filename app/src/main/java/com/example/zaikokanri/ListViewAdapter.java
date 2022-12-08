@@ -65,7 +65,7 @@ public final class ListViewAdapter extends ArrayAdapter {
             convertView.findViewById(R.id.item_detail_button).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    mainActivity.changeActivity();
+                    mainActivity.changeActivity(position);
                 }
             });
 
