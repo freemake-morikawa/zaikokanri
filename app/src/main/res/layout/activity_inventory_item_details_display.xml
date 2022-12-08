@@ -35,4 +35,42 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <TextView
+        android:id="@+id/details_display_activity_time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:34:56"
+        android:textSize="@dimen/details_display_activity_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/details_display_activity_comment_text_view"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/details_display_activity_quantity_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quantity_text_view_text"
+        android:textSize="@dimen/details_display_activity_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/details_display_activity_comment_text_view"
+        app:layout_constraintEnd_toStartOf="@id/details_display_activity_inventory_count_text_view" />
+
+    <!-- 最終的に削除するため一時的にtextを直接記載 -->
+    <TextView
+        android:id="@+id/details_display_activity_inventory_count_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9,999"
+        android:textSize="@dimen/details_display_activity_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/details_display_activity_comment_text_view"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 最終的に削除するため一時的にtextを直接記載 -->
+    <TextView
+        android:id="@+id/details_display_activity_comment_text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="@dimen/details_display_activity_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
