@@ -1,6 +1,8 @@
 package com.example.zaikokanri;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +20,15 @@ public final class ListViewAdapter extends ArrayAdapter {
     private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
     private static final int ITEM_BACKGROUND_COLOR_CHECKED = Color.GREEN;
 
+    private MainActivity mainActivity;
     private LayoutInflater inflater;
     private int itemLayout;
 
-    ListViewAdapter(final Context context, final int itemLayout) {
+    ListViewAdapter(final Context context, final int itemLayout, final MainActivity mainActivity) {
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayout = itemLayout;
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -54,6 +58,14 @@ public final class ListViewAdapter extends ArrayAdapter {
                         final View parentView = (View) buttonView.getParent();
                         changeBackgroundColor(parentView, position, isChecked);
                     }
+                }
+            });
+
+            // 詳細ボタンのリスナー
+            convertView.findViewById(R.id.item_detail_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    mainActivity.changeActivity();
                 }
             });
 

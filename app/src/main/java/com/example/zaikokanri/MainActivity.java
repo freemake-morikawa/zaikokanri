@@ -1,5 +1,6 @@
 package com.example.zaikokanri;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         // リスト追加
         final ListView listView = findViewById(R.id.inventory_info_list_view);
-        adapter = new ListViewAdapter(this, R.layout.list_item);
+        adapter = new ListViewAdapter(this, R.layout.list_item, this);
 
         final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -186,5 +187,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    // 画面遷移
+    public void changeActivity() {
+        Intent intent = new Intent(this, InventoryItemDetailsDisplayActivity.class);
+        startActivity(intent);
     }
 }

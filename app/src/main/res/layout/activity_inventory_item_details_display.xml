@@ -12,8 +12,8 @@
         android:layout_height="@dimen/details_display_activity_image_view_size"
         android:contentDescription="@string/details_display_activity_photo_library_image_view_description"
         android:src="@drawable/photo_library"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/details_display_activity_save_image_view"
@@ -23,7 +23,6 @@
         android:contentDescription="@string/details_display_activity_save_image_view_description"
         app:layout_constraintEnd_toStartOf="@id/details_display_activity_delete_image_view"
         app:layout_constraintStart_toEndOf="@+id/details_display_activity_photo_library_image_view"
-        app:layout_constraintStart_toEnfOf="@id/details_display_activity_photo_library_image_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
