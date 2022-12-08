@@ -15,10 +15,10 @@ public class InventoryItemDetailsDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_item_details_display);
 
-        init();
+        initView();
     }
 
-    private void init() {
+    private void initView() {
         Intent intent = getIntent();
 
         final String time = intent.getStringExtra(Constants.INTENT_KEY_TIME_STRING);
