@@ -110,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
         // リスト追加
         final ListView listView = findViewById(R.id.inventory_info_list_view);
-        adapter = new ListViewAdapter(this, R.layout.list_item);
+        final DetailButtonOnClickListener detailButtonOnClickListener = new DetailButtonOnClickListener();
+        adapter = new InventoryInfoListViewAdapter(this, R.layout.list_item, detailButtonOnClickListener);
 
         final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -189,15 +190,24 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    // 画面遷移
-    public void changeActivity(int position) {
-        Intent intent = new Intent(this, InventoryItemDetailsDisplayActivity.class);
-        InventoryInfo inventoryInfo = adapter.getItem(position);
+    // 詳細ボタンのリスナー
+    public class DetailButtonOnClickListener implements View.OnClickListener {
+        private int position;
 
-        intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
-        intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
-        intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
+        @Override
+        public void onClick(final View view) {
+            final Intent intent = new Intent(MainActivity.this, InventoryItemDetailsDisplayActivity.class);
+            final InventoryInfo inventoryInfo = adapter.getItem(position);
 
-        startActivity(intent);
+            intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
+            intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
+            intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
+
+            startActivity(intent);
+        }
+
+        public void setPosition(final int position) {
+            this.position = position;
+        }
     }
 }

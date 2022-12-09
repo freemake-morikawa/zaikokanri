@@ -12,21 +12,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public final class ListViewAdapter extends ArrayAdapter {
+public final class InventoryInfoListViewAdapter extends ArrayAdapter {
 
     private static final int ITEM_BACKGROUND_COLOR_EVEN = Color.rgb(100, 149, 237);
     private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
     private static final int ITEM_BACKGROUND_COLOR_CHECKED = Color.GREEN;
 
-    private MainActivity activity;
+    private MainActivity.DetailButtonOnClickListener detailButtonOnClickListener;
     private LayoutInflater inflater;
     private int itemLayout;
 
-    ListViewAdapter(final Context context, final int itemLayout) {
+    InventoryInfoListViewAdapter(final Context context, final int itemLayout,
+                                 final MainActivity.DetailButtonOnClickListener onClickListener) {
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayout = itemLayout;
-        this.activity = (MainActivity)context;
+        this.detailButtonOnClickListener = onClickListener;
     }
 
     @Override
@@ -63,7 +64,8 @@ public final class ListViewAdapter extends ArrayAdapter {
             convertView.findViewById(R.id.item_detail_button).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    activity.changeActivity(position);
+                    detailButtonOnClickListener.setPosition(position);
+                    detailButtonOnClickListener.onClick(v);
                 }
             });
 
