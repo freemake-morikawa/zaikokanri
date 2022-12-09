@@ -22,14 +22,14 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
 
     private LayoutInflater inflater;
     private int itemLayout;
-    private View.OnClickListener onClickListener;
+    private View.OnClickListener detailButtonOnClickListener;
 
     InventoryInfoListViewAdapter(final Context context, final int itemLayout,
                                  final View.OnClickListener onClickListener) {
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayout = itemLayout;
-        this.onClickListener = onClickListener;
+        this.detailButtonOnClickListener = onClickListener;
     }
 
     @Override
@@ -55,7 +55,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
 
             // 詳細ボタンのリスナー
             viewHolder.getDetailButton().setTag(position);
-            viewHolder.getDetailButton().setOnClickListener(onClickListener);
+            viewHolder.getDetailButton().setOnClickListener(detailButtonOnClickListener);
 
             // 削除ボタンのリスナー
             viewHolder.getDeleteButton().setTag(position);
