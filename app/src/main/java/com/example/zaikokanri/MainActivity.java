@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int totalInventoryCount = 0;
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            InventoryInfo inventoryInfo = adapter.getItem(i);
+            final InventoryInfo inventoryInfo = adapter.getItem(i);
             totalInventoryCount += inventoryInfo.getInventoryCount();
         }
 
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // 選択されている項目があるかの確認
     private boolean isListItemChecked() {
         for (int i = 0; i < adapter.getCount(); i++) {
-            InventoryInfo inventoryInfo = adapter.getItem(i);
+            final InventoryInfo inventoryInfo = adapter.getItem(i);
             if (inventoryInfo.isChecked()) {
                 return true;
             }

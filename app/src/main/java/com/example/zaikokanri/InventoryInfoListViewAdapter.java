@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public final class InventoryInfoListViewAdapter extends ArrayAdapter {
+public final class InventoryInfoListViewAdapter extends ArrayAdapter implements View.OnClickListener {
 
     private static final int ITEM_BACKGROUND_COLOR_EVEN = Color.rgb(100, 149, 237);
     private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
@@ -86,6 +86,12 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter {
         changeBackgroundColor(convertView, position, viewHolder.getCheckBox().isChecked());
 
         return convertView;
+    }
+
+    // クリックイベント
+    @Override
+    public void onClick(View v) {
+
     }
 
     // 背景色の変更
