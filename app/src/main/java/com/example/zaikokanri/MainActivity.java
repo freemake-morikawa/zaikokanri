@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final int position = (int) v.getTag();
         final InventoryInfo inventoryInfo = adapter.getItem(position);
 
-        final Intent intent = new Intent(MainActivity.this, InventoryItemDetailsDisplayActivity.class);
+        final Intent intent = new Intent(MainActivity.this, InventoryItemDetailsActivity.class);
         intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
         intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
         intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());

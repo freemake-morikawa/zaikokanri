@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InventoryItemDetailsDisplayActivity">
+    tools:context=".InventoryItemDetailsActivity">
 
     <ImageView
         android:id="@+id/details_display_activity_photo_library_image_view"
