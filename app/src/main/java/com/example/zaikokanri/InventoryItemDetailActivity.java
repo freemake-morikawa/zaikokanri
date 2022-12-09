@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.Date;
 
-public class InventoryItemDetailsActivity extends AppCompatActivity {
+public class InventoryItemDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
