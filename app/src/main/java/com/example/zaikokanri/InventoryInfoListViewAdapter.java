@@ -104,8 +104,8 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
         }
 
         // 削除ボタン
-        Pattern p = Pattern.compile(PATTERN_DELETE_BUTTON);
-        Matcher m = p.matcher(v.getTag().toString());
+        final Pattern p = Pattern.compile(PATTERN_DELETE_BUTTON);
+        final Matcher m = p.matcher(v.getTag().toString());
 
         if (m.matches()) {
             final String str = v.getTag().toString().replaceAll(PATTERN_IGNORE_NON_NUMERIC, NULL_STRING);
