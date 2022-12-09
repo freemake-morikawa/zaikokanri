@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment;
 public class TotalInventoryCountDialogFragment extends DialogFragment {
 
     private static final int ARG_COUNT_DEFAULT_VALUE = 0;
-    
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

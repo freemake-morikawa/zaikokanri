@@ -90,7 +90,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter implements 
 
     // クリックイベント
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
 
     }
 

@@ -64,14 +64,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(final View v) {
-        if(v.getTag() == null) {
+        if (v.getTag() == null) {
             return;
         }
 
-        final int position = (int)v.getTag();
-        final Intent intent = new Intent(MainActivity.this, InventoryItemDetailsDisplayActivity.class);
+        final int position = (int) v.getTag();
         final InventoryInfo inventoryInfo = adapter.getItem(position);
 
+        final Intent intent = new Intent(MainActivity.this, InventoryItemDetailsDisplayActivity.class);
         intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
         intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
         intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final Button clearButton = findViewById(R.id.clear_button);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 adapter.clear();
             }
         });
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.checked_total_inventory_count_show_button);
         checkedTotalInventoryCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 if (!isListItemChecked()) {
                     return;
                 }
