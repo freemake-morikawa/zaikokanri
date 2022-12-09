@@ -19,7 +19,7 @@ public class InventoryItemDetailsDisplayActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
         final String time = intent.getStringExtra(Constants.INTENT_KEY_TIME_STRING);
         final TextView timeTextView = findViewById(R.id.details_display_activity_time_text_view);
