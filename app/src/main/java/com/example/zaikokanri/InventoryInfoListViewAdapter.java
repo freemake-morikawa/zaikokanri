@@ -18,16 +18,16 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter {
     private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
     private static final int ITEM_BACKGROUND_COLOR_CHECKED = Color.GREEN;
 
-    private MainActivity.DetailButtonOnClickListener detailButtonOnClickListener;
     private LayoutInflater inflater;
     private int itemLayout;
+    private View.OnClickListener onClickListener;
 
     InventoryInfoListViewAdapter(final Context context, final int itemLayout,
-                                 final MainActivity.DetailButtonOnClickListener onClickListener) {
+                                 final View.OnClickListener onClickListener) {
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayout = itemLayout;
-        this.detailButtonOnClickListener = onClickListener;
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -61,13 +61,8 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter {
             });
 
             // 詳細ボタンのリスナー
-            convertView.findViewById(R.id.item_detail_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    detailButtonOnClickListener.setPosition(position);
-                    detailButtonOnClickListener.onClick(v);
-                }
-            });
+            convertView.findViewById(R.id.item_detail_button).setOnClickListener(onClickListener);
+            convertView.findViewById(R.id.item_detail_button).setTag(position);
 
             // 削除ボタンのリスナー
             convertView.findViewById(R.id.item_delete_button).setOnClickListener(new View.OnClickListener() {
@@ -78,7 +73,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter {
                 }
             });
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder)convertView.getTag();
         }
 
         final InventoryInfo inventoryInfo = (InventoryInfo) getItem(position);

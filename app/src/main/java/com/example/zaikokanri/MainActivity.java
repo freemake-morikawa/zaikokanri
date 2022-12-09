@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int INVENTORY_COUNT_MIN = 0;
     private static final int INVENTORY_COUNT_MAX = 9_999;
@@ -60,6 +60,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         timer.cancel();
+    }
+
+    @Override
+    public void onClick(final View v) {
+        if(v.getTag() == null) {
+            return;
+        }
+
+        final int position = (int)v.getTag();
+        final Intent intent = new Intent(MainActivity.this, InventoryItemDetailsDisplayActivity.class);
+        final InventoryInfo inventoryInfo = adapter.getItem(position);
+
+        intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
+        intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
+        intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
+
+        startActivity(intent);
     }
 
     // 時計のタスククラス
@@ -110,8 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         // リスト追加
         final ListView listView = findViewById(R.id.inventory_info_list_view);
-        final DetailButtonOnClickListener detailButtonOnClickListener = new DetailButtonOnClickListener();
-        adapter = new InventoryInfoListViewAdapter(this, R.layout.list_item, detailButtonOnClickListener);
+        adapter = new InventoryInfoListViewAdapter(this, R.layout.list_item, this);
 
         final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -188,26 +204,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
-    }
-
-    // 詳細ボタンのリスナー
-    public class DetailButtonOnClickListener implements View.OnClickListener {
-        private int position;
-
-        @Override
-        public void onClick(final View view) {
-            final Intent intent = new Intent(MainActivity.this, InventoryItemDetailsDisplayActivity.class);
-            final InventoryInfo inventoryInfo = adapter.getItem(position);
-
-            intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
-            intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
-            intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
-
-            startActivity(intent);
-        }
-
-        public void setPosition(final int position) {
-            this.position = position;
-        }
     }
 }
