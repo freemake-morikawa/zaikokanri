@@ -14,4 +14,6 @@
     <dimen name="item_comment_text_view_margin_start">20dp</dimen>
     <dimen name="item_button_width">60dp</dimen>
     <dimen name="checked_total_inventory_count_show_button_width">300dp</dimen>
+    <dimen name="details_display_activity_image_view_size">40dp</dimen>
+    <dimen name="details_display_activity_text_size">30sp</dimen>
 </resources>

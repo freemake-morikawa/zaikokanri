@@ -16,4 +16,7 @@
     <string name="dialog_end_message">です。 </string>
     <string name="format_24_hour">HH:mm:ss</string>
     <string name="dialog_ok_button_text">OK</string>
+    <string name="details_display_activity_photo_library_image_view_description">画像を選択</string>
+    <string name="details_display_activity_save_image_view_description">保存</string>
+    <string name="details_display_activity_delete_image_view_description">削除</string>
 </resources>

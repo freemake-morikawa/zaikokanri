@@ -1,5 +1,6 @@
 package com.example.zaikokanri;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,7 +18,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int INVENTORY_COUNT_MIN = 0;
     private static final int INVENTORY_COUNT_MAX = 9_999;
@@ -61,6 +62,23 @@ public class MainActivity extends AppCompatActivity {
         timer.cancel();
     }
 
+    @Override
+    public void onClick(final View v) {
+        if (v.getTag() == null) {
+            return;
+        }
+
+        final int position = (int) v.getTag();
+        final InventoryInfo inventoryInfo = adapter.getItem(position);
+
+        final Intent intent = new Intent(MainActivity.this, InventoryItemDetailActivity.class);
+        intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
+        intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
+        intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
+
+        startActivity(intent);
+    }
+
     // 時計のタスククラス
     private class TextViewClockTimerTask extends TimerTask {
         @Override
@@ -80,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                if (v.getTag() == null) {
+                    return;
+                }
+
                 inventoryCount++;
                 if (INVENTORY_COUNT_MAX < inventoryCount) {
                     inventoryCount = INVENTORY_COUNT_MAX;
@@ -94,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                if (v.getTag() == null) {
+                    return;
+                }
+
                 inventoryCount--;
                 if (inventoryCount < INVENTORY_COUNT_MIN) {
                     inventoryCount = INVENTORY_COUNT_MIN;
@@ -109,12 +135,16 @@ public class MainActivity extends AppCompatActivity {
 
         // リスト追加
         final ListView listView = findViewById(R.id.inventory_info_list_view);
-        adapter = new ListViewAdapter(this, R.layout.list_item);
+        adapter = new InventoryInfoListViewAdapter(this, R.layout.list_item, this);
 
         final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                if (v.getTag() == null) {
+                    return;
+                }
+
                 final TextView clockTextView = findViewById(R.id.clock_text_view);
                 final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
                 final EditText commentEditText = findViewById(R.id.comment_edit_text);
@@ -132,7 +162,11 @@ public class MainActivity extends AppCompatActivity {
         final Button clearButton = findViewById(R.id.clear_button);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
+                if (v.getTag() == null) {
+                    return;
+                }
+
                 adapter.clear();
             }
         });
@@ -142,7 +176,10 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.checked_total_inventory_count_show_button);
         checkedTotalInventoryCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
+                if (v.getTag() == null) {
+                    return;
+                }
                 if (!isListItemChecked()) {
                     return;
                 }
@@ -170,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         int totalInventoryCount = 0;
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            InventoryInfo inventoryInfo = adapter.getItem(i);
+            final InventoryInfo inventoryInfo = adapter.getItem(i);
             totalInventoryCount += inventoryInfo.getInventoryCount();
         }
 
@@ -180,8 +217,8 @@ public class MainActivity extends AppCompatActivity {
     // 選択されている項目があるかの確認
     private boolean isListItemChecked() {
         for (int i = 0; i < adapter.getCount(); i++) {
-            InventoryInfo inventoryInfo = adapter.getItem(i);
-            if(inventoryInfo.isChecked()) {
+            final InventoryInfo inventoryInfo = adapter.getItem(i);
+            if (inventoryInfo.isChecked()) {
                 return true;
             }
         }
