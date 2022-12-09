@@ -13,19 +13,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public final class InventoryInfoListViewAdapter extends ArrayAdapter
         implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private static final int ITEM_BACKGROUND_COLOR_EVEN = Color.rgb(100, 149, 237);
     private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
     private static final int ITEM_BACKGROUND_COLOR_CHECKED = Color.GREEN;
-    private static final String PATTERN_DELETE_BUTTON = "delete[0-9]*";
-    private static final String PATTERN_DELETE_BUTTON_PREFIX = "delete";
-    private static final String NULL_STRING = "";
-    private static final String PATTERN_IGNORE_NON_NUMERIC = "[^0-9]";
 
     private LayoutInflater inflater;
     private int itemLayout;
@@ -65,7 +58,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
             viewHolder.getDetailButton().setOnClickListener(onClickListener);
 
             // 削除ボタンのリスナー
-            viewHolder.getDeleteButton().setTag(PATTERN_DELETE_BUTTON_PREFIX + position);
+            viewHolder.getDeleteButton().setTag(position);
             viewHolder.getDeleteButton().setOnClickListener(this);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -85,10 +78,13 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
     // チェックイベント
     @Override
     public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+        if (buttonView.getTag() == null) {
+            return;
+        }
+
         if (buttonView.isPressed()) {
             final int position = (int) buttonView.getTag();
             final InventoryInfo inventoryInfo = (InventoryInfo) getItem(position);
-
             inventoryInfo.setCheck(isChecked);
 
             final View parentView = (View) buttonView.getParent();
@@ -103,16 +99,9 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
             return;
         }
 
-        // 削除ボタン
-        final Pattern p = Pattern.compile(PATTERN_DELETE_BUTTON);
-        final Matcher m = p.matcher(v.getTag().toString());
-
-        if (m.matches()) {
-            final String str = v.getTag().toString().replaceAll(PATTERN_IGNORE_NON_NUMERIC, NULL_STRING);
-            final int position = Integer.parseInt(str);
-            remove(getItem(position));
-            notifyDataSetChanged();
-        }
+        final int position = (int) v.getTag();
+        remove(getItem(position));
+        notifyDataSetChanged();
     }
 
     // 背景色の変更
