@@ -64,6 +64,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter {
             convertView.findViewById(R.id.item_detail_button).setOnClickListener(onClickListener);
             convertView.findViewById(R.id.item_detail_button).setTag(position);
 
+
             // 削除ボタンのリスナー
             convertView.findViewById(R.id.item_delete_button).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +74,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter {
                 }
             });
         } else {
-            viewHolder = (ViewHolder)convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         final InventoryInfo inventoryInfo = (InventoryInfo) getItem(position);
