@@ -6,17 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public final class InventoryInfoListViewAdapter extends ArrayAdapter implements View.OnClickListener {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public final class InventoryInfoListViewAdapter extends ArrayAdapter
+        implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private static final int ITEM_BACKGROUND_COLOR_EVEN = Color.rgb(100, 149, 237);
     private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
     private static final int ITEM_BACKGROUND_COLOR_CHECKED = Color.GREEN;
+    private static final String PATTERN_DELETE_BUTTON = "delete[0-9]*";
+    private static final String PATTERN_DELETE_BUTTON_PREFIX = "delete";
+    private static final String NULL_STRING = "";
+    private static final String PATTERN_IGNORE_NON_NUMERIC = "[^0-9]";
 
     private LayoutInflater inflater;
     private int itemLayout;
@@ -41,38 +50,23 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter implements 
                     (CheckBox) convertView.findViewById(R.id.item_checkbox),
                     (TextView) convertView.findViewById(R.id.item_time_text_view),
                     (TextView) convertView.findViewById(R.id.item_inventory_count_text_view),
-                    (TextView) convertView.findViewById(R.id.item_comment_text_view)
+                    (TextView) convertView.findViewById(R.id.item_comment_text_view),
+                    (Button) convertView.findViewById(R.id.item_detail_button),
+                    (Button) convertView.findViewById(R.id.item_delete_button)
             );
             convertView.setTag(viewHolder);
 
             // チェックボックスのリスナー
-            viewHolder.getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-
-                public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                    if (buttonView.isPressed()) {
-                        final InventoryInfo inventoryInfo = (InventoryInfo) getItem(position);
-                        inventoryInfo.setCheck(isChecked);
-
-                        final View parentView = (View) buttonView.getParent();
-                        changeBackgroundColor(parentView, position, isChecked);
-                    }
-                }
-            });
+            viewHolder.getCheckBox().setTag(position);
+            viewHolder.getCheckBox().setOnCheckedChangeListener(this);
 
             // 詳細ボタンのリスナー
-            convertView.findViewById(R.id.item_detail_button).setOnClickListener(onClickListener);
-            convertView.findViewById(R.id.item_detail_button).setTag(position);
-
+            viewHolder.getDetailButton().setTag(position);
+            viewHolder.getDetailButton().setOnClickListener(onClickListener);
 
             // 削除ボタンのリスナー
-            convertView.findViewById(R.id.item_delete_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    remove(getItem(position));
-                    notifyDataSetChanged();
-                }
-            });
+            viewHolder.getDeleteButton().setTag(PATTERN_DELETE_BUTTON_PREFIX + position);
+            viewHolder.getDeleteButton().setOnClickListener(this);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
@@ -88,10 +82,37 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter implements 
         return convertView;
     }
 
+    // チェックイベント
+    @Override
+    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+        if (buttonView.isPressed()) {
+            final int position = (int) buttonView.getTag();
+            final InventoryInfo inventoryInfo = (InventoryInfo) getItem(position);
+
+            inventoryInfo.setCheck(isChecked);
+
+            final View parentView = (View) buttonView.getParent();
+            changeBackgroundColor(parentView, position, isChecked);
+        }
+    }
+
     // クリックイベント
     @Override
     public void onClick(final View v) {
+        if (v.getTag() == null) {
+            return;
+        }
 
+        // 削除ボタン
+        Pattern p = Pattern.compile(PATTERN_DELETE_BUTTON);
+        Matcher m = p.matcher(v.getTag().toString());
+
+        if (m.matches()) {
+            final String str = v.getTag().toString().replaceAll(PATTERN_IGNORE_NON_NUMERIC, NULL_STRING);
+            final int position = Integer.parseInt(str);
+            remove(getItem(position));
+            notifyDataSetChanged();
+        }
     }
 
     // 背景色の変更
