@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
@@ -24,6 +26,9 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_item_detail);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         initView();
     }
@@ -41,8 +46,8 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
         inventoryCountTextView.setText(String.valueOf(inventoryCount));
 
         final String comment = intent.getStringExtra(Constants.INTENT_KEY_COMMENT);
-        final TextView commentTextView = findViewById(R.id.detail_activity_comment_text_view);
-        commentTextView.setText(comment);
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(comment);
 
         // 画像選択
         imageView = findViewById(R.id.detail_activity_selected_image_view);
@@ -72,5 +77,16 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
                 Log.d("Exception", e.toString());
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
