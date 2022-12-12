@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
@@ -24,6 +25,9 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_item_detail);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         initView();
     }
@@ -40,9 +44,10 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
         final TextView inventoryCountTextView = findViewById(R.id.detail_activity_inventory_count_text_view);
         inventoryCountTextView.setText(String.valueOf(inventoryCount));
 
+        // コメントはActionBarに表示
         final String comment = intent.getStringExtra(Constants.INTENT_KEY_COMMENT);
-        final TextView commentTextView = findViewById(R.id.detail_activity_comment_text_view);
-        commentTextView.setText(comment);
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(comment);
 
         // 画像選択
         imageView = findViewById(R.id.detail_activity_selected_image_view);
