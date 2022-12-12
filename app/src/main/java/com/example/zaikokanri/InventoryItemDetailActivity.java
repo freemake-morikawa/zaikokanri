@@ -45,7 +45,6 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
         final TextView inventoryCountTextView = findViewById(R.id.detail_activity_inventory_count_text_view);
         inventoryCountTextView.setText(String.valueOf(inventoryCount));
 
-        // コメントはActionBarに表示
         final String comment = intent.getStringExtra(Constants.INTENT_KEY_COMMENT);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(comment);
