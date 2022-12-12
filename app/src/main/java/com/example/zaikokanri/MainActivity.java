@@ -98,10 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if (v.getTag() == null) {
-                    return;
-                }
-
                 inventoryCount++;
                 if (INVENTORY_COUNT_MAX < inventoryCount) {
                     inventoryCount = INVENTORY_COUNT_MAX;
@@ -116,10 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if (v.getTag() == null) {
-                    return;
-                }
-
                 inventoryCount--;
                 if (inventoryCount < INVENTORY_COUNT_MIN) {
                     inventoryCount = INVENTORY_COUNT_MIN;
@@ -141,10 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if (v.getTag() == null) {
-                    return;
-                }
-
                 final TextView clockTextView = findViewById(R.id.clock_text_view);
                 final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
                 final EditText commentEditText = findViewById(R.id.comment_edit_text);
@@ -163,10 +151,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if (v.getTag() == null) {
-                    return;
-                }
-
                 adapter.clear();
             }
         });
@@ -177,9 +161,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkedTotalInventoryCountShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if (v.getTag() == null) {
-                    return;
-                }
                 if (!isListItemChecked()) {
                     return;
                 }
