@@ -60,14 +60,15 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
         });
     }
 
+    // 選択された画像の画面表示
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
             try {
-                InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                final InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView.setImageBitmap(bitmap);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.d("Exception", e.toString());
             }
         }
