@@ -14,13 +14,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class InventoryItemDetailActivity extends AppCompatActivity {
 
     private static final int INTENT_INT_EXTRA_DEFAULT_VALUE = 0;
     private static final int REQUEST_GALLERY = 0;
-    private  ImageView imageView;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +74,15 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
                 final InputStream inputStream = getContentResolver().openInputStream(data.getData());
                 final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView.setImageBitmap(bitmap);
-            } catch (final Exception e) {
-                Log.d("Exception", e.toString());
+            } catch (final FileNotFoundException e) {
+                Log.d(Constants.EXCEPTION, e.toString());
             }
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch(item.getItemId()) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
