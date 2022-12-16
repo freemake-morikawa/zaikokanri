@@ -21,6 +21,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
 
     private static final int INTENT_INT_EXTRA_DEFAULT_VALUE = 0;
     private static final int REQUEST_GALLERY = 0;
+    private static final String INTENT_TYPE_IMAGE = "image/*";
     private ImageView imageView;
 
     @Override
@@ -64,7 +65,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
                 final Intent intent = new Intent();
-                intent.setType("image/*");
+                intent.setType(INTENT_TYPE_IMAGE);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, REQUEST_GALLERY);
             }

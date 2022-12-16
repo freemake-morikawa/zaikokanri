@@ -127,6 +127,8 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
             if (position < entry.getKey()) {
                 buf.put(entry.getKey() - 1, entry.getValue());
             }
+        }
+        if (buf.size() > 0) {
             MyApplication.setImageMap(new HashMap<>(buf));
         }
     }
