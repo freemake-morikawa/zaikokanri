@@ -27,16 +27,13 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
     private LayoutInflater inflater;
     private int itemLayout;
     private View.OnClickListener detailButtonOnClickListener;
-    private MyApplication app;
 
     InventoryInfoListViewAdapter(final Context context, final int itemLayout,
-                                 final View.OnClickListener onClickListener,
-                                 final MyApplication app) {
+                                 final View.OnClickListener onClickListener) {
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayout = itemLayout;
         this.detailButtonOnClickListener = onClickListener;
-        this.app = app;
     }
 
     @Override
@@ -123,14 +120,14 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
 
     // 削除ボタン押下時のApplication.Mapの処理
     private void updateApplicationMap(final int position) {
-        app.imageMap.remove(position);
+        MyApplication.getImageMap().remove(position);
         final Map<Integer, Bitmap> buf = new HashMap<>();
 
-        for (Map.Entry<Integer, Bitmap> entry : app.imageMap.entrySet()) {
+        for (Map.Entry<Integer, Bitmap> entry : MyApplication.getImageMap().entrySet()) {
             if (position < entry.getKey()) {
                 buf.put(entry.getKey() - 1, entry.getValue());
             }
-            app.imageMap = new HashMap<>(buf);
+            MyApplication.setImageMap(new HashMap<>(buf));
         }
     }
 }

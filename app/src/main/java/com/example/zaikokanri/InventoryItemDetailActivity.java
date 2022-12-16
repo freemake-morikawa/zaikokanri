@@ -22,7 +22,6 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
     private static final int INTENT_INT_EXTRA_DEFAULT_VALUE = 0;
     private static final int REQUEST_GALLERY = 0;
     private ImageView imageView;
-    private MyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        app = (MyApplication) this.getApplication();
         initView();
     }
 
@@ -54,8 +52,8 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.detail_activity_selected_image_view);
         final int position = intent.getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
-        if (!app.imageMap.isEmpty() && app.imageMap.get(position) != null) {
-            final Bitmap bitmap = app.imageMap.get(position);
+        if (!MyApplication.getImageMap().isEmpty() && MyApplication.getImageMap().get(position) != null) {
+            final Bitmap bitmap = MyApplication.getImageMap().get(position);
             imageView.setImageBitmap(bitmap);
         }
 
@@ -83,7 +81,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
 
                 final int position = getIntent().getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
-                app.imageMap.put(position, bitmap);
+                MyApplication.getImageMap().put(position, bitmap);
             } catch (final FileNotFoundException e) {
                 Log.d(Constants.EXCEPTION, e.toString());
             }

@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayAdapter<InventoryInfo> adapter;
     private TextView clockTextView;
     private Timer timer;
-    private MyApplication app;
 
     public MainActivity() {
         inventoryCount = 0;
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        app = (MyApplication) this.getApplication();
+        MyApplication.getInstance();
         getSupportActionBar().setTitle(R.string.action_bar_text);
 
         initView();
@@ -130,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // リスト追加
         final ListView listView = findViewById(R.id.inventory_info_list_view);
-        adapter = new InventoryInfoListViewAdapter(this, R.layout.list_item, this, app);
+        adapter = new InventoryInfoListViewAdapter(this, R.layout.list_item, this);
 
         final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(final View v) {
                 adapter.clear();
-                app.imageMap.clear();
+                MyApplication.getImageMap().clear();
             }
         });
 
