@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -74,7 +75,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
                 final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView.setImageBitmap(bitmap);
             } catch (final FileNotFoundException e) {
-                e.printStackTrace();
+                Log.d(Constants.EXCEPTION, e.toString());
             }
         }
     }
@@ -82,7 +83,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home :
+            case android.R.id.home:
                 finish();
                 return true;
         }
