@@ -1,6 +1,7 @@
 package com.example.zaikokanri;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class InventoryInfoListViewAdapter extends ArrayAdapter
         implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -23,13 +27,16 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
     private LayoutInflater inflater;
     private int itemLayout;
     private View.OnClickListener detailButtonOnClickListener;
+    private MyApplication app;
 
     InventoryInfoListViewAdapter(final Context context, final int itemLayout,
-                                 final View.OnClickListener onClickListener) {
+                                 final View.OnClickListener onClickListener,
+                                 final MyApplication app) {
         super(context, itemLayout);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayout = itemLayout;
         this.detailButtonOnClickListener = onClickListener;
+        this.app = app;
     }
 
     @Override
@@ -101,6 +108,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
 
         final int position = (int) v.getTag();
         remove(getItem(position));
+        updateApplicationMap(position);
         notifyDataSetChanged();
     }
 
@@ -111,5 +119,18 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
             color = ITEM_BACKGROUND_COLOR_CHECKED;
         }
         view.setBackgroundColor(color);
+    }
+
+    // 削除ボタン押下時のApplication.Mapの処理
+    private void updateApplicationMap(final int position) {
+        app.imageMap.remove(position);
+        final Map<Integer, Bitmap> buf = new HashMap<>();
+
+        for (Map.Entry<Integer, Bitmap> entry : app.imageMap.entrySet()) {
+            if (position < entry.getKey()) {
+                buf.put(entry.getKey() - 1, entry.getValue());
+            }
+            app.imageMap = new HashMap<>(buf);
+        }
     }
 }
