@@ -1,6 +1,7 @@
 package com.example.zaikokanri;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -71,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final int position = (int) v.getTag();
         final InventoryInfo inventoryInfo = adapter.getItem(position);
 
-        final Intent intent = new Intent(MainActivity.this, InventoryItemDetailActivity.class);
+        final Intent intent = new Intent(this, InventoryItemDetailActivity.class);
+        intent.putExtra(Constants.INTENT_KEY_POSITION, position);
         intent.putExtra(Constants.INTENT_KEY_TIME_STRING, inventoryInfo.getTimeString());
         intent.putExtra(Constants.INTENT_KEY_INVENTORY_COUNT, inventoryInfo.getInventoryCount());
         intent.putExtra(Constants.INTENT_KEY_COMMENT, inventoryInfo.getComment());
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         inventoryCountTextView.getText().toString(),
                         commentEditText.getText().toString());
                 adapter.add(inventoryInfo);
+                MyApplication.getInstance().setImage(adapter.getCount(), null);
                 listView.setAdapter(adapter);
             }
         });
@@ -171,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 args.putInt(Constants.BUNDLE_KEY_COUNT, totalInventoryCount);
                 dialogFragment.setArguments(args);
-
                 dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);
             }
         });

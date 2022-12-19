@@ -21,6 +21,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
 
     private static final int INTENT_INT_EXTRA_DEFAULT_VALUE = 0;
     private static final int REQUEST_GALLERY = 0;
+    private static final String INTENT_TYPE_IMAGE = "image/*";
     private ImageView imageView;
 
     @Override
@@ -50,8 +51,13 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(comment);
 
-        // 画像選択
         imageView = findViewById(R.id.detail_activity_selected_image_view);
+        final int position = intent.getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
+        if (MyApplication.getInstance().hasImage(position)) {
+            final Bitmap bitmap = MyApplication.getInstance().getImage(position);
+            imageView.setImageBitmap(bitmap);
+        }
+
         final ImageButton photoLibraryImageButton = findViewById(
                 R.id.detail_activity_photo_library_image_button
         );
@@ -59,7 +65,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
                 final Intent intent = new Intent();
-                intent.setType("image/*");
+                intent.setType(INTENT_TYPE_IMAGE);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, REQUEST_GALLERY);
             }
@@ -74,6 +80,9 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
                 final InputStream inputStream = getContentResolver().openInputStream(data.getData());
                 final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView.setImageBitmap(bitmap);
+
+                final int position = getIntent().getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
+                MyApplication.getInstance().setImage(position, bitmap);
             } catch (final FileNotFoundException e) {
                 Log.d(Constants.EXCEPTION, e.toString());
             }
