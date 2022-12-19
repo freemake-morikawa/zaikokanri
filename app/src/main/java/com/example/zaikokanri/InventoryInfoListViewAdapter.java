@@ -105,7 +105,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
 
         final int position = (int) v.getTag();
         remove(getItem(position));
-        updateApplicationMap(position);
+        MyApplication.alignPositionImageMap(position);
         notifyDataSetChanged();
     }
 
@@ -116,20 +116,5 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
             color = ITEM_BACKGROUND_COLOR_CHECKED;
         }
         view.setBackgroundColor(color);
-    }
-
-    // 削除ボタン押下時のApplication.Mapの処理
-    private void updateApplicationMap(final int position) {
-        MyApplication.getImageMap().remove(position);
-        final Map<Integer, Bitmap> buf = new HashMap<>();
-
-        for (Map.Entry<Integer, Bitmap> entry : MyApplication.getImageMap().entrySet()) {
-            if (position < entry.getKey()) {
-                buf.put(entry.getKey() - 1, entry.getValue());
-            }
-        }
-        if (buf.size() > 0) {
-            MyApplication.setImageMap(new HashMap<>(buf));
-        }
     }
 }

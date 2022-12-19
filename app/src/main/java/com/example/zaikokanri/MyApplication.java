@@ -17,15 +17,28 @@ public class MyApplication extends Application {
         instance = this;
     }
 
-    public static MyApplication getInstance() {
-        return instance;
-    }
-
     public static Map<Integer, Bitmap> getImageMap() {
         return imageMap;
     }
 
-    public static void setImageMap(Map<Integer, Bitmap> imageMap) {
-        MyApplication.imageMap = imageMap;
+    public static void alignPositionImageMap(final int position) {
+        imageMap.remove(position);
+        final Map<Integer, Bitmap> buf = new HashMap<>();
+        for (Map.Entry<Integer, Bitmap> entry : imageMap.entrySet()) {
+            if (position < entry.getKey()) {
+                buf.put(entry.getKey() - 1, entry.getValue());
+            }
+            if (buf.size() > 0) {
+                imageMap = buf;
+            }
+        }
+    }
+
+    public static void putImageMap(final int position, final Bitmap bitmap) {
+        imageMap.put(position, bitmap);
+    }
+
+    public static void clearImageMap() {
+        imageMap.clear();
     }
 }

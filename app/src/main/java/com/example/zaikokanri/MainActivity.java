@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MyApplication.getInstance();
         getSupportActionBar().setTitle(R.string.action_bar_text);
 
         initView();
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(final View v) {
                 adapter.clear();
-                MyApplication.getImageMap().clear();
+                MyApplication.clearImageMap();
             }
         });
 
