@@ -38,10 +38,9 @@ public class MyApplication extends Application {
     }
 
     public boolean hasImage(final int position) {
-        if (imageList.get(position) == null) {
+        if (imageList.size() < position) {
             return false;
         }
-        return true;
+        return imageList.get(position) != null;
     }
-
 }
