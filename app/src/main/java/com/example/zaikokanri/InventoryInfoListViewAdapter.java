@@ -1,7 +1,6 @@
 package com.example.zaikokanri;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,6 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public final class InventoryInfoListViewAdapter extends ArrayAdapter
         implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -105,7 +101,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
 
         final int position = (int) v.getTag();
         remove(getItem(position));
-        MyApplication.alignPositionImageMap(position);
+        MyApplication.removeImage(position);
         notifyDataSetChanged();
     }
 

@@ -53,8 +53,8 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.detail_activity_selected_image_view);
         final int position = intent.getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
-        if (!MyApplication.getImageMap().isEmpty() && MyApplication.getImageMap().get(position) != null) {
-            final Bitmap bitmap = MyApplication.getImageMap().get(position);
+        if (!MyApplication.isEmpty() && MyApplication.getImage(position) != null) {
+            final Bitmap bitmap = MyApplication.getImage(position);
             imageView.setImageBitmap(bitmap);
         }
 
@@ -82,7 +82,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
 
                 final int position = getIntent().getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
-                MyApplication.putImageMap(position, bitmap);
+                MyApplication.addImage(bitmap, position);
             } catch (final FileNotFoundException e) {
                 Log.d(Constants.EXCEPTION, e.toString());
             }

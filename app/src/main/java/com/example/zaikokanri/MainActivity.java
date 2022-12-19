@@ -1,6 +1,7 @@
 package com.example.zaikokanri;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         inventoryCountTextView.getText().toString(),
                         commentEditText.getText().toString());
                 adapter.add(inventoryInfo);
+                MyApplication.addImageSpace();
                 listView.setAdapter(adapter);
             }
         });
@@ -153,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(final View v) {
                 adapter.clear();
-                MyApplication.clearImageMap();
             }
         });
 
@@ -173,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 args.putInt(Constants.BUNDLE_KEY_COUNT, totalInventoryCount);
                 dialogFragment.setArguments(args);
-
                 dialogFragment.show(getSupportFragmentManager(), TAG_DIALOG);
             }
         });
