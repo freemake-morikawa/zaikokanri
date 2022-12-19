@@ -16,11 +16,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
     }
-
-    public static Map<Integer, Bitmap> getImageMap() {
-        return imageMap;
-    }
-
+    
     public static void alignPositionImageMap(final int position) {
         imageMap.remove(position);
         final Map<Integer, Bitmap> buf = new HashMap<>();
