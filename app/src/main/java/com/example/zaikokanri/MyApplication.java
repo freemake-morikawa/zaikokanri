@@ -28,9 +28,9 @@ public class MyApplication extends Application {
     public void setImage(final int position, final Bitmap bitmap) {
         if (imageList.size() < position) {
             imageList.add(null);
-        } else {
-            imageList.set(position, bitmap);
+            return;
         }
+        imageList.set(position, bitmap);
     }
 
     public void removeImage(final int position) {
