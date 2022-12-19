@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         inventoryCountTextView.getText().toString(),
                         commentEditText.getText().toString());
                 adapter.add(inventoryInfo);
-                MyApplication.getInstance().addImageSpace();
+                MyApplication.getInstance().setImage(adapter.getCount(), null);
                 listView.setAdapter(adapter);
             }
         });

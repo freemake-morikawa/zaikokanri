@@ -82,7 +82,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
 
                 final int position = getIntent().getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
-                MyApplication.getInstance().addImage(bitmap, position);
+                MyApplication.getInstance().setImage(position, bitmap);
             } catch (final FileNotFoundException e) {
                 Log.d(Constants.EXCEPTION, e.toString());
             }

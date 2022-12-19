@@ -25,13 +25,12 @@ public class MyApplication extends Application {
         return imageList.get(position);
     }
 
-    public void addImage( final Bitmap bitmap, final int position) {
-        imageList.remove(position);
-        imageList.add(position, bitmap);
-    }
-
-    public void addImageSpace() {
-        imageList.add(null);
+    public void setImage(final int position, final Bitmap bitmap) {
+        if (imageList.size() < position) {
+            imageList.add(null);
+        } else {
+            imageList.set(position, bitmap);
+        }
     }
 
     public int imagesCount() {
