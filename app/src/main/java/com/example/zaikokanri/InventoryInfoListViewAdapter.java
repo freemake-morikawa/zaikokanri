@@ -101,7 +101,7 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
 
         final int position = (int) v.getTag();
         remove(getItem(position));
-        MyApplication.removeImage(position);
+        MyApplication.getInstance().removeImage(position);
         notifyDataSetChanged();
     }
 
