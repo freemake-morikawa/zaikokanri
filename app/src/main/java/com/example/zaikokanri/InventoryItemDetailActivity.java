@@ -53,7 +53,7 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.detail_activity_selected_image_view);
         final int position = intent.getIntExtra(Constants.INTENT_KEY_POSITION, INTENT_INT_EXTRA_DEFAULT_VALUE);
-        if (MyApplication.getInstance().imagesCount() != 0 && MyApplication.getInstance().getImage(position) != null) {
+        if (MyApplication.getInstance().hasImage(position)) {
             final Bitmap bitmap = MyApplication.getInstance().getImage(position);
             imageView.setImageBitmap(bitmap);
         }
