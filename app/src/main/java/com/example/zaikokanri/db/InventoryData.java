@@ -1,27 +1,39 @@
 package com.example.zaikokanri.db;
 
-import android.graphics.Bitmap;
-
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.sql.Blob;
 import java.sql.Timestamp;
 
-@Entity
+@Entity(tableName = "inventory_data")
 public class InventoryData {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     public int id;
 
+    @ColumnInfo(defaultValue = "0")
+    @NonNull
     public int count;
-    public String comment;
-    public Bitmap image;
 
-    @ColumnInfo(name = "is_delete")
+    @ColumnInfo(defaultValue = "NULL")
+    public String comment;
+
+    @ColumnInfo(defaultValue = "NULL")
+    public Blob image;
+
+    @ColumnInfo(name = "is_delete", defaultValue = "0")
+    @NonNull
     public boolean isDelete;
-    @ColumnInfo(name = "create_at")
+
+    @ColumnInfo(name = "create_at", defaultValue = "CURRENT_TIMESTAMP")
+    @NonNull
     public Timestamp createAt;
-    @ColumnInfo(name = "update_at")
+
+    @ColumnInfo(name = "update_at", defaultValue = "CURRENT_TIMESTAMP")
+    @NonNull
     public Timestamp updateAt;
 }
