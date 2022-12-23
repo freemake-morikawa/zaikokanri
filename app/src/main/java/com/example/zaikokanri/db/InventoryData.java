@@ -3,10 +3,12 @@ package com.example.zaikokanri.db;
 import android.graphics.Bitmap;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.sql.Timestamp;
 
+@Entity
 public class InventoryData {
 
     @PrimaryKey
