@@ -10,9 +10,9 @@ public final class InventoryInfo {
     private static final String SIMPLE_DATE_FORMAT_PATTERN = "HH:mm:ss";
 
     private boolean isCheck;
-    private Date time;
-    private int inventoryCount;
-    private String comment;
+    private final Date time;
+    private final int inventoryCount;
+    private final String comment;
 
     public InventoryInfo(final String time, final String inventoryCount, final String comment) {
         this.time = parseDate(time);

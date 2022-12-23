@@ -24,7 +24,7 @@ public class TotalInventoryCountDialogFragment extends DialogFragment {
         final String dialogFirstMessage = getResources().getString(R.string.dialog_first_message);
         final String dialogEndMessage = getResources().getString(R.string.dialog_end_message);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(dialogFirstMessage + totalInventoryCount + dialogEndMessage)
                 .setPositiveButton(R.string.dialog_ok_button_text, null);
 

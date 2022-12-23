@@ -9,7 +9,7 @@ import java.util.List;
 public class MyApplication extends Application {
 
     private static MyApplication instance = new MyApplication();
-    private static List<Bitmap> imageList = new ArrayList<>();
+    private static final List<Bitmap> imageList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -27,7 +27,7 @@ public class MyApplication extends Application {
 
     public void setImage(final int position, final Bitmap bitmap) {
         if (imageList.size() < position) {
-            imageList.add(null);
+            imageList.add(bitmap);
             return;
         }
         imageList.set(position, bitmap);
@@ -38,10 +38,9 @@ public class MyApplication extends Application {
     }
 
     public boolean hasImage(final int position) {
-        if (imageList.get(position) == null) {
+        if (imageList.size() < position) {
             return false;
         }
-        return true;
+        return imageList.get(position) != null;
     }
-
 }
