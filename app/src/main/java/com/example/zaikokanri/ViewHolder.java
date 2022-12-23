@@ -5,12 +5,12 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 public final class ViewHolder {
-    private CheckBox checkBox;
-    private TextView timeTextView;
-    private TextView stockCountTextView;
-    private TextView commentTextView;
-    private Button detailButton;
-    private Button deleteButton;
+    private final CheckBox checkBox;
+    private final TextView timeTextView;
+    private final TextView stockCountTextView;
+    private final TextView commentTextView;
+    private final Button detailButton;
+    private final Button deleteButton;
 
     public ViewHolder(CheckBox checkBox,
                       TextView timeTextView,

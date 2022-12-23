@@ -61,14 +61,11 @@ public class InventoryItemDetailActivity extends AppCompatActivity {
         final ImageButton photoLibraryImageButton = findViewById(
                 R.id.detail_activity_photo_library_image_button
         );
-        photoLibraryImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                final Intent intent = new Intent();
-                intent.setType(INTENT_TYPE_IMAGE);
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, REQUEST_GALLERY);
-            }
+        photoLibraryImageButton.setOnClickListener(view -> {
+            final Intent intent1 = new Intent();
+            intent1.setType(INTENT_TYPE_IMAGE);
+            intent1.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent1, REQUEST_GALLERY);
         });
     }
 

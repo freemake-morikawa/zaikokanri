@@ -20,9 +20,9 @@ public final class InventoryInfoListViewAdapter extends ArrayAdapter
     private static final int ITEM_BACKGROUND_COLOR_ODD = Color.WHITE;
     private static final int ITEM_BACKGROUND_COLOR_CHECKED = Color.GREEN;
 
-    private LayoutInflater inflater;
-    private int itemLayout;
-    private View.OnClickListener detailButtonOnClickListener;
+    private final LayoutInflater inflater;
+    private final int itemLayout;
+    private final View.OnClickListener detailButtonOnClickListener;
 
     InventoryInfoListViewAdapter(final Context context, final int itemLayout,
                                  final View.OnClickListener onClickListener) {

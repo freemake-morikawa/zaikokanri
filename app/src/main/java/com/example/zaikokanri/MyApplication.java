@@ -9,7 +9,7 @@ import java.util.List;
 public class MyApplication extends Application {
 
     private static MyApplication instance = new MyApplication();
-    private static List<Bitmap> imageList = new ArrayList<>();
+    private static final List<Bitmap> imageList = new ArrayList<>();
 
     @Override
     public void onCreate() {
