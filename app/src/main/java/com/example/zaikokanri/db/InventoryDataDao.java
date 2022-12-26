@@ -11,7 +11,7 @@ public interface InventoryDataDao {
     @Query("SELECT * FROM inventory_data WHERE is_delete = 0 ORDER BY id")
     List<InventoryData> getAll();
 
-    @Query("SELECT * FROM inventory_data WHERE is_delete = 0 ORDER BY id LIMIT 1 OFFSET (:id - 1)")
+    @Query("SELECT * FROM inventory_data WHERE id = (:id)")
     InventoryData getOne(final int id);
 
     @Insert
