@@ -11,6 +11,9 @@ import java.util.List;
 public interface InventoryDataDao {
     @Query("SELECT * FROM inventory_data WHERE is_delete = 0 ORDER BY id")
     List<InventoryData> getAll();
+    
+    @Query("SELECT * FROM inventory_data WHERE is_delete = 0 ORDER BY id LIMIT 1 OFFSET (:position - 1)")
+    InventoryData loadInventoryDataFromPosition(final int position);
 
     @Insert
     void insertAll(InventoryData inventoryData);
