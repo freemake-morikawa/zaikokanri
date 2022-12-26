@@ -9,7 +9,7 @@ import java.util.List;
 
 @Dao
 public interface InventoryDataDao {
-    @Query("SELECT * FROM inventory_data")
+    @Query("SELECT * FROM inventory_data WHERE is_delete = 0 ORDER BY id")
     List<InventoryData> getAll();
 
     @Insert
