@@ -20,17 +20,14 @@ public class MyApplication extends Application {
     private static final List<Bitmap> imageList = new ArrayList<>();
     private static AppDatabase db;
     private static InventoryDataDao dao;
-    private static List<InventoryData> inventoryDataList;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, DATABASE_NAME).build();
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).build();
         dao = db.inventoryDataDao();
-        inventoryDataList = dao.getAll();
     }
 
     public static MyApplication getInstance() {
@@ -60,7 +57,11 @@ public class MyApplication extends Application {
         return imageList.get(position) != null;
     }
 
+    public static InventoryDataDao getDao() {
+        return dao;
+    }
+
     public static List<InventoryData> getInventoryDataList() {
-        return inventoryDataList;
+        return dao.getAll();
     }
 }
