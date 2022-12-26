@@ -18,7 +18,6 @@ public class MyApplication extends Application {
 
     private static MyApplication instance = new MyApplication();
     private static final List<Bitmap> imageList = new ArrayList<>();
-    private static AppDatabase db;
     private static InventoryDataDao dao;
 
     @Override
@@ -26,7 +25,8 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
 
-        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).build();
+        final AppDatabase db = Room
+                .databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).build();
         dao = db.inventoryDataDao();
     }
 
