@@ -3,18 +3,34 @@ package com.example.zaikokanri;
 import android.app.Application;
 import android.graphics.Bitmap;
 
+import androidx.room.Room;
+
+import com.example.zaikokanri.db.AppDatabase;
+import com.example.zaikokanri.db.InventoryData;
+import com.example.zaikokanri.db.InventoryDataDao;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyApplication extends Application {
 
+    private static final String DATABASE_NAME = "inventory_data";
+
     private static MyApplication instance = new MyApplication();
     private static final List<Bitmap> imageList = new ArrayList<>();
+    private static AppDatabase db;
+    private static InventoryDataDao dao;
+    private static List<InventoryData> inventoryDataList;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, DATABASE_NAME).build();
+        dao = db.inventoryDataDao();
+        inventoryDataList = dao.getAll();
     }
 
     public static MyApplication getInstance() {
@@ -42,5 +58,9 @@ public class MyApplication extends Application {
             return false;
         }
         return imageList.get(position) != null;
+    }
+
+    public static List<InventoryData> getInventoryDataList() {
+        return inventoryDataList;
     }
 }
