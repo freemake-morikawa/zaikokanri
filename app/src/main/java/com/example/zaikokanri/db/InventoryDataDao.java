@@ -8,7 +8,7 @@ import java.util.List;
 
 @Dao
 public interface InventoryDataDao {
-    @Query("SELECT * FROM inventory_data WHERE is_delete = 0 ORDER BY id")
+    @Query("SELECT * FROM inventory_data WHERE is_delete = 0 ORDER BY update_at DESC")
     List<InventoryData> getAll();
 
     @Query("SELECT * FROM inventory_data WHERE id = (:id)")
