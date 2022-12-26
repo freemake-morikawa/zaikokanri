@@ -18,8 +18,8 @@ public interface InventoryDataDao {
     @Insert
     void insertAll(InventoryData inventoryData);
 
-    @Delete
-    void delete(InventoryData inventoryData);
+    @Query("DELETE FROM inventory_data WHERE id = (:id)")
+    void deleteFromPosition(final int id);
 
     // TODO : 必要に応じてSQL文を追加
 }
