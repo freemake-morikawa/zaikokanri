@@ -6,7 +6,6 @@ import androidx.room.TypeConverters;
 
 @Database(entities = {InventoryData.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
-
 public abstract class AppDatabase extends RoomDatabase {
     public abstract InventoryDataDao inventoryDataDao();
 }
