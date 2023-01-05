@@ -1,5 +1,7 @@
 package com.example.zaikokanri.db;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -22,7 +24,7 @@ public class InventoryData {
     public String comment;
 
     @ColumnInfo(defaultValue = "NULL", typeAffinity = ColumnInfo.BLOB)
-    public byte[] image;
+    public Bitmap image;
 
     @ColumnInfo(name = "is_delete", defaultValue = "0")
     @NonNull
@@ -35,4 +37,16 @@ public class InventoryData {
     @ColumnInfo(name = "update_at", defaultValue = "CURRENT_TIMESTAMP")
     @NonNull
     public Timestamp updateAt;
+
+    public InventoryData(final int id, final int count, final String comment,
+                         final Bitmap image, final boolean isDelete, final Timestamp createAt,
+                         final Timestamp updateAt) {
+        this.id = id;
+        this.count = count;
+        this.comment = comment;
+        this.image = image;
+        this.isDelete = isDelete;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+    }
 }

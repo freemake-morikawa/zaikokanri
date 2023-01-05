@@ -2,6 +2,7 @@ package com.example.zaikokanri;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +13,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.zaikokanri.db.InventoryData;
+
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int TIMER_PERIOD = 100;
     private static final String DEFAULT_NUMBER_FORMAT = "#,###";
     private static final String TAG_DIALOG = "dialog";
+    private static final String TAG_EXCEPTION = "Exception";
 
     private int inventoryCount;
     private ArrayAdapter<InventoryInfo> adapter;
@@ -137,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final TextView clockTextView = findViewById(R.id.clock_text_view);
                 final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
                 final EditText commentEditText = findViewById(R.id.comment_edit_text);
-
                 final InventoryInfo inventoryInfo = new InventoryInfo(
                         clockTextView.getText().toString(),
                         inventoryCountTextView.getText().toString(),
@@ -145,6 +150,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.add(inventoryInfo);
                 MyApplication.getInstance().setImage(adapter.getCount(), null);
                 listView.setAdapter(adapter);
+
+                final Timestamp timestamp = new Timestamp(new Date().getTime());
+                final InventoryData inventoryData = new InventoryData(
+                        0, Integer.parseInt(inventoryCountTextView.getText().toString()),
+                        commentEditText.getText().toString(),
+                        null, true, timestamp, timestamp);
+                new Thread(() -> MyApplication.getDao().add(inventoryData)).start();
             }
         });
 
@@ -205,5 +217,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return false;
+    }
+
+    private Date stringToDate(final String string) {
+        try {
+            final SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+            return format.parse(string);
+        } catch (final ParseException e) {
+            Log.d(TAG_EXCEPTION, e.toString());
+        }
+        return null;
     }
 }
