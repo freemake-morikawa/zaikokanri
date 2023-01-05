@@ -2,7 +2,6 @@ package com.example.zaikokanri.db;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Base64;
 
 import androidx.room.TypeConverter;
 
@@ -21,16 +20,14 @@ public class Converters {
     }
 
     @TypeConverter
-    public static Bitmap stringToBitmap(final String string) {
-        final byte[] bytes = Base64.decode(string, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    public static byte[] bitmapToByteArray(final Bitmap bitmap) {
+        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
     }
 
     @TypeConverter
-    public static String bitmapToString(final Bitmap bitmap) {
-        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        final byte[] bytes = stream.toByteArray();
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    public static Bitmap byteArrayToBitmap(final byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }

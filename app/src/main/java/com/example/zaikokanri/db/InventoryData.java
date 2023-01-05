@@ -21,8 +21,8 @@ public class InventoryData {
     @ColumnInfo(defaultValue = "NULL")
     public String comment;
 
-    @ColumnInfo(defaultValue = "NULL")
-    public String image;
+    @ColumnInfo(defaultValue = "NULL", typeAffinity = ColumnInfo.BLOB)
+    public byte[] image;
 
     @ColumnInfo(name = "is_delete", defaultValue = "0")
     @NonNull
