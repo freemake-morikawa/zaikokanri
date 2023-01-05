@@ -3,9 +3,11 @@ package com.example.zaikokanri.db;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import androidx.annotation.NonNull;
 import androidx.room.TypeConverter;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 
 public class Converters {
@@ -21,11 +23,14 @@ public class Converters {
 
     @TypeConverter
     public static byte[] bitmapToByteArray(final Bitmap bitmap) {
-        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
+        if (bitmap == null) {
+            return null;
+        }
+        ByteBuffer byteBuffer = ByteBuffer.allocate(bitmap.getByteCount());
+        bitmap.copyPixelsToBuffer(byteBuffer);
+        return byteBuffer.array();
     }
-
+    
     @TypeConverter
     public static Bitmap byteArrayToBitmap(final byte[] bytes) {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
