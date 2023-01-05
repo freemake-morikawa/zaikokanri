@@ -5,7 +5,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 @Entity(tableName = "inventory_data")
@@ -23,7 +22,7 @@ public class InventoryData {
     public String comment;
 
     @ColumnInfo(defaultValue = "NULL")
-    public Blob image;
+    public String image;
 
     @ColumnInfo(name = "is_delete", defaultValue = "0")
     @NonNull
