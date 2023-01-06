@@ -218,14 +218,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return false;
     }
-
-    private Date stringToDate(final String string) {
-        try {
-            final SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
-            return format.parse(string);
-        } catch (final ParseException e) {
-            Log.d(TAG_EXCEPTION, e.toString());
-        }
-        return null;
-    }
 }
