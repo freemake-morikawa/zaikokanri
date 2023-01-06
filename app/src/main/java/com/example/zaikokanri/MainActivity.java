@@ -2,7 +2,6 @@ package com.example.zaikokanri;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,7 +16,6 @@ import com.example.zaikokanri.db.InventoryData;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;

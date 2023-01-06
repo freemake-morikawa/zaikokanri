@@ -17,29 +17,29 @@ public class InventoryData {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private int id;
+    private final int id;
 
     @ColumnInfo(defaultValue = "0")
     @NonNull
-    private int count;
+    private final int count;
 
     @ColumnInfo(defaultValue = "NULL")
-    private String comment;
+    private final String comment;
 
     @ColumnInfo(defaultValue = "NULL", typeAffinity = ColumnInfo.BLOB)
-    private Bitmap image;
+    private final Bitmap image;
 
     @ColumnInfo(name = "is_delete", defaultValue = "0")
     @NonNull
-    private boolean isDelete;
+    private final boolean isDelete;
 
     @ColumnInfo(name = "create_at", defaultValue = "CURRENT_TIMESTAMP")
     @NonNull
-    private Timestamp createAt;
+    private final Timestamp createAt;
 
     @ColumnInfo(name = "update_at", defaultValue = "CURRENT_TIMESTAMP")
     @NonNull
-    private Timestamp updateAt;
+    private final Timestamp updateAt;
 
     public InventoryData(final int id, final int count, final String comment,
                          final Bitmap image, final boolean isDelete, final Timestamp createAt,
