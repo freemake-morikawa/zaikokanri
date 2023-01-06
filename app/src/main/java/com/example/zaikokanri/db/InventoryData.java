@@ -16,11 +16,9 @@ public class InventoryData {
     private static final String TIME_FORMAT_PATTERN = "hh:mm:ss";
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     private final int id;
 
     @ColumnInfo(defaultValue = "0")
-    @NonNull
     private final int count;
 
     @ColumnInfo(defaultValue = "NULL")
@@ -30,7 +28,6 @@ public class InventoryData {
     private final Bitmap image;
 
     @ColumnInfo(name = "is_delete", defaultValue = "0")
-    @NonNull
     private final boolean isDelete;
 
     @ColumnInfo(name = "create_at", defaultValue = "CURRENT_TIMESTAMP")
@@ -42,8 +39,8 @@ public class InventoryData {
     private final Timestamp updateAt;
 
     public InventoryData(final int id, final int count, final String comment,
-                         final Bitmap image, final boolean isDelete, final Timestamp createAt,
-                         final Timestamp updateAt) {
+                         final Bitmap image, final boolean isDelete,
+                         @NonNull final Timestamp createAt, @NonNull final Timestamp updateAt) {
         this.id = id;
         this.count = count;
         this.comment = comment;
