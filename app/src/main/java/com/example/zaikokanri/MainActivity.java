@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int TIMER_PERIOD = 100;
     private static final String DEFAULT_NUMBER_FORMAT = "#,###";
     private static final String TAG_DIALOG = "dialog";
-    private static final String TAG_EXCEPTION = "Exception";
 
     private int inventoryCount;
     private ArrayAdapter<InventoryInfo> adapter;
