@@ -8,35 +8,38 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity(tableName = "inventory_data")
 public class InventoryData {
 
+    private static final String TIME_FORMAT_PATTERN = "hh:mm:ss";
+
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public int id;
+    private int id;
 
     @ColumnInfo(defaultValue = "0")
     @NonNull
-    public int count;
+    private int count;
 
     @ColumnInfo(defaultValue = "NULL")
-    public String comment;
+    private String comment;
 
     @ColumnInfo(defaultValue = "NULL", typeAffinity = ColumnInfo.BLOB)
-    public Bitmap image;
+    private Bitmap image;
 
     @ColumnInfo(name = "is_delete", defaultValue = "0")
     @NonNull
-    public boolean isDelete;
+    private boolean isDelete;
 
     @ColumnInfo(name = "create_at", defaultValue = "CURRENT_TIMESTAMP")
     @NonNull
-    public Timestamp createAt;
+    private Timestamp createAt;
 
     @ColumnInfo(name = "update_at", defaultValue = "CURRENT_TIMESTAMP")
     @NonNull
-    public Timestamp updateAt;
+    private Timestamp updateAt;
 
     public InventoryData(final int id, final int count, final String comment,
                          final Bitmap image, final boolean isDelete, final Timestamp createAt,
@@ -48,5 +51,40 @@ public class InventoryData {
         this.isDelete = isDelete;
         this.createAt = createAt;
         this.updateAt = updateAt;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    @NonNull
+    public Timestamp getCreateAt() {
+        return createAt;
+    }
+
+    @NonNull
+    public Timestamp getUpdateAt() {
+        return updateAt;
+    }
+
+    public String getCreateAtString() {
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TIME_FORMAT_PATTERN);
+        return simpleDateFormat.format(createAt);
     }
 }
