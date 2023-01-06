@@ -2,7 +2,6 @@ package com.example.zaikokanri;
 
 import android.app.Application;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import androidx.room.Room;
 
@@ -26,13 +25,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        new Thread(() -> {
-            db = Room.databaseBuilder(getApplicationContext(),
-                    AppDatabase.class, DATABASE_NAME).build();
-            dao = db.inventoryDataDao();
-            inventoryDataList = dao.getAll();
-            Log.d("Test", inventoryDataList.toString());
-        }).start();
         instance = this;
     }
 
@@ -63,11 +55,27 @@ public class MyApplication extends Application {
         return imageList.get(position) != null;
     }
 
-    public static List<InventoryData> getInventoryDataList() {
+    public List<InventoryData> getInventoryDataList() {
         return inventoryDataList;
     }
 
-    public static InventoryDataDao getDao() {
+    public InventoryDataDao getDao() {
         return dao;
+    }
+
+    public void initializeDatabase() {
+        new GetDatabaseThread().start();
+    }
+
+    // データベースのインスタンスや内容を取得するThread
+    private class GetDatabaseThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            db = Room.databaseBuilder(getApplicationContext(),
+                    AppDatabase.class, DATABASE_NAME).build();
+            dao = db.inventoryDataDao();
+            inventoryDataList = dao.getAll();
+        }
     }
 }

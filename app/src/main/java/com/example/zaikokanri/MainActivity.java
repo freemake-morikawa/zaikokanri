@@ -1,5 +1,6 @@
 package com.example.zaikokanri;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,12 +35,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayAdapter<InventoryInfo> adapter;
     private TextView clockTextView;
     private Timer timer;
+    private ProgressDialog progressDialog;
 
     public MainActivity() {
         inventoryCount = 0;
         adapter = null;
         clockTextView = null;
         timer = null;
+        progressDialog = null;
     }
 
     @Override
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle(R.string.action_bar_text);
 
         initView();
+        startProgressDialog();
+        MyApplication.getInstance().initializeDatabase();
+        progressDialog.dismiss();
     }
 
     @Override
@@ -153,7 +159,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         0, Integer.parseInt(inventoryCountTextView.getText().toString()),
                         commentEditText.getText().toString(),
                         null, true, timestamp, timestamp);
-                new Thread(() -> MyApplication.getDao().add(inventoryData)).start();
+                startProgressDialog();
+                new Thread(() -> MyApplication.getInstance().getDao().add(inventoryData)).start();
+                progressDialog.dismiss();
             }
         });
 
@@ -214,5 +222,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return false;
+    }
+
+    private void startProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(R.string.progress_dialog_title);
+        progressDialog.setMessage(getText(R.string.progress_dialog_message));
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
     }
 }
