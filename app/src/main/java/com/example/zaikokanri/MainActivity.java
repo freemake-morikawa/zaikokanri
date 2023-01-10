@@ -1,5 +1,6 @@
 package com.example.zaikokanri;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.zaikokanri.db.InventoryData;
+
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,12 +35,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayAdapter<InventoryInfo> adapter;
     private TextView clockTextView;
     private Timer timer;
+    private ProgressDialog progressDialog;
 
     public MainActivity() {
         inventoryCount = 0;
         adapter = null;
         clockTextView = null;
         timer = null;
+        progressDialog = null;
     }
 
     @Override
@@ -45,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setTitle(R.string.action_bar_text);
-
         initView();
     }
 
@@ -137,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final TextView clockTextView = findViewById(R.id.clock_text_view);
                 final TextView inventoryCountTextView = findViewById(R.id.inventory_count_text_view);
                 final EditText commentEditText = findViewById(R.id.comment_edit_text);
-
                 final InventoryInfo inventoryInfo = new InventoryInfo(
                         clockTextView.getText().toString(),
                         inventoryCountTextView.getText().toString(),
@@ -145,6 +149,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.add(inventoryInfo);
                 MyApplication.getInstance().setImage(adapter.getCount(), null);
                 listView.setAdapter(adapter);
+
+                final Timestamp timestamp = new Timestamp(new Date().getTime());
+                final InventoryData inventoryData = new InventoryData(
+                        0, Integer.parseInt(inventoryCountTextView.getText().toString()),
+                        commentEditText.getText().toString(),
+                        null, true, timestamp, timestamp);
+                startProgressDialog();
+                new Thread(() -> MyApplication.getInstance().getDao().add(inventoryData)).start();
+                endProgressDialog();
             }
         });
 
@@ -205,5 +218,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return false;
+    }
+
+    private final void startProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(R.string.progress_dialog_title);
+        progressDialog.setMessage(getText(R.string.progress_dialog_message));
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+    }
+
+    private final void endProgressDialog() {
+        progressDialog.dismiss();
     }
 }
