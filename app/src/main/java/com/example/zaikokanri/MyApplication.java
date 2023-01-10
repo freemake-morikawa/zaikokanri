@@ -2,6 +2,7 @@ package com.example.zaikokanri;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class MyApplication extends Application {
 
     private static final String DATABASE_NAME = "inventory_data";
+    private static final String TAG_EXCEPTION = "Exception";
 
     private static MyApplication instance = new MyApplication();
     private static final List<Bitmap> imageList = new ArrayList<>();
@@ -26,6 +28,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        initializeDatabase();
     }
 
     public static MyApplication getInstance() {
@@ -64,7 +67,13 @@ public class MyApplication extends Application {
     }
 
     public void initializeDatabase() {
-        new GetDatabaseThread().start();
+        final GetDatabaseThread thread = new GetDatabaseThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            Log.d(TAG_EXCEPTION, e.toString());
+        }
     }
 
     // データベースのインスタンスや内容を取得するThread

@@ -51,11 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setTitle(R.string.action_bar_text);
-
         initView();
-        startProgressDialog();
-        MyApplication.getInstance().initializeDatabase();
-        progressDialog.dismiss();
     }
 
     @Override
@@ -161,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         null, true, timestamp, timestamp);
                 startProgressDialog();
                 new Thread(() -> MyApplication.getInstance().getDao().add(inventoryData)).start();
-                progressDialog.dismiss();
+                endProgressDialog();
             }
         });
 
@@ -224,11 +220,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
-    private void startProgressDialog() {
+    private final void startProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(R.string.progress_dialog_title);
         progressDialog.setMessage(getText(R.string.progress_dialog_message));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
+    }
+
+    private final void endProgressDialog() {
+        progressDialog.dismiss();
     }
 }
