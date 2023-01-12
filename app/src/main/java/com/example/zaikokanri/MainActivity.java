@@ -131,10 +131,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 時計の処理のためViewを取得
         clockTextView = findViewById(R.id.clock_text_view);
 
-        // リスト追加
+        // 初回リスト表示
         final ListView listView = findViewById(R.id.inventory_info_list_view);
         adapter = new InventoryInfoListViewAdapter(this, R.layout.list_item, this);
+        for (InventoryData inventoryData : MyApplication.getInstance().getInventoryDataList()) {
+            final InventoryInfo inventoryInfo = new InventoryInfo(
+                    inventoryData.getCreateAtString(),
+                    String.valueOf(inventoryData.getCount()),
+                    inventoryData.getComment()
+            );
+            adapter.add(inventoryInfo);
+        }
+        listView.setAdapter(adapter);
 
+        // リストアイテム追加
         final Button addInventoryInfoButton = findViewById(R.id.add_inventory_info_button);
         addInventoryInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final InventoryData inventoryData = new InventoryData(
                         0, Integer.parseInt(inventoryCountTextView.getText().toString()),
                         commentEditText.getText().toString(),
-                        null, true, timestamp, timestamp);
+                        null, false, timestamp, timestamp);
 
                 final OperateInventoryDataTask operateInventoryDataTask =
                         new OperateInventoryDataTask();
@@ -172,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void task() {
                         MyApplication.getInstance().getDao().add(inventoryData);
+                        MyApplication.getInstance().getInventoryDataList().add(inventoryData);
                     }
                 });
                 operateInventoryDataTask.execute(inventoryData);
