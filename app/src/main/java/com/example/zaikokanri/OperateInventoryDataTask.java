@@ -17,6 +17,9 @@ public class OperateInventoryDataTask extends AsyncTask<InventoryData, Void, Voi
 
     @Override
     protected void onPostExecute(final Void result) {
+        if (callBackTask == null) {
+            return;
+        }
         callBackTask.callBack();
     }
 

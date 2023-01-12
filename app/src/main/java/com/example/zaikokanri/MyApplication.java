@@ -67,24 +67,16 @@ public class MyApplication extends Application {
     }
 
     public void initializeDatabase() {
-        final GetDatabaseThread thread = new GetDatabaseThread();
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            Log.d(TAG_EXCEPTION, e.toString());
-        }
-    }
-
-    // データベースのインスタンスや内容を取得するThread
-    private class GetDatabaseThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-            db = Room.databaseBuilder(getApplicationContext(),
-                    AppDatabase.class, DATABASE_NAME).build();
-            dao = db.inventoryDataDao();
-            inventoryDataList = dao.getAll();
-        }
+        final OperateInventoryDataTask operateInventoryDataTask = new OperateInventoryDataTask();
+        operateInventoryDataTask.setTask(new OperateInventoryDataTask.ExecuteTask() {
+            @Override
+            public void task() {
+                db = Room.databaseBuilder(getApplicationContext(),
+                        AppDatabase.class, DATABASE_NAME).build();
+                dao = db.inventoryDataDao();
+                inventoryDataList = dao.getAll();
+            }
+        });
+        operateInventoryDataTask.execute();
     }
 }
