@@ -31,6 +31,9 @@ public class Converters {
 
     @TypeConverter
     public static Bitmap byteArrayToBitmap(final byte[] bytes) {
+        if (bytes == null) {
+            return null;
+        }
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }
