@@ -2,7 +2,6 @@ package com.example.zaikokanri;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -157,16 +156,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         commentEditText.getText().toString(),
                         null, true, timestamp, timestamp);
 
-                final AddInventoryDataTask addInventoryDataTask =
-                        new AddInventoryDataTask();
-                startProgressDialog();
-                addInventoryDataTask.setCallBackTask(new AddInventoryDataTask.CallBackTask() {
+                final OperateInventoryDataTask operateInventoryDataTask =
+                        new OperateInventoryDataTask();
+                startProgressDialog(
+                        getText(R.string.progress_dialog_title_add).toString(),
+                        getText(R.string.progress_dialog_message_add).toString()
+                );
+                operateInventoryDataTask.setCallBackTask(new OperateInventoryDataTask.CallBackTask() {
                     @Override
-                    public void CallBack() {
+                    public void callBack() {
                         endProgressDialog();
                     }
                 });
-                addInventoryDataTask.execute(inventoryData);
+                operateInventoryDataTask.setTask(new OperateInventoryDataTask.ExecuteTask() {
+                    @Override
+                    public void task() {
+                        MyApplication.getInstance().getDao().add(inventoryData);
+                    }
+                });
+                operateInventoryDataTask.execute(inventoryData);
             }
         });
 
@@ -229,42 +237,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
-    private void startProgressDialog() {
+    private void startProgressDialog(final String title, final String message) {
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(R.string.progress_dialog_title);
-        progressDialog.setMessage(getText(R.string.progress_dialog_message));
+        progressDialog.setTitle(title);
+        progressDialog.setMessage(message);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
     }
 
     private void endProgressDialog() {
         progressDialog.dismiss();
-    }
-
-    private static class AddInventoryDataTask extends AsyncTask<InventoryData, Void, Void> {
-
-        private CallBackTask callBackTask;
-
-        @Override
-        protected Void doInBackground(final InventoryData... inventoryData) {
-            for (InventoryData data : inventoryData) {
-                MyApplication.getInstance().getDao().add(data);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(final Void result) {
-            callBackTask.CallBack();
-        }
-
-        public void setCallBackTask(final CallBackTask callBackTask) {
-            this.callBackTask = callBackTask;
-        }
-
-        public abstract static class CallBackTask {
-            public void CallBack() {
-            }
-        }
     }
 }

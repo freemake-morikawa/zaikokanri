@@ -19,6 +19,6 @@
     <string name="detail_activity_photo_library_image_button_description">画像を選択</string>
     <string name="detail_activity_save_image_button_description">保存</string>
     <string name="detail_activity_delete_image_button_description">削除</string>
-    <string name="progress_dialog_title">データ追加中</string>
-    <string name="progress_dialog_message">データを追加しています。少々お待ちください。</string>
+    <string name="progress_dialog_title_add">データ追加中</string>
+    <string name="progress_dialog_message_add">データを追加しています。少々お待ちください。</string>
 </resources>
