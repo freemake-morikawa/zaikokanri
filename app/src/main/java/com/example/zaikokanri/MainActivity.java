@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
-    private final void startProgressDialog() {
+    private void startProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(R.string.progress_dialog_title);
         progressDialog.setMessage(getText(R.string.progress_dialog_message));
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressDialog.show();
     }
 
-    private final void endProgressDialog() {
+    private void endProgressDialog() {
         progressDialog.dismiss();
     }
 
