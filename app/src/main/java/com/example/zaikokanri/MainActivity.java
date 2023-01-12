@@ -2,6 +2,7 @@ package com.example.zaikokanri;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -155,9 +156,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         0, Integer.parseInt(inventoryCountTextView.getText().toString()),
                         commentEditText.getText().toString(),
                         null, true, timestamp, timestamp);
+
+                final AddInventoryDataTask addInventoryDataTask =
+                        new AddInventoryDataTask();
                 startProgressDialog();
-                new Thread(() -> MyApplication.getInstance().getDao().add(inventoryData)).start();
-                endProgressDialog();
+                addInventoryDataTask.setCallBackTask(new AddInventoryDataTask.CallBackTask() {
+                    @Override
+                    public void CallBack() {
+                        endProgressDialog();
+                    }
+                });
+                addInventoryDataTask.execute(inventoryData);
             }
         });
 
@@ -230,5 +239,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private final void endProgressDialog() {
         progressDialog.dismiss();
+    }
+
+    private static class AddInventoryDataTask extends AsyncTask<InventoryData, Void, Void> {
+
+        private CallBackTask callBackTask;
+
+        @Override
+        protected Void doInBackground(final InventoryData... inventoryData) {
+            for (InventoryData data : inventoryData) {
+                MyApplication.getInstance().getDao().add(data);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(final Void result) {
+            callBackTask.CallBack();
+        }
+
+        public void setCallBackTask(final CallBackTask callBackTask) {
+            this.callBackTask = callBackTask;
+        }
+
+        public abstract static class CallBackTask {
+            public void CallBack() {
+            }
+        }
     }
 }
