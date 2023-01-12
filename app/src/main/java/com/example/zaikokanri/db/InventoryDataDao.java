@@ -19,4 +19,7 @@ public interface InventoryDataDao {
 
     @Query("DELETE FROM inventory_data WHERE id = (:id)")
     void remove(final int id);
+
+    @Query("DELETE FROM inventory_data")
+    void removeAll();
 }

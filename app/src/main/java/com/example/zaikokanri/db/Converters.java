@@ -3,10 +3,8 @@ package com.example.zaikokanri.db;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import androidx.annotation.NonNull;
 import androidx.room.TypeConverter;
 
-import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 
@@ -30,7 +28,7 @@ public class Converters {
         bitmap.copyPixelsToBuffer(byteBuffer);
         return byteBuffer.array();
     }
-    
+
     @TypeConverter
     public static Bitmap byteArrayToBitmap(final byte[] bytes) {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
