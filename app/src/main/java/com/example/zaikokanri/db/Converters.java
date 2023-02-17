@@ -1,11 +1,9 @@
 package com.example.zaikokanri.db;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 
 import androidx.room.TypeConverter;
 
-import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 
 public class Converters {
@@ -20,17 +18,15 @@ public class Converters {
     }
 
     @TypeConverter
-    public static byte[] bitmapToByteArray(final Bitmap bitmap) {
-        if (bitmap == null) {
-            return null;
-        }
-        ByteBuffer byteBuffer = ByteBuffer.allocate(bitmap.getByteCount());
-        bitmap.copyPixelsToBuffer(byteBuffer);
-        return byteBuffer.array();
+    public static Uri stringToUri(final String string) {
+        return Uri.parse(string);
     }
 
     @TypeConverter
-    public static Bitmap byteArrayToBitmap(final byte[] bytes) {
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    public static String uriToString(final Uri uri) {
+        if (uri == null) {
+            return null;
+        }
+        return uri.toString();
     }
 }
