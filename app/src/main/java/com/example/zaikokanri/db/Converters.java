@@ -19,6 +19,9 @@ public class Converters {
 
     @TypeConverter
     public static Uri stringToUri(final String string) {
+        if (string == null) {
+            return null;
+        }
         return Uri.parse(string);
     }
 
